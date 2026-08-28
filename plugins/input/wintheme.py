@@ -13,7 +13,25 @@ class input_plug(plugins.base):
 		return 'Windows .theme'
 	
 	def parse(self, theme_obj, themeverter_intent):
+		theme_obj.supported_types.append('win32')
 		win32_colors = theme_obj.win32_colors
 		wintheme = windows_theme.wintheme(themeverter_intent.input_file)
 		for k, v in wintheme.colors.items(): win32_colors.set(k, v)
+
+		def get_font(curstyle, LOGFONTA):
+			font_obj = curstyle.add_font('control:main')
+			font_obj.used = True
+			font_obj.face = LOGFONTA.lfFaceName
+			if LOGFONTA.lfWeight>400: font_obj.fx.append('bold')
+			if LOGFONTA.lfItalic: font_obj.fx.append('italic')
+			if LOGFONTA.lfUnderline: font_obj.fx.append('underline')
+			if LOGFONTA.lfStrikeOut: font_obj.fx.append('strikeout')
+
+		if wintheme.NonclientMetrics:
+			NonclientMetrics = wintheme.NonclientMetrics
+			lfMenuFont = NonclientMetrics.lfMenuFont
+
+			curstyle, curctrl = theme_obj.add_stylecontrol('menubar')
+			get_font(curstyle, lfMenuFont)
+
 		theme_obj.import_win32_colors()

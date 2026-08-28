@@ -17,23 +17,59 @@ class input_plug(plugins.base):
 	
 	def parse(self, theme_obj, themeverter_intent):
 		import configparser
+		theme_obj.supported_types.append('basic')
 
 		config = configparser.ConfigParser()
 		config.read(themeverter_intent.input_file)
 
 		maincolors = config['main']
 
-		theme_obj.add_color('fg_color', hex_to_int(maincolors['fg_color']) )
-		theme_obj.add_color('bg_color', hex_to_int(maincolors['bg_color']) )
-		theme_obj.add_color('base_color', hex_to_int(maincolors['base_color']) )
-		theme_obj.add_color('text_color', hex_to_int(maincolors['text_color']) )
-		theme_obj.add_color('selected_bg_color', hex_to_int(maincolors['selected_bg_color']) )
-		theme_obj.add_color('selected_fg_color', hex_to_int(maincolors['selected_fg_color']) )
-
 		globalstyle = theme_obj.style_global
-		globalstyle.add_color_named('control', None, 'bg', 'bg_color')
-		globalstyle.add_color_named('control', None, 'fg', 'fg_color')
-		globalstyle.add_color_named('text', None, 'bg', 'base_color')
-		globalstyle.add_color_named('text', None, 'fg', 'text_color')
-		globalstyle.add_color_named('text', 'active', 'bg', 'selected_bg_color')
-		globalstyle.add_color_named('text', 'active', 'fg', 'selected_fg_color')
+
+		def add_color(curstype, name, collocs):
+			if name in maincolors:
+				color = hex_to_int(maincolors[name])
+				theme_obj.add_global_color(name, color)
+				for cl in collocs:
+					curstype.add_color_named(cl, name)
+
+		add_color(globalstyle, 'bg_color', ['control:main:bg'] )
+		add_color(globalstyle, 'fg_color', ['control:main:fg'] )
+		add_color(globalstyle, 'base_color', ['text:main:bg'] )
+		add_color(globalstyle, 'text_color', ['text:main:fg'] )
+		add_color(globalstyle, 'selected_bg_color', ['control:selected:bg'] )
+		add_color(globalstyle, 'selected_fg_color', ['control:selected:fg'] )
+		add_color(globalstyle, 'inactive_fg_color', ['control:disabled:fg'] )
+		add_color(globalstyle, 'selected_base_color', ['text:selected:bg'] )
+		add_color(globalstyle, 'selected_text_color', ['text:selected:fg'] )
+		add_color(globalstyle, 'inactive_text_color', ['text:disabled:fg'] )
+
+		curstyle, curctrl = theme_obj.add_stylecontrol('tooltip')
+		add_color(curstyle, 'tooltip_color', ['control:main:bg'] )
+
+		curstyle, curctrl = theme_obj.add_stylecontrol('infobar_error')
+		add_color(curstyle, 'error_bg_color', ['control:main:bg'] )
+		add_color(curstyle, 'error_fg_color', ['control:main:fg', 'text:main:fg'] )
+
+		curstyle, curctrl = theme_obj.add_stylecontrol('infobar_warning')
+		add_color(curstyle, 'warning_bg_color', ['control:main:bg'] )
+		add_color(curstyle, 'warning_fg_color', ['control:main:fg', 'text:main:fg'] )
+
+		curstyle, curctrl = theme_obj.add_stylecontrol('infobar_info')
+		add_color(curstyle, 'info_bg_color', ['control:main:bg'] )
+		add_color(curstyle, 'info_fg_color', ['control:main:fg', 'text:main:fg'] )
+
+		curstyle, curctrl = theme_obj.add_stylecontrol('infobar_question')
+		add_color(curstyle, 'question_bg_color', ['control:main:bg'] )
+		add_color(curstyle, 'question_fg_color', ['control:main:fg', 'text:main:fg'] )
+
+		curstyle, curctrl = theme_obj.add_stylecontrol('infobar_other')
+		add_color(curstyle, 'question_bg_color', ['control:main:bg'] )
+		add_color(curstyle, 'question_fg_color', ['control:main:fg', 'text:main:fg'] )
+
+		curstyle, curctrl = theme_obj.add_stylecontrol('url')
+		add_color(curstyle, 'url_color', ['text:main:fg'] )
+		add_color(curstyle, 'visited_url_color', ['text:visited:fg'] )
+
+		theme_obj.complete_incomplete()
+		theme_obj.to_xml('out.xml')

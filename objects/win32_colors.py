@@ -5,6 +5,8 @@ class win32_colors():
 	__slots__ = ['used', 'scrollbar', 'background', 'activetitle', 'inactivetitle', 'menu', 'window', 'windowframe', 'menutext', 'windowtext', 'titletext', 'activeborder', 'inactiveborder', 'appworkspace', 'hilight', 'hilighttext', 'buttonface', 'buttonshadow', 'graytext', 'buttontext', 'inactivetitletext', 'buttonhilight', 'buttondkshadow', 'buttonlight', 'infotext', 'infowindow', 'buttonalternateface', 'hottrackingcolor', 'gradientactivetitle', 'gradientinactivetitle', 'menuhilight', 'menubar']
 
 	def __init__(self):
+		self.used = False
+
 		self.scrollbar = visual.visual_color()
 		self.background = visual.visual_color()
 		self.activetitle = visual.visual_color()

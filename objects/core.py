@@ -135,8 +135,14 @@ class core:
 		selected_plugin = self.currentplug_input.selected_plugin
 		plug_obj = selected_plugin.plug_obj
 		plug_obj.parse(self.theme_obj, themeverter_intent)
+		self.theme_obj.to_xml('debug_in.xml')
+		self.theme_obj.import_win32_colors()
+		self.theme_obj.export_win32_colors()
+		self.theme_obj.complete_incomplete()
+		self.theme_obj.to_xml('debug_mid.xml')
 
 	def parse_output(self, themeverter_intent): 
 		plug_obj = self.currentplug_output.selected_plugin.plug_obj
 		plug_obj.parse(self.theme_obj, themeverter_intent)
 		#logger_core.info('File outputted: '+out_file)
+		self.theme_obj.to_xml('debug_out.xml')

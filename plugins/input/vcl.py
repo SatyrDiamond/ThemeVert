@@ -14,7 +14,7 @@ class input_plug(plugins.base):
 		return 'Delphi VCL'
 	
 	def parse(self, theme_obj, themeverter_intent):
-
+		theme_obj.supported_types.append('win32')
 		vcl_theme_obj = vcl_theme.masterstyle_data(themeverter_intent.input_file)
 		#vcl_theme_obj.to_xml('out_o.xml')
 
@@ -58,5 +58,4 @@ class input_plug(plugins.base):
 		win32_colors.set('WindowText', vcl_get_w32_color('clWindowText') ) # WindowText
 		
 		theme_obj.import_win32_colors()
-		
-		theme_obj.to_xml('out.xml')
+	

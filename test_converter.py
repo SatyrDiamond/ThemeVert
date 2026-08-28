@@ -16,7 +16,7 @@ themeconv_core = core.core()
 themeconv_core.input_load_plugins(None)
 themeconv_core.output_load_plugins(None)
 
-if False:
+if True:
 	themeverter_intent.set_file_input('themes/win_theme/The Ethereal Engine 7.theme')
 	themeconv_core.input_set('win32_theme')
 else:
