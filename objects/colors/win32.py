@@ -230,8 +230,8 @@ class colors_win32():
 			text_sel_bg = theme_obj.get_color(None, 'selected:edit_bg', True)
 			text_sel_fg = theme_obj.get_color(None, 'selected:edit_fg', True)
 
-			threed_dark = ctrl_main_bg.copy()*0.7
-			threed_light = ctrl_main_bg.copy()*1.3
+			threed_dark = ctrl_main_bg.copy()*0.5
+			threed_light = ctrl_main_bg.copy()*1.5
 
 			self.set('buttonface', ctrl_main_bg.get_int() )
 			self.set('buttondkshadow', threed_dark.get_int() )
@@ -245,8 +245,8 @@ class colors_win32():
 			self.set('window', text_main_bg.get_int() )
 			self.set('windowtext', text_main_fg.get_int() )
 
-			self.set('hilight', text_sel_bg.get_int() )
-			self.set('hilighttext', text_sel_fg.get_int() )
+			self.set('hilight', text_sel_fg.get_int() )
+			self.set('hilighttext', text_sel_bg.get_int() )
 
 			self.set('activeborder', ctrl_main_bg.get_int() )
 			self.set('activetitle', ctrl_main_bg.get_int() )

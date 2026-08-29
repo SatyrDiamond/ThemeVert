@@ -141,9 +141,10 @@ class core:
 		colors_win32.import_colors(self.theme_obj)
 		colors_gtk.import_colors(self.theme_obj)
 
+		self.theme_obj.complete_incomplete()
+		
 		colors_win32.export_colors(self.theme_obj)
 		colors_gtk.export_colors(self.theme_obj)
-		self.theme_obj.complete_incomplete()
 		self.theme_obj.to_xml('debug_mid.xml')
 
 	def parse_output(self, themeverter_intent): 

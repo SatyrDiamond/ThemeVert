@@ -41,7 +41,7 @@ class data_color():
 			if self.type=='name': return True, self.index_name
 			if self.manual=='manual': return False, self.color
 
-class data_text():
+class data_font():
 	def __init__(self):
 		self.used = False
 		self.face = None
@@ -53,10 +53,10 @@ class data_text():
 		self.face = face
 	def to_xml(self, part, name):
 		if self.used:
-			part = ET.SubElement(part, 'font')
-			if self.face: part.set('face', self.face)
-			if self.size: part.set('size', str(self.size))
-			if self.fx: part.set('fx', '|'.join(self.fx))
+			xpart = ET.SubElement(part, name)
+			if self.face: xpart.set('face', self.face)
+			if self.size: xpart.set('size', str(self.size))
+			if self.fx: xpart.set('fx', '|'.join(self.fx))
 			#if self.color.used: self.color.to_xml(part, 'color')
 
 # =============================================== STYLE ===============================================
@@ -65,23 +65,28 @@ class basstyle_state():
 	def __init__(self):
 		self.prop = {}
 		self.colors = {}
-		self.font = data_text()
+		self.fonts = {}
 	def __bool__(self): return True in [bool(c) for c in self.colors]
 
 	def create_color(self, name):
 		if name not in self.colors: self.colors[name] = data_color()
 		return self.colors[name]
 
+	def create_font(self, name):
+		if name not in self.fonts: self.fonts[name] = data_font()
+		return self.fonts[name]
+
 	def to_xml(self, part, name):
 		cpart = ET.SubElement(part, name)
-		self.font.to_xml(cpart, 'font')
+		if self.fonts:
+			xpart = ET.SubElement(cpart, 'fonts')
+			for k, v in self.fonts.items(): v.to_xml(xpart, k)
 		if self.prop:
-			cpart = ET.SubElement(cpart, 'prop')
-			for k, v in self.prop.items(): cpart.set(k, str(v))
+			xpart = ET.SubElement(cpart, 'prop')
+			for k, v in self.prop.items(): xpart.set(k, str(v))
 		if self.colors:
-			cpart = ET.SubElement(cpart, 'color')
-			for k, v in self.colors.items():
-				v.to_xml(cpart, k)
+			xpart = ET.SubElement(cpart, 'colors')
+			for k, v in self.colors.items(): v.to_xml(xpart, k)
 
 	def add_color(self, name, rgb):
 		self._internal_add_color(name, rgb, False)
@@ -96,6 +101,9 @@ class basstyle_state():
 
 	def get_color(self, name):
 		if name in self.colors: return self.colors[name].get_simp()
+
+	def exists_color(self, name):
+		return name in self.colors
 
 class basstyle_main():
 	def __init__(self):
@@ -132,8 +140,7 @@ class basstyle_main():
 		name = calloc_val.type
 
 		cstate = self.add_state(state)
-		cprop = cstate.add_prop(name)
-		return cprop.font
+		return cstate.create_font(name)
 
 	def to_xml(self, cpart):
 		if self.colfrom: cpart.set('color_from', '|'.join(self.colfrom))
@@ -149,8 +156,19 @@ class basstyle_main():
 		state = calloc_val.category
 		name = calloc_val.type
 
-		if state in self.states: return self.states[state].get_color(name)
+		if state in self.states: 
+			c = self.states[state].get_color(name)
+			if c: return c
 		return self.mainstate.get_color(name)
+
+	def exists_color(self, colloc):
+		calloc_val = triplestr.from_str(colloc)
+		state = calloc_val.category
+		name = calloc_val.type
+
+		if state=='main': return self.mainstate.exists_color(name)
+		elif state in self.states: return self.states[state].exists_color(name)
+		else: return False
 
 	def simple_add_col(self, colloc, nameval):
 		calloc_val = triplestr.from_str(colloc)
@@ -260,6 +278,7 @@ class data_theme():
 
 		ctrl_main_bg = globalstyle.get_color('main:control_bg')
 		ctrl_main_fg = globalstyle.get_color('main:control_fg')
+
 		if (not ctrl_main_bg) or (not ctrl_main_fg):
 			print('control BG or FG missing')
 			exit()
@@ -274,32 +293,32 @@ class data_theme():
 
 		# ----------------- selected -----------------
 		#text
-		text_sel_bg = globalstyle.get_color('selected:edit_bg')
-		text_sel_fg = globalstyle.get_color('selected:edit_fg')
-		if (not text_sel_bg) or (not text_sel_fg):
+		color1 = globalstyle.exists_color('selected:edit_bg')
+		color2 = globalstyle.exists_color('selected:edit_fg')
+		if (not color1) or (not color2):
 			globalstyle.simple_add_col('selected:edit_fg', text_main_bg)
 			globalstyle.simple_add_col('selected:edit_bg', text_main_fg)
 
 		#control
-		text_sel_bg = globalstyle.get_color('main:control_text_selected_bg')
-		text_sel_fg = globalstyle.get_color('main:control_text_selected')
-		if (not text_sel_bg) or (not text_sel_fg):
-			globalstyle.simple_add_col('main:control_text_selected_bg', text_main_bg)
-			globalstyle.simple_add_col('main:control_text_selected', text_main_fg)
+		color1 = globalstyle.exists_color('main:control_text_selected_bg')
+		color2 = globalstyle.exists_color('main:control_text_selected')
+		if (not color1) or (not color2):
+			globalstyle.simple_add_col('main:control_text_selected_bg', ctrl_main_fg)
+			globalstyle.simple_add_col('main:control_text_selected', ctrl_main_bg)
 
 		# ----------------- disabled -----------------
 		#control
 		ctxt = 'disabled:control_bg'
-		if not globalstyle.get_color(ctxt): globalstyle.simple_add_col(ctxt, ctrl_main_bg)
-		if not globalstyle.get_color('disabled:control_fg'):
-			globalstyle.add_color_named('disabled:control_fg', '_generated_greytext')
+		if not globalstyle.exists_color(ctxt): globalstyle.simple_add_col(ctxt, ctrl_main_bg)
+		if not globalstyle.exists_color('disabled:control_fg'):
+			globalstyle.add_color_named('disabled:control_fg', 'generated__greytext')
 			greytxt_needed = True
 
 		#text
 		ctxt = 'disabled:edit_bg'
-		if not globalstyle.get_color(ctxt): globalstyle.simple_add_col(ctxt, ctrl_main_bg)
-		if not globalstyle.get_color('disabled:edit_fg'):
-			globalstyle.add_color_named('disabled:edit_fg', '_generated_greytext')
+		if not globalstyle.exists_color(ctxt): globalstyle.simple_add_col(ctxt, ctrl_main_bg)
+		if not globalstyle.exists_color('disabled:edit_fg'):
+			globalstyle.add_color_named('disabled:edit_fg', 'generated__greytext')
 			greytxt_needed = True
 
 		if greytxt_needed:
@@ -308,4 +327,4 @@ class data_theme():
 			greytxt1 /= 2
 			greytxt2 /= 2
 			greycolor = (greytxt1+greytxt2)
-			self.add_global_color('_generated_greytext', greycolor.get_int() )
+			self.add_global_color('generated__greytext', greycolor.get_int() )

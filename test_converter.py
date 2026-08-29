@@ -17,7 +17,7 @@ themeconv_core.input_load_plugins(None)
 themeconv_core.output_load_plugins(None)
 
 if 0:
-	themeverter_intent.set_file_input('themes/win_theme/The Ethereal Engine 7.theme')
+	themeverter_intent.set_file_input('themes/win_theme/Windows 2000.theme')
 	themeconv_core.input_set('win32_theme')
 else:
 	themeverter_intent.set_file_input('themes/tcl/RUBYGRAPHITE')

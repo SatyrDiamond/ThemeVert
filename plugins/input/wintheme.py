@@ -24,7 +24,7 @@ class input_plug(plugins.base):
 		for k, v in wintheme.colors.items(): win32_colors.set(k, v)
 
 		def get_font(curstyle, LOGFONTA):
-			font_obj = curstyle.add_font('control:main')
+			font_obj = curstyle.add_font('main:control')
 			font_obj.used = True
 			font_obj.face = LOGFONTA.lfFaceName
 			if LOGFONTA.lfWeight>400: font_obj.fx.append('bold')

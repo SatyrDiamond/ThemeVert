@@ -17,7 +17,7 @@ themeconv_core.input_load_plugins(None)
 themeconv_core.output_load_plugins(None)
 
 
-themeverter_intent.set_file_input('gtk_color_scheme.ini')
+themeverter_intent.set_file_input('themes/gtk_color_scheme.ini')
 themeconv_core.input_set('gtk_color_scheme')
 themeconv_core.parse_input(themeverter_intent)
 
