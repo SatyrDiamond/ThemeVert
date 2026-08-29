@@ -121,6 +121,8 @@ class base:
 				dvplug_obj.shortname = 'noname_'+str(base.noname_num)
 				base.noname_num += 1
 
+			dvplug_obj.prop = in_object.get_prop()
+
 			if dvplug_obj.shortname not in base.loaded_plugins:
 				dvplug_obj.type = plugintype
 				dvplug_obj.plug_obj = in_object

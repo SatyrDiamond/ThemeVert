@@ -13,17 +13,23 @@ class input_plug(plugins.base):
 	def get_name(self):
 		return 'Delphi VCL'
 	
+	def get_prop(self):
+		prop = {}
+		prop['supported_types'] = ['win32']
+		return prop
+	
 	def parse(self, theme_obj, themeverter_intent):
 		theme_obj.supported_types.append('win32')
 		vcl_theme_obj = vcl_theme.masterstyle_data(themeverter_intent.input_file)
-		#vcl_theme_obj.to_xml('out_o.xml')
+		vcl_theme_obj.to_xml('vcl_out.xml')
 
 		def vcl_get_w32_color(vclname):
 			c = vcl_theme_obj.get_color_w32(vclname)
-			c = vcl_theme.get_color_int(c)
+			d, c = vcl_theme.get_color_int(c)
+			#print(d, vclname, c)
 			return c
 
-		win32_colors = theme_obj.win32_colors
+		win32_colors = theme_obj.colors_win32
 		
 		win32_colors.set('ActiveBorder', vcl_get_w32_color('clActiveBorder') ) # ActiveBorder
 		win32_colors.set('ActiveTitle', vcl_get_w32_color('clActiveCaption') ) # ActiveTitle
@@ -57,5 +63,19 @@ class input_plug(plugins.base):
 		win32_colors.set('WindowFrame', vcl_get_w32_color('clWindowFrame') ) # WindowFrame
 		win32_colors.set('WindowText', vcl_get_w32_color('clWindowText') ) # WindowText
 		
-		theme_obj.import_win32_colors()
-	
+		win32_colors.import_colors(theme_obj)
+
+		def vcl_get_font(curstyle, fontname, proploc, propcol):
+
+			if fontname in vcl_theme_obj.fonts:
+				f_name, f_size, f_unk, f_r, f_g, f_b = vcl_theme_obj.fonts[fontname].split(',')
+
+				font_obj = curstyle.add_font(proploc)
+				font_obj.used = True
+				font_obj.face = f_name
+				font_obj.size = int(f_size)
+				curstyle.add_color(proploc+':'+propcol, [int(f_r), int(f_g), int(f_b)])
+
+			#d, c = vcl_theme.get_color_int(c)
+			#print(d, vclname, c)
+			#return c

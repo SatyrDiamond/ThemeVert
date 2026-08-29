@@ -12,9 +12,14 @@ class input_plug(plugins.base):
 	def get_name(self):
 		return 'Windows .theme'
 	
+	def get_prop(self):
+		prop = {}
+		prop['supported_types'] = ['win32']
+		return prop
+	
 	def parse(self, theme_obj, themeverter_intent):
 		theme_obj.supported_types.append('win32')
-		win32_colors = theme_obj.win32_colors
+		win32_colors = theme_obj.colors_win32
 		wintheme = windows_theme.wintheme(themeverter_intent.input_file)
 		for k, v in wintheme.colors.items(): win32_colors.set(k, v)
 
@@ -33,5 +38,3 @@ class input_plug(plugins.base):
 
 			curstyle, curctrl = theme_obj.add_stylecontrol('menubar')
 			get_font(curstyle, lfMenuFont)
-
-		theme_obj.import_win32_colors()

@@ -13,9 +13,14 @@ class output_plug(plugins.base):
 	def get_name(self):
 		return 'Windows .theme'
 	
+	def get_prop(self):
+		prop = {}
+		prop['supported_types'] = ['win32']
+		return prop
+	
 	def parse(self, theme_obj, themeverter_intent):
 		import configparser
-		win32_colors = theme_obj.win32_colors
+		win32_colors = theme_obj.colors_win32
 
 		config = configparser.ConfigParser()
 		config.read(themeverter_intent.output_file)

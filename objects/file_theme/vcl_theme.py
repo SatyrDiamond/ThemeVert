@@ -124,12 +124,12 @@ class tpf_data:
 def get_color_int(val):
 	if val[0]=='$': 
 		h = val.lstrip('$')
-		return list(int(h[i:i+2], 16) for i in (2, 4, 6))
+		return 0, list(int(h[i:i+2], 16) for i in (6, 4, 2))
 	elif val[0]=='#': 
 		h = val.lstrip('#')
-		return list(int(h[i:i+2], 16) for i in (0, 2, 4))
+		return 1, list(int(h[i:i+2], 16) for i in (0, 2, 4))
 	else:
-		return val
+		return 2, val
 
 class masterstyle_data:
 
