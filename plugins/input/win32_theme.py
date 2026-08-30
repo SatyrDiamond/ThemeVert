@@ -1,32 +1,42 @@
 
 import plugins
-
-from functions import color
+from objects.file_theme import windows_theme
 
 class input_plug(plugins.base):
 	def is_themeconv_plugin(self):
 		return 'input'
 	
 	def get_shortname(self):
-		return 'gtk_color_scheme'
+		return 'win32_theme'
 	
 	def get_name(self):
-		return 'Gtk Colors .INI'
+		return '[Win32] Windows .theme'
 	
 	def get_prop(self):
 		prop = {}
-		prop['supported_types'] = ['gtk']
+		prop['supported_types'] = ['win32']
 		return prop
 	
 	def parse(self, theme_obj, themeverter_intent):
-		import configparser
-		theme_obj.supported_types.append('gtk')
+		from objects.file_theme import windows_theme
+		theme_obj.supported_types.append('win32')
+		win32_colors = theme_obj.colors_win32
+		wintheme = windows_theme.wintheme()
+		wintheme.read(themeverter_intent.input_file)
+		for k, v in wintheme.colors.items(): win32_colors.set(k, v)
 
-		config = configparser.ConfigParser()
-		config.read(themeverter_intent.input_file)
+		def get_font(curstyle, LOGFONTA):
+			font_obj = curstyle.add_font('main:control')
+			font_obj.used = True
+			font_obj.face = LOGFONTA.lfFaceName
+			if LOGFONTA.lfWeight>400: font_obj.fx.append('bold')
+			if LOGFONTA.lfItalic: font_obj.fx.append('italic')
+			if LOGFONTA.lfUnderline: font_obj.fx.append('underline')
+			if LOGFONTA.lfStrikeOut: font_obj.fx.append('strikeout')
 
-		maincolors = config['main']
+		if wintheme.NonclientMetrics:
+			NonclientMetrics = wintheme.NonclientMetrics
+			lfMenuFont = NonclientMetrics.lfMenuFont
 
-		gtk_colors = theme_obj.colors_gtk
-
-		for k, v in maincolors.items(): gtk_colors.set(k, color.hex_to_int(v))
+			curstyle, curctrl = theme_obj.add_stylecontrol('menubar')
+			get_font(curstyle, lfMenuFont)
