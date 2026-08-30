@@ -193,7 +193,7 @@ class colors_win32():
 			globalstyle.add_color_named('selected:edit_bg', 'win32__hilight')
 			globalstyle.add_color_named('selected:edit_fg', 'win32__hilighttext')
 
-			# ------ desktop -----
+			# ------ titlebar -----
 			curstyle, curctrl = theme_obj.add_stylecontrol('titlebar')
 			curstyle.add_color_named('main:control_bg', 'win32__activetitle')
 			curstyle.add_color_named('inactive:control_bg', 'win32__inactivetitle')
@@ -218,6 +218,8 @@ class colors_win32():
 			curstyle, curctrl = theme_obj.add_stylecontrol('menu')
 			curstyle.add_color_named('main:control_bg', 'win32__menu')
 			curstyle.add_color_named('main:control_fg', 'win32__menutext')
+			curstyle.add_color_named('focused:control_bg', 'win32__hilight')
+			curstyle.add_color_named('focused:control_fg', 'win32__hilighttext')
 
 			# ------ scrollbar -----
 			curstyle, curctrl = theme_obj.add_stylecontrol('scrollbar')

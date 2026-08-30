@@ -4,6 +4,7 @@ from objects.colors import win32 as colors_win32
 from objects.colors import gtk as colors_gtk
 from objects import visual
 from objects import valobjs
+from functions import color as colorfunc
 
 triplestr = valobjs.triplestr
 
@@ -179,7 +180,6 @@ class basstyle_main():
 		if not nameval[0]: cstate.add_color(name, nameval[1])
 		else: cstate.add_color_named(name, nameval[1])
 
-
 # =============================================== CTRL ===============================================
 
 class data_control():
@@ -330,17 +330,15 @@ class data_theme():
 			edit_greytext_needed = True
 
 		if control_greytext_needed:
-			greytxt1 = self.get_color(None, 'main:control_bg', True)
-			greytxt2 = self.get_color(None, 'main:control_fg', True)
-			greytxt1 /= 2
-			greytxt2 /= 2
-			greycolor = (greytxt1+greytxt2)
+			greycolor = colorfunc.mix_color(
+				self.get_color(None, 'main:control_bg', True), 
+				self.get_color(None, 'main:control_fg', True)
+				, 0.5)
 			self.add_global_color('generated__control_greytext', greycolor.get_int() )
 
 		if edit_greytext_needed:
-			greytxt1 = self.get_color(None, 'main:edit_bg', True)
-			greytxt2 = self.get_color(None, 'main:edit_fg', True)
-			greytxt1 /= 2
-			greytxt2 /= 2
-			greycolor = (greytxt1+greytxt2)
+			greycolor = colorfunc.mix_color(
+				self.get_color(None, 'main:edit_bg', True), 
+				self.get_color(None, 'main:edit_fg', True)
+				, 0.5)
 			self.add_global_color('generated__edit_greytext', greycolor.get_int() )
