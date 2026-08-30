@@ -32,8 +32,6 @@ parser.add_argument("-o", default=None)
 parser.add_argument("-ot", default=None)
 args = parser.parse_args()
 
-dawvert_core = core.core()
-
 if not args.i:
 	logger_core.error('Input File Not Specified.')
 	exit()
