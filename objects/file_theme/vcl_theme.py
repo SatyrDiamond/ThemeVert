@@ -2,6 +2,7 @@ from external.easybinrw import easybinrw
 import xml.etree.ElementTree as ET
 from PIL import Image
 from objects.file_theme import vcl_colors
+import zlib
 
 def read_string(ebrw_readstr):
 	size = ebrw_readstr.int_u32()
@@ -136,6 +137,12 @@ class masterstyle_data:
 	def __init__(self, filename):
 		ebrw_readstr = easybinrw.binread()
 		ebrw_readstr.load_file(filename)
+
+		if ebrw_readstr.raw(13)==b'VCL_STYLE 2.0':
+			c = zlib.decompress(ebrw_readstr.rest())
+			ebrw_readstr.load_data(c)
+		else:
+			print('not a valid vcl')
 
 		self.text1 = read_string(ebrw_readstr)
 		self.text2 = read_string(ebrw_readstr)
