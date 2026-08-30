@@ -1,10 +1,10 @@
 <div align="center">
 
-# ThemeVerter - The THEME ConVERTer
+# ThemeVert - The THEME ConVERTer
 </div>
 
 <p align="center">
-    ThemeVerter is a Theme/Color Scheme Converter for Themes for Unix and Windows
+    ThemeVert is a Theme/Color Scheme Converter for Themes for Unix and Windows
 </p>
 
 ## How to Use
