@@ -6,14 +6,24 @@
 import json
 import argparse
 import os
-import logging
 from objects import core
 
-logger_core = logging.getLogger('core')
 
 scriptfiledir = os.path.dirname(os.path.realpath(__file__))
 
 print('ThemeVerter: a Theme/ColorScheme Conversion Tool')
+
+import logging
+logFormatter = logging.Formatter(fmt='%(levelname)8s | %(name)12s | %(message)s')
+consoleHandler = logging.StreamHandler()
+consoleHandler.setLevel(logging.DEBUG)
+consoleHandler.setFormatter(logFormatter)
+logger_plugins = logging.getLogger('plugins')
+logger_plugins.addHandler(consoleHandler)
+logger_plugins.setLevel(logging.INFO)
+logger_core = logging.getLogger('core')
+logger_core.addHandler(consoleHandler)
+logger_core.setLevel(logging.INFO)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", default=None)
