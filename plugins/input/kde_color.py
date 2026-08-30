@@ -13,7 +13,7 @@ class input_plug(plugins.base):
 		return 'kde_color'
 	
 	def get_name(self):
-		return 'KDE Color Scheme'
+		return 'KDE/Plasma Color Scheme'
 	
 	def get_prop(self):
 		prop = {}
