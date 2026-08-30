@@ -10,7 +10,7 @@
 ## How to Use
 
 ```
-python3 dawvert_cmd.py -i <input> -ot <output type> -o <output>
+python3 themevert_cmd.py -i <input> -ot <output type> -o <output>
 
 input type: -it 
 input file: -i 
