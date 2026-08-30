@@ -45,6 +45,13 @@ if not args.o:
 	logger_core.error('Output File Not Specified.')
 	exit()
 
+if not args.it:
+	logger_core.error('Input Type Not Specified.')
+	exit()
+
+if not args.ot:
+	logger_core.error('Output Type Not Specified.')
+	exit()
 
 themeconv_core = core.core()
 themeconv_core.input_load_plugins(None)
