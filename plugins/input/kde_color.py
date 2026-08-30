@@ -154,3 +154,28 @@ class input_plug(plugins.base):
 			tstyle.add_color_named('main:edit_fg_selected_negative', txt_foregroundnegative)
 			tstyle.add_color_named('main:edit_fg_selected_neutral', txt_foregroundneutral)
 			tstyle.add_color_named('main:edit_fg_selected_positive', txt_foregroundpositive)
+
+		if 'WM' in config:
+			colorset = config['WM']
+
+			theme_obj.add_global_color('wm_activeBackground', conv_color(colorset['activeBackground']) )
+			theme_obj.add_global_color('wm_activeBlend', conv_color(colorset['activeBlend']) )
+			theme_obj.add_global_color('wm_activeForeground', conv_color(colorset['activeForeground']) )
+			theme_obj.add_global_color('wm_inactiveBackground', conv_color(colorset['inactiveBackground']) )
+			theme_obj.add_global_color('wm_inactiveBlend', conv_color(colorset['inactiveBlend']) )
+			theme_obj.add_global_color('wm_inactiveForeground', conv_color(colorset['inactiveForeground']) )
+
+			curstyle, curctrl = theme_obj.add_stylecontrol('titlebar')
+			curstyle.add_color_named('main:control_bg', 'wm_activeBackground')
+			curstyle.add_color_named('main:control_bg_second', 'wm_activeBlend')
+			curstyle.add_color_named('main:control_fg', 'wm_activeForeground')
+			curstyle.add_prop('main', 'color_fx', 'gradent')
+			curstyle.add_prop('main', 'gradent_color', 'user_gradent')
+			curstyle.add_color_named('main:user_gradent', 'wm_activeBlend')
+
+			curstyle.add_color_named('inactive:control_bg', 'wm_inactiveBackground')
+			curstyle.add_color_named('inactive:control_fg', 'wm_inactiveForeground')
+			curstyle.add_color_named('inactive:control_bg_second', 'wm_activeBlend')
+			curstyle.add_prop('inactive', 'color_fx', 'gradent')
+			curstyle.add_prop('inactive', 'gradent_color', 'user_gradent')
+			curstyle.add_color_named('inactive:user_gradent', 'wm_inactiveBlend')

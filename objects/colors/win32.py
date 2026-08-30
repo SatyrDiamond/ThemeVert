@@ -198,8 +198,15 @@ class colors_win32():
 			curstyle, curctrl = theme_obj.add_stylecontrol('titlebar')
 			curstyle.add_color_named('main:control_bg', 'win32__activetitle')
 			curstyle.add_color_named('main:control_fg', 'win32__titletext')
+			curstyle.add_prop('main', 'color_fx', 'gradent')
+			curstyle.add_prop('main', 'gradent_color', 'user_gradent')
+			curstyle.add_color_named('main:user_gradent', 'win32__gradientactivetitle')
+
 			curstyle.add_color_named('inactive:control_bg', 'win32__inactivetitle')
 			curstyle.add_color_named('inactive:control_fg', 'win32__inactivetitletext')
+			curstyle.add_prop('main', 'color_fx', 'gradent')
+			curstyle.add_prop('main', 'gradent_color', 'user_gradent')
+			curstyle.add_color_named('main:user_gradent', 'win32__gradientinactivetitle')
 
 			# ------ desktop -----
 			curstyle, curctrl = theme_obj.add_stylecontrol('desktop')
@@ -279,10 +286,20 @@ class colors_win32():
 			color = theme_obj.get_color('titlebar', 'main:control_bg', True)
 			self.set('activetitle', color.get_int() )
 			self.set('gradientactivetitle', color.get_int() )
+			cfx_type = theme_obj.get_prop('titlebar', 'main', 'color_fx')
+			if cfx_type=='gradent':
+				gradent_color = theme_obj.get_prop('titlebar', 'main', 'gradent_color')
+				gcolor = theme_obj.get_color('titlebar', 'main:'+gradent_color, True)
+				if gcolor: self.set('gradientactivetitle', gcolor.get_int() )
 
 			color = theme_obj.get_color('titlebar', 'inactive:control_bg', True)
 			self.set('inactivetitle', color.get_int() )
 			self.set('gradientinactivetitle', color.get_int() )
+			cfx_type = theme_obj.get_prop('titlebar', 'inactive', 'color_fx')
+			if cfx_type=='gradent':
+				gradent_color = theme_obj.get_prop('titlebar', 'inactive', 'gradent_color')
+				gcolor = theme_obj.get_color('titlebar', 'inactive:'+gradent_color, True)
+				if gcolor: self.set('gradientinactivetitle', gcolor.get_int() )
 			
 			color = theme_obj.get_color('titlebar', 'main:control_fg', True)
 			self.set('titletext', color.get_int() )

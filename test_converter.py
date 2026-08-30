@@ -16,11 +16,11 @@ themeconv_core = core.core()
 themeconv_core.input_load_plugins(None)
 themeconv_core.output_load_plugins(None)
 
-if 0:
+if 1:
 	themeverter_intent.set_file_input('themes/win_theme/Windows 2000.theme')
 	themeconv_core.input_set('win32_theme')
 else:
-	themeverter_intent.set_file_input('themes/tcl/RUBYGRAPHITE')
+	themeverter_intent.set_file_input('themes/tcl/ONYXBLUE')
 	themeconv_core.input_set('vcl_theme')
 
 themeconv_core.parse_input(themeverter_intent)

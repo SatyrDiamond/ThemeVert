@@ -135,6 +135,18 @@ class basstyle_main():
 		cstate = self.add_state(state)
 		cstate.add_color_named(name, colname)
 
+	def add_prop(self, state, name, value):
+		cstate = self.add_state(state)
+		cstate.prop[name] = value
+
+	def get_prop(self, state, name):
+		if state=='main':
+			c = self.mainstate
+			if name in c.prop: return c.prop[name] 
+		elif state in self.states: 
+			c = self.states[state]
+			if name in c.prop: return c.prop[name] 
+
 	def add_font(self, colloc):
 		calloc_val = triplestr.from_str(colloc)
 		state = calloc_val.category
@@ -253,7 +265,7 @@ class data_theme():
 	def get_color(self, controlname, colloc, alwayscol):
 		styleobj = self.style_global
 
-		color_global = self.style_global.exists_color(colloc)
+		#color_global = self.style_global.exists_color(colloc)
 
 		#print('debug: get_color |', controlname, colloc, '|', color_global, end=' ' )
 
@@ -280,6 +292,15 @@ class data_theme():
 			else:
 				return isname, val.copy() if not isname else val
 
+	def get_prop(self, controlname, state, name):
+		styleobj = self.style_global
+
+		if controlname in self.controls:
+			style = self.controls[controlname]
+			for s in style.styles:
+				stylep = self.style_part[s]
+				return stylep.get_prop(state, name)
+
 	def complete_incomplete(self):
 		globalstyle = self.style_global
 
@@ -303,7 +324,7 @@ class data_theme():
 
 		if not globalstyle.exists_color('main:control_bg_alt'):
 			globalstyle.simple_add_col('main:control_bg_alt', ctrl_main_bg)
-			
+
 		# ----------------- selected -----------------
 		#text
 		color1 = globalstyle.exists_color('main:edit_bg_selected')
