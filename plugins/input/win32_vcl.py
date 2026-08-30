@@ -11,7 +11,7 @@ class input_plug(plugins.base):
 		return 'vcl_theme'
 	
 	def get_name(self):
-		return 'Delphi VCL'
+		return '[Win32] Delphi VCL'
 	
 	def get_prop(self):
 		prop = {}
@@ -80,37 +80,37 @@ class input_plug(plugins.base):
 		vcl_get_font(curstyle, 'ButtonTextPressed', 'active:control', 'text')
 		vcl_get_font(curstyle, 'ButtonTextHot', 'hot:control', 'text')
 		vcl_get_font(curstyle, 'ButtonTextFocused', 'focused:control', 'text')
-		vcl_get_font(curstyle, 'ButtonTextDisabled', 'disabled:control', 'text')
+		vcl_get_font(curstyle, 'ButtonTextDisabled', 'inactive:control', 'text')
 
 		curstyle, curctrl = theme_obj.add_stylecontrol('checkbox')
 		vcl_get_font(curstyle, 'CheckBoxTextNormal', 'main:control', 'text')
 		vcl_get_font(curstyle, 'CheckBoxTextPressed', 'active:control', 'text')
 		vcl_get_font(curstyle, 'CheckBoxTextHot', 'hot:control', 'text')
 		vcl_get_font(curstyle, 'CheckBoxTextFocused', 'focused:control', 'text')
-		vcl_get_font(curstyle, 'CheckBoxTextDisabled', 'disabled:control', 'text')
+		vcl_get_font(curstyle, 'CheckBoxTextDisabled', 'inactive:control', 'text')
 
 		curstyle, curctrl = theme_obj.add_stylecontrol('radiobutton')
 		vcl_get_font(curstyle, 'RadioButtonTextNormal', 'main:control', 'text')
 		vcl_get_font(curstyle, 'RadioButtonTextPressed', 'active:control', 'text')
 		vcl_get_font(curstyle, 'RadioButtonTextHot', 'hot:control', 'text')
 		vcl_get_font(curstyle, 'RadioButtonTextFocused', 'focused:control', 'text')
-		vcl_get_font(curstyle, 'RadioButtonTextDisabled', 'disabled:control', 'text')
+		vcl_get_font(curstyle, 'RadioButtonTextDisabled', 'inactive:control', 'text')
 
 		curstyle, curctrl = theme_obj.add_stylecontrol('groupbox')
 		vcl_get_font(curstyle, 'GroupBoxTextNormal', 'main:control', 'text')
-		vcl_get_font(curstyle, 'GroupBoxTextDisabled', 'disabled:control', 'text')
+		vcl_get_font(curstyle, 'GroupBoxTextDisabled', 'inactive:control', 'text')
 
 		curstyle, curctrl = theme_obj.add_stylecontrol('menuitem')
 		vcl_get_font(curstyle, 'MenuItemTextNormal', 'main:control', 'text')
 		vcl_get_font(curstyle, 'MenuItemTextSelected', 'active:control', 'text')
 		vcl_get_font(curstyle, 'MenuItemTextHot', 'hot:control', 'text')
-		vcl_get_font(curstyle, 'MenuItemTextDisabled', 'disabled:control', 'text')
+		vcl_get_font(curstyle, 'MenuItemTextDisabled', 'inactive:control', 'text')
 
 		curstyle, curctrl = theme_obj.add_stylecontrol('editbox')
 		vcl_get_font(curstyle, 'EditBoxTextNormal', 'main:text', 'fg')
 		vcl_get_font(curstyle, 'EditBoxTextFocused', 'focused:text', 'fg')
 		vcl_get_font(curstyle, 'EditBoxTextHot', 'hot:text', 'fg')
-		vcl_get_font(curstyle, 'EditBoxTextDisabled', 'disabled:text', 'fg')
+		vcl_get_font(curstyle, 'EditBoxTextDisabled', 'inactive:text', 'fg')
 		vcl_get_font(curstyle, 'EditBoxTextSelected', 'active:text', 'fg')
 
 		curstyle, curctrl = theme_obj.add_stylecontrol('treeitem')
@@ -118,7 +118,7 @@ class input_plug(plugins.base):
 		vcl_get_font(curstyle, 'TreeItemTextHot', 'hot:text', 'fg')
 		vcl_get_font(curstyle, 'TreeItemTextSelected', 'selected:text', 'fg')
 		vcl_get_font(curstyle, 'TreeItemTextFocused', 'focused:text', 'fg')
-		vcl_get_font(curstyle, 'TreeItemTextDisabled', 'disabled:text', 'fg')
+		vcl_get_font(curstyle, 'TreeItemTextDisabled', 'inactive:text', 'fg')
 
 		curstyle, curctrl = theme_obj.add_stylecontrol('griditem')
 		vcl_get_font(curstyle, 'GridItemNormal', 'main:text', 'fg')

@@ -253,17 +253,24 @@ class data_theme():
 	def get_color(self, controlname, colloc, alwayscol):
 		styleobj = self.style_global
 
+		color_global = self.style_global.exists_color(colloc)
+
+		print('debug: get_color |', controlname, colloc, '|', color_global, end=' ' )
+
+		outcolor = None
 		c = styleobj.get_color(colloc)
 
 		if controlname in self.controls:
 			style = self.controls[controlname]
 			for s in style.styles:
 				stylep = self.style_part[s]
-				oc = stylep.get_color(colloc)
-				if oc is not None: 
-					c = oc
-				else:
-					print('debug:', str(colloc), 'not found in', controlname)
+				color_ele = stylep.exists_color(colloc)
+				print(color_ele, end=' ' )
+				if color_ele:
+					c = stylep.get_color(colloc)
+					break
+
+		print()
 
 		if c:
 			isname, val = c
@@ -289,7 +296,8 @@ class data_theme():
 			print('text BG or FG missing')
 			exit()
 
-		greytxt_needed = False
+		control_greytext_needed = False
+		edit_greytext_needed = False
 
 		# ----------------- selected -----------------
 		#text
@@ -306,25 +314,33 @@ class data_theme():
 			globalstyle.simple_add_col('main:control_text_selected_bg', ctrl_main_fg)
 			globalstyle.simple_add_col('main:control_text_selected', ctrl_main_bg)
 
-		# ----------------- disabled -----------------
+		# ----------------- inactive -----------------
 		#control
-		ctxt = 'disabled:control_bg'
+		ctxt = 'inactive:control_bg'
 		if not globalstyle.exists_color(ctxt): globalstyle.simple_add_col(ctxt, ctrl_main_bg)
-		if not globalstyle.exists_color('disabled:control_fg'):
-			globalstyle.add_color_named('disabled:control_fg', 'generated__greytext')
-			greytxt_needed = True
+		if not globalstyle.exists_color('inactive:control_fg'):
+			globalstyle.add_color_named('inactive:control_fg', 'generated__control_greytext')
+			control_greytext_needed = True
 
 		#text
-		ctxt = 'disabled:edit_bg'
+		ctxt = 'inactive:edit_bg'
 		if not globalstyle.exists_color(ctxt): globalstyle.simple_add_col(ctxt, ctrl_main_bg)
-		if not globalstyle.exists_color('disabled:edit_fg'):
-			globalstyle.add_color_named('disabled:edit_fg', 'generated__greytext')
-			greytxt_needed = True
+		if not globalstyle.exists_color('inactive:edit_fg'):
+			globalstyle.add_color_named('inactive:edit_fg', 'generated__control_greytext')
+			edit_greytext_needed = True
 
-		if greytxt_needed:
+		if control_greytext_needed:
 			greytxt1 = self.get_color(None, 'main:control_bg', True)
+			greytxt2 = self.get_color(None, 'main:control_fg', True)
+			greytxt1 /= 2
+			greytxt2 /= 2
+			greycolor = (greytxt1+greytxt2)
+			self.add_global_color('generated__control_greytext', greycolor.get_int() )
+
+		if edit_greytext_needed:
+			greytxt1 = self.get_color(None, 'main:edit_bg', True)
 			greytxt2 = self.get_color(None, 'main:edit_fg', True)
 			greytxt1 /= 2
 			greytxt2 /= 2
 			greycolor = (greytxt1+greytxt2)
-			self.add_global_color('generated__greytext', greycolor.get_int() )
+			self.add_global_color('generated__edit_greytext', greycolor.get_int() )

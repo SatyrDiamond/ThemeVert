@@ -1,8 +1,7 @@
 
 import xml.etree.ElementTree as ET
 from objects import visual
-
-def writecol(c): return ' '.join([str(x) for x in c.get_int()])
+from functions import color as colorfunc
 
 class colors_gtk():
 	__slots__ = ['used', 'base_color', 'text_color', 'bg_color', 'fg_color', 'error_bg_color', 'error_color', 'error_fg_color', 'inactive_fg_color', 'inactive_text_color', 'info_bg_color', 'info_fg_color', 'other_bg_color', 'other_fg_color', 'question_bg_color', 'question_fg_color', 'selected_base_color', 'selected_bg_color', 'selected_fg_color', 'selected_text_color', 'tooltip_color', 'url_color', 'visited_url_color', 'warning_bg_color', 'warning_fg_color']
@@ -69,7 +68,7 @@ class colors_gtk():
 
 		def xml_write(part, name, color):
 			if color:
-				part.set(name, writecol(color) )
+				part.set(name, colorfunc.writestr(color) )
 
 		if self.used:
 			part = ET.SubElement(part, name)
@@ -123,8 +122,8 @@ class colors_gtk():
 			if globalcolor_add('selected_base_color', self.selected_base_color): curstyle.add_color_named('selected:edit_bg', 'gtk__selected_base_color')
 			if globalcolor_add('selected_text_color', self.selected_text_color): curstyle.add_color_named('selected:edit_fg', 'gtk__selected_text_color')
 
-			if globalcolor_add('inactive_fg_color', self.inactive_fg_color): curstyle.add_color_named('disabled:control_fg', 'gtk__inactive_fg_color')
-			if globalcolor_add('inactive_text_color', self.inactive_text_color): curstyle.add_color_named('disabled:edit_fg', 'gtk__inactive_text_color')
+			if globalcolor_add('inactive_fg_color', self.inactive_fg_color): curstyle.add_color_named('inactive:control_fg', 'gtk__inactive_fg_color')
+			if globalcolor_add('inactive_text_color', self.inactive_text_color): curstyle.add_color_named('inactive:edit_fg', 'gtk__inactive_text_color')
 
 			curstyle, curctrl = theme_obj.add_stylecontrol('tooltip')
 			if globalcolor_add('tooltip_color', self.tooltip_color): curstyle.add_color_named('main:control_bg', 'gtk__tooltip_color')

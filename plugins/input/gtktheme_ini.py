@@ -1,9 +1,7 @@
 
 import plugins
 
-def hex_to_int(val):
-	h = val.lstrip('#')
-	return list(int(h[i:i+2], 16) for i in (0, 2, 4))
+from functions import color
 
 class input_plug(plugins.base):
 	def is_themeconv_plugin(self):
@@ -13,7 +11,7 @@ class input_plug(plugins.base):
 		return 'gtk_color_scheme'
 	
 	def get_name(self):
-		return 'gtk color scheme INI'
+		return 'Gtk Colors .INI'
 	
 	def get_prop(self):
 		prop = {}
@@ -31,4 +29,4 @@ class input_plug(plugins.base):
 
 		gtk_colors = theme_obj.colors_gtk
 
-		for k, v in maincolors.items(): gtk_colors.set(k, hex_to_int(v))
+		for k, v in maincolors.items(): gtk_colors.set(k, color.hex_to_int(v))

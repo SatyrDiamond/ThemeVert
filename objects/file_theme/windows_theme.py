@@ -56,10 +56,12 @@ class tagNONCLIENTMETRICS():
 		self.lfMessageFont = tagLOGFONTA(ebrw_readstr)
 
 class wintheme():
-	def __init__(self, filename):
-		f = open(filename, 'rb')
+	def __init__(self):
 		self.data = {}
 		self.colors = {}
+
+	def read(self, filename):
+		f = open(filename, 'rb')
 		c = None
 		for x in f.readlines():
 			x = x.decode('latin1').rstrip().lstrip().split(';')[0]
@@ -86,3 +88,13 @@ class wintheme():
 			for k, v in self.data['Control Panel\\Colors'].items():
 				color = [int(x) for x in v.split(' ')]
 				self.colors[k] = color
+
+	def write(self, filename):
+		import configparser
+		f = open(filename, 'rb')
+
+		config = configparser.ConfigParser()
+		config['Control Panel\\Colors'] = self.colors
+
+		with open(filename, 'w') as configfile:
+		    config.write(configfile)

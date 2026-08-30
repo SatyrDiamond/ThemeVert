@@ -10,7 +10,7 @@ class input_plug(plugins.base):
 		return 'win32_theme'
 	
 	def get_name(self):
-		return 'Windows .theme'
+		return '[Win32] Windows .theme'
 	
 	def get_prop(self):
 		prop = {}
@@ -18,9 +18,11 @@ class input_plug(plugins.base):
 		return prop
 	
 	def parse(self, theme_obj, themeverter_intent):
+		from objects.file_theme import windows_theme
 		theme_obj.supported_types.append('win32')
 		win32_colors = theme_obj.colors_win32
-		wintheme = windows_theme.wintheme(themeverter_intent.input_file)
+		wintheme = windows_theme.wintheme()
+		wintheme.read(themeverter_intent.input_file)
 		for k, v in wintheme.colors.items(): win32_colors.set(k, v)
 
 		def get_font(curstyle, LOGFONTA):

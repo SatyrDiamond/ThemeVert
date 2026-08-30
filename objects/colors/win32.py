@@ -1,8 +1,7 @@
 
 import xml.etree.ElementTree as ET
 from objects import visual
-
-def writecol(c): return ' '.join([str(x) for x in c.get_int()])
+from functions import color as colorfunc
 
 class colors_win32():
 	__slots__ = ['used', 'scrollbar', 'background', 'activetitle', 'inactivetitle', 'menu', 'window', 'windowframe', 'menutext', 'windowtext', 'titletext', 'activeborder', 'inactiveborder', 'appworkspace', 'hilight', 'hilighttext', 'buttonface', 'buttonshadow', 'graytext', 'buttontext', 'inactivetitletext', 'buttonhilight', 'buttondkshadow', 'buttonlight', 'infotext', 'infowindow', 'buttonalternateface', 'hottrackingcolor', 'gradientactivetitle', 'gradientinactivetitle', 'menuhilight', 'menubar']
@@ -114,37 +113,37 @@ class colors_win32():
 	def to_xml(self, part, name):
 		if self.used:
 			part = ET.SubElement(part, name)
-			part.set('scrollbar', writecol(self.scrollbar) )
-			part.set('background', writecol(self.background) )
-			part.set('activetitle', writecol(self.activetitle) )
-			part.set('inactivetitle', writecol(self.inactivetitle) )
-			part.set('menu', writecol(self.menu) )
-			part.set('window', writecol(self.window) )
-			part.set('windowframe', writecol(self.windowframe) )
-			part.set('menutext', writecol(self.menutext) )
-			part.set('windowtext', writecol(self.windowtext) )
-			part.set('titletext', writecol(self.titletext) )
-			part.set('activeborder', writecol(self.activeborder) )
-			part.set('inactiveborder', writecol(self.inactiveborder) )
-			part.set('appworkspace', writecol(self.appworkspace) )
-			part.set('hilight', writecol(self.hilight) )
-			part.set('hilighttext', writecol(self.hilighttext) )
-			part.set('buttonface', writecol(self.buttonface) )
-			part.set('buttonshadow', writecol(self.buttonshadow) )
-			part.set('graytext', writecol(self.graytext) )
-			part.set('buttontext', writecol(self.buttontext) )
-			part.set('inactivetitletext', writecol(self.inactivetitletext) )
-			part.set('buttonhilight', writecol(self.buttonhilight) )
-			part.set('buttondkshadow', writecol(self.buttondkshadow) )
-			part.set('buttonlight', writecol(self.buttonlight) )
-			part.set('infotext', writecol(self.infotext) )
-			part.set('infowindow', writecol(self.infowindow) )
-			part.set('buttonalternateface', writecol(self.buttonalternateface) )
-			part.set('hottrackingcolor', writecol(self.hottrackingcolor) )
-			part.set('gradientactivetitle', writecol(self.gradientactivetitle) )
-			part.set('gradientinactivetitle', writecol(self.gradientinactivetitle) )
-			part.set('menuhilight', writecol(self.menuhilight) )
-			part.set('menubar', writecol(self.menubar) )
+			part.set('scrollbar', colorfunc.writestr(self.scrollbar) )
+			part.set('background', colorfunc.writestr(self.background) )
+			part.set('activetitle', colorfunc.writestr(self.activetitle) )
+			part.set('inactivetitle', colorfunc.writestr(self.inactivetitle) )
+			part.set('menu', colorfunc.writestr(self.menu) )
+			part.set('window', colorfunc.writestr(self.window) )
+			part.set('windowframe', colorfunc.writestr(self.windowframe) )
+			part.set('menutext', colorfunc.writestr(self.menutext) )
+			part.set('windowtext', colorfunc.writestr(self.windowtext) )
+			part.set('titletext', colorfunc.writestr(self.titletext) )
+			part.set('activeborder', colorfunc.writestr(self.activeborder) )
+			part.set('inactiveborder', colorfunc.writestr(self.inactiveborder) )
+			part.set('appworkspace', colorfunc.writestr(self.appworkspace) )
+			part.set('hilight', colorfunc.writestr(self.hilight) )
+			part.set('hilighttext', colorfunc.writestr(self.hilighttext) )
+			part.set('buttonface', colorfunc.writestr(self.buttonface) )
+			part.set('buttonshadow', colorfunc.writestr(self.buttonshadow) )
+			part.set('graytext', colorfunc.writestr(self.graytext) )
+			part.set('buttontext', colorfunc.writestr(self.buttontext) )
+			part.set('inactivetitletext', colorfunc.writestr(self.inactivetitletext) )
+			part.set('buttonhilight', colorfunc.writestr(self.buttonhilight) )
+			part.set('buttondkshadow', colorfunc.writestr(self.buttondkshadow) )
+			part.set('buttonlight', colorfunc.writestr(self.buttonlight) )
+			part.set('infotext', colorfunc.writestr(self.infotext) )
+			part.set('infowindow', colorfunc.writestr(self.infowindow) )
+			part.set('buttonalternateface', colorfunc.writestr(self.buttonalternateface) )
+			part.set('hottrackingcolor', colorfunc.writestr(self.hottrackingcolor) )
+			part.set('gradientactivetitle', colorfunc.writestr(self.gradientactivetitle) )
+			part.set('gradientinactivetitle', colorfunc.writestr(self.gradientinactivetitle) )
+			part.set('menuhilight', colorfunc.writestr(self.menuhilight) )
+			part.set('menubar', colorfunc.writestr(self.menubar) )
 
 	def import_colors(self, theme_obj):
 		if self.used == True and 'basic' not in theme_obj.supported_types:
@@ -186,13 +185,20 @@ class colors_win32():
 			globalstyle.add_color_named('main:control_fg', 'win32__windowtext')
 			globalstyle.add_color_named('main:edit_bg', 'win32__window')
 			globalstyle.add_color_named('main:edit_fg', 'win32__windowtext')
-			globalstyle.add_color_named('disabled:control_bg', 'win32__buttonface')
-			globalstyle.add_color_named('disabled:control_fg', 'win32__graytext')
-			globalstyle.add_color_named('disabled:edit_bg', 'win32__buttonface')
-			globalstyle.add_color_named('disabled:edit_fg', 'win32__graytext')
+			globalstyle.add_color_named('inactive:control_bg', 'win32__buttonface')
+			globalstyle.add_color_named('inactive:control_fg', 'win32__graytext')
+			globalstyle.add_color_named('inactive:edit_bg', 'win32__buttonface')
+			globalstyle.add_color_named('inactive:edit_fg', 'win32__graytext')
 			globalstyle.add_color_named('hot:edit_bg', 'win32__hottrackingcolor')
 			globalstyle.add_color_named('selected:edit_bg', 'win32__hilight')
 			globalstyle.add_color_named('selected:edit_fg', 'win32__hilighttext')
+
+			# ------ desktop -----
+			curstyle, curctrl = theme_obj.add_stylecontrol('titlebar')
+			curstyle.add_color_named('main:control_bg', 'win32__activetitle')
+			curstyle.add_color_named('inactive:control_bg', 'win32__inactivetitle')
+			curstyle.add_color_named('main:control_fg', 'win32__titletext')
+			curstyle.add_color_named('inactive:control_fg', 'win32__inactivetitletext')
 
 			# ------ desktop -----
 			curstyle, curctrl = theme_obj.add_stylecontrol('desktop')
@@ -214,9 +220,8 @@ class colors_win32():
 			curstyle.add_color_named('main:control_fg', 'win32__menutext')
 
 			# ------ scrollbar -----
-			#curstyle, curctrl = theme_obj.add_stylecontrol('scrollbar')
-			#curstyle.add_color_named('scrollbar:main:bg', 'win32__scrollbar')
-			#curstyle.add_color_named('scrollbar:main:fg', 'win32__buttonface')
+			curstyle, curctrl = theme_obj.add_stylecontrol('scrollbar')
+			curstyle.add_color_named('main:bg', 'win32__scrollbar')
 
 	def export_colors(self, theme_obj):
 		if self.used == False and 'win32' not in theme_obj.supported_types:
@@ -240,24 +245,31 @@ class colors_win32():
 			self.set('buttonlight', threed_light.get_int() )
 
 			self.set('buttontext', ctrl_main_fg.get_int() )
-			self.set('menutext', ctrl_main_fg.get_int() )
 
 			self.set('window', text_main_bg.get_int() )
 			self.set('windowtext', text_main_fg.get_int() )
 
-			self.set('hilight', text_sel_fg.get_int() )
-			self.set('hilighttext', text_sel_bg.get_int() )
+			self.set('hilight', text_sel_bg.get_int() )
+			self.set('hilighttext', text_sel_fg.get_int() )
 
 			self.set('activeborder', ctrl_main_bg.get_int() )
-			self.set('activetitle', ctrl_main_bg.get_int() )
-			self.set('gradientactivetitle', ctrl_main_bg.get_int() )
-			self.set('gradientinactivetitle', ctrl_main_bg.get_int() )
 			self.set('inactiveborder', ctrl_main_bg.get_int() )
-			self.set('inactivetitle', ctrl_main_bg.get_int() )
 			self.set('windowframe', ctrl_main_bg.get_int() )
 
-			self.set('inactivetitletext', ctrl_main_fg.get_int() )
-			self.set('titletext', ctrl_main_fg.get_int() )
+			# ------ titlebar -----
+			color = theme_obj.get_color('titlebar', 'main:control_bg', True)
+			self.set('activetitle', color.get_int() )
+			self.set('gradientactivetitle', color.get_int() )
+
+			color = theme_obj.get_color('titlebar', 'inactive:control_bg', True)
+			self.set('inactivetitle', color.get_int() )
+			self.set('gradientinactivetitle', color.get_int() )
+			
+			color = theme_obj.get_color('titlebar', 'main:control_fg', True)
+			self.set('titletext', color.get_int() )
+
+			color = theme_obj.get_color('titlebar', 'inactive:control_fg', True)
+			self.set('inactivetitletext', color.get_int() )
 
 			# ------ desktop -----
 			color_bg = theme_obj.get_color('desktop', 'main:control_bg', True)
@@ -275,10 +287,10 @@ class colors_win32():
 
 			# ------ menu -----
 			color_bg = theme_obj.get_color('menu', 'main:control_bg', True)
-			color_fg = theme_obj.get_color('menu', 'main:edit_fg', True)
+			color_fg = theme_obj.get_color('menu', 'main:control_fg', True)
 			self.set('menu', color_bg.get_int() )
 			self.set('menutext', color_fg.get_int() )
 
 			# ------ scrollbar -----
-			#scrollbar = theme_obj.get_color('scrollbar', 'main:control_bg', True)
-			#self.set('scrollbar', scrollbar.get_int() )
+			scrollbar = theme_obj.get_color('scrollbar', 'main:control_bg', True)
+			self.set('scrollbar', scrollbar.get_int() )
