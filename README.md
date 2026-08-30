@@ -35,7 +35,6 @@ Short Name | Name | Ext |
 ```gtk_color_scheme``` | Gtk Colors .INI | ```.ini``` |
 ```icewm``` | IceWM | ```default.theme``` |
 ```kde_color``` | KDE/Plasma Color Scheme | ```.colors``` |
-```win32_3dcc``` | 3DCC | ```.3DC``` |
 ```win32_theme``` | Windows .theme | ```.theme``` |
 ```vcl_theme``` | Delphi VCL | |
 ## Supported Outputs
