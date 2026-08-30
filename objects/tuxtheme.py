@@ -301,13 +301,16 @@ class data_theme():
 
 		globalstyle.simple_add_col('main:border', text_main_fg)
 
+		if not globalstyle.exists_color('main:control_bg_alt'):
+			globalstyle.simple_add_col('main:control_bg_alt', ctrl_main_bg)
+			
 		# ----------------- selected -----------------
 		#text
-		color1 = globalstyle.exists_color('selected:edit_bg')
-		color2 = globalstyle.exists_color('selected:edit_fg')
+		color1 = globalstyle.exists_color('main:edit_bg_selected')
+		color2 = globalstyle.exists_color('main:edit_fg_selected')
 		if (not color1) or (not color2):
-			globalstyle.simple_add_col('selected:edit_fg', text_main_bg)
-			globalstyle.simple_add_col('selected:edit_bg', text_main_fg)
+			globalstyle.simple_add_col('main:edit_fg_selected', text_main_bg)
+			globalstyle.simple_add_col('main:edit_bg_selected', text_main_fg)
 
 		#control
 		color1 = globalstyle.exists_color('main:control_text_selected_bg')

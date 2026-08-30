@@ -1,42 +1,32 @@
 
 import plugins
-from objects.file_theme import windows_theme
+
+from functions import color
 
 class input_plug(plugins.base):
 	def is_themeconv_plugin(self):
 		return 'input'
 	
 	def get_shortname(self):
-		return 'win32_theme'
+		return 'gtk_color_scheme'
 	
 	def get_name(self):
-		return '[Win32] Windows .theme'
+		return 'Gtk Colors .INI'
 	
 	def get_prop(self):
 		prop = {}
-		prop['supported_types'] = ['win32']
+		prop['supported_types'] = ['gtk']
 		return prop
 	
 	def parse(self, theme_obj, themeverter_intent):
-		from objects.file_theme import windows_theme
-		theme_obj.supported_types.append('win32')
-		win32_colors = theme_obj.colors_win32
-		wintheme = windows_theme.wintheme()
-		wintheme.read(themeverter_intent.input_file)
-		for k, v in wintheme.colors.items(): win32_colors.set(k, v)
+		import configparser
+		theme_obj.supported_types.append('gtk')
 
-		def get_font(curstyle, LOGFONTA):
-			font_obj = curstyle.add_font('main:control')
-			font_obj.used = True
-			font_obj.face = LOGFONTA.lfFaceName
-			if LOGFONTA.lfWeight>400: font_obj.fx.append('bold')
-			if LOGFONTA.lfItalic: font_obj.fx.append('italic')
-			if LOGFONTA.lfUnderline: font_obj.fx.append('underline')
-			if LOGFONTA.lfStrikeOut: font_obj.fx.append('strikeout')
+		config = configparser.ConfigParser()
+		config.read(themeverter_intent.input_file)
 
-		if wintheme.NonclientMetrics:
-			NonclientMetrics = wintheme.NonclientMetrics
-			lfMenuFont = NonclientMetrics.lfMenuFont
+		maincolors = config['main']
 
-			curstyle, curctrl = theme_obj.add_stylecontrol('menubar')
-			get_font(curstyle, lfMenuFont)
+		gtk_colors = theme_obj.colors_gtk
+
+		for k, v in maincolors.items(): gtk_colors.set(k, color.hex_to_int(v))

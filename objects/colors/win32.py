@@ -182,6 +182,7 @@ class colors_win32():
 
 			globalstyle = theme_obj.style_global
 			globalstyle.add_color_named('main:control_bg', 'win32__buttonface')
+			globalstyle.add_color_named('main:control_bg_alt', 'win32__buttonalternateface')
 			globalstyle.add_color_named('main:control_fg', 'win32__windowtext')
 			globalstyle.add_color_named('main:edit_bg', 'win32__window')
 			globalstyle.add_color_named('main:edit_fg', 'win32__windowtext')
@@ -190,8 +191,8 @@ class colors_win32():
 			globalstyle.add_color_named('inactive:edit_bg', 'win32__buttonface')
 			globalstyle.add_color_named('inactive:edit_fg', 'win32__graytext')
 			globalstyle.add_color_named('hot:edit_bg', 'win32__hottrackingcolor')
-			globalstyle.add_color_named('selected:edit_bg', 'win32__hilight')
-			globalstyle.add_color_named('selected:edit_fg', 'win32__hilighttext')
+			globalstyle.add_color_named('main:edit_bg_selected', 'win32__hilight')
+			globalstyle.add_color_named('main:edit_fg_selected', 'win32__hilighttext')
 
 			# ------ titlebar -----
 			curstyle, curctrl = theme_obj.add_stylecontrol('titlebar')
@@ -239,17 +240,25 @@ class colors_win32():
 			ctrl_main_fg = theme_obj.get_color(None, 'main:control_fg', True)
 			text_main_bg = theme_obj.get_color(None, 'main:edit_bg', True)
 			text_main_fg = theme_obj.get_color(None, 'main:edit_fg', True)
-			text_sel_bg = theme_obj.get_color(None, 'selected:edit_bg', True)
-			text_sel_fg = theme_obj.get_color(None, 'selected:edit_fg', True)
+			text_sel_bg = theme_obj.get_color(None, 'main:edit_bg_selected', True)
+			text_sel_fg = theme_obj.get_color(None, 'main:edit_fg_selected', True)
 
-			threed_dark = ctrl_main_bg.copy()*0.5
-			threed_light = ctrl_main_bg.copy()*1.5
+			maxv = 1-(max(ctrl_main_bg.get_int())/255)
+
+			mulctrl = 1.3+((maxv**2)/1.5)
+
+			threed_dark = ctrl_main_bg.copy()*(1/mulctrl)
+			threed_light = ctrl_main_bg.copy()*(mulctrl/1)
 
 			self.set('buttonface', ctrl_main_bg.get_int() )
 			self.set('buttondkshadow', threed_dark.get_int() )
 			self.set('buttonshadow', threed_dark.get_int() )
 			self.set('buttonhilight', threed_light.get_int() )
 			self.set('buttonlight', threed_light.get_int() )
+
+			altface = theme_obj.get_color(None, 'main:control_bg_alt', True)
+			if altface: self.set('buttonalternateface', altface.get_int())
+			else: self.set('buttonalternateface', ctrl_main_bg.get_int())
 
 			self.set('buttontext', ctrl_main_fg.get_int() )
 
@@ -307,6 +316,6 @@ class colors_win32():
 
 			# ------ window -----
 			border = theme_obj.get_color('window', 'main:border', True)
-			self.set('activeborder', border.get_int() )
+			#self.set('activeborder', border.get_int() )
 			border = theme_obj.get_color('window', 'inactive:border', True)
-			self.set('inactiveborder', border.get_int() )
+			#self.set('inactiveborder', border.get_int() )

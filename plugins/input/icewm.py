@@ -162,8 +162,8 @@ class input_plug(plugins.base):
 		curstyle = theme_obj.style_global
 		curstyle.add_color_named('main:edit_bg', 'ColorListBox')
 		curstyle.add_color_named('main:edit_fg', 'ColorListBoxText')
-		curstyle.add_color_named('selected:edit_bg', 'ColorListBoxSelection')
-		curstyle.add_color_named('selected:edit_fg', 'ColorListBoxSelectionText')
+		curstyle.add_color_named('main:edit_bg_selected', 'ColorListBoxSelection')
+		curstyle.add_color_named('main:edit_fg_selected', 'ColorListBoxSelectionText')
 
 		# MEMStatus
 		add_color("ColorMEMStatusBuffers", "rgb:60/60/C0")
@@ -198,5 +198,5 @@ class input_plug(plugins.base):
 		# Other
 		add_color("ColorDialog", "rgb:C0/C0/C0")
 		if add_color("DesktopBackgroundColor", None):
-			curstyle, curctrl = theme_obj.add_stylecontrol('tooltip')
-			curstyle.add_color_named('main:control_bg', 'ColorToolTip')
+			curstyle, curctrl = theme_obj.add_stylecontrol('desktop')
+			curstyle.add_color_named('main:control_bg', 'DesktopBackgroundColor')

@@ -119,11 +119,14 @@ class colors_gtk():
 			if globalcolor_add('selected_bg_color', self.selected_bg_color): curstyle.add_color_named('selected:control_bg', 'gtk__selected_bg_color')
 			if globalcolor_add('selected_fg_color', self.selected_fg_color): curstyle.add_color_named('selected:control_fg', 'gtk__selected_fg_color')
 
-			if globalcolor_add('selected_base_color', self.selected_base_color): curstyle.add_color_named('selected:edit_bg', 'gtk__selected_base_color')
-			if globalcolor_add('selected_text_color', self.selected_text_color): curstyle.add_color_named('selected:edit_fg', 'gtk__selected_text_color')
+			if globalcolor_add('selected_base_color', self.selected_base_color): curstyle.add_color_named('main:edit_bg_selected', 'gtk__selected_base_color')
+			if globalcolor_add('selected_text_color', self.selected_text_color): curstyle.add_color_named('main:edit_fg_selected', 'gtk__selected_text_color')
 
 			if globalcolor_add('inactive_fg_color', self.inactive_fg_color): curstyle.add_color_named('inactive:control_fg', 'gtk__inactive_fg_color')
 			if globalcolor_add('inactive_text_color', self.inactive_text_color): curstyle.add_color_named('inactive:edit_fg', 'gtk__inactive_text_color')
+
+			if globalcolor_add('url_color', self.url_color): curstyle.add_color_named('main:edit_fg_url', 'gtk__url_color')
+			if globalcolor_add('visited_url_color', self.visited_url_color): curstyle.add_color_named('visited:edit_fg_url_visited', 'gtk__visited_url_color')
 
 			curstyle, curctrl = theme_obj.add_stylecontrol('tooltip')
 			if globalcolor_add('tooltip_color', self.tooltip_color): curstyle.add_color_named('main:control_bg', 'gtk__tooltip_color')
@@ -148,10 +151,6 @@ class colors_gtk():
 			if globalcolor_add('other_bg_color', self.other_bg_color): curstyle.add_color_named('main:control_bg', 'gtk__other_bg_color')
 			if globalcolor_add('other_fg_color', self.other_fg_color): curstyle.add_color_named('main:control_fg', 'gtk__other_fg_color')
 			
-			curstyle, curctrl = theme_obj.add_stylecontrol('url')
-			if globalcolor_add('url_color', self.url_color): curstyle.add_color_named('main:edit_fg', 'gtk__url_color')
-			if globalcolor_add('visited_url_color', self.visited_url_color): curstyle.add_color_named('visited:edit_fg', 'gtk__visited_url_color')
-
 			globalcolor_add('error_color', self.error_color)
 
 	def export_colors(self, theme_obj):
@@ -170,7 +169,7 @@ class colors_gtk():
 			self.set('bg_color', ctrl_main_bg.get_int() )
 			self.set('fg_color', ctrl_main_fg.get_int() )
 
-			text_sel_bg = theme_obj.get_color(None, 'selected:edit_bg', True)
-			text_sel_fg = theme_obj.get_color(None, 'selected:edit_fg', True)
+			text_sel_bg = theme_obj.get_color(None, 'main:edit_bg_selected', True)
+			text_sel_fg = theme_obj.get_color(None, 'main:edit_fg_selected', True)
 			self.set('selected_bg_color', text_sel_bg.get_int() )
 			self.set('selected_fg_color', text_sel_fg.get_int() )
