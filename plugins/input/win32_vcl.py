@@ -21,7 +21,7 @@ class input_plug(plugins.base):
 	def parse(self, theme_obj, themeverter_intent):
 		theme_obj.supported_types.append('win32')
 		vcl_theme_obj = vcl_theme.masterstyle_data(themeverter_intent.input_file)
-		vcl_theme_obj.to_xml('vcl_out.xml')
+		#vcl_theme_obj.to_xml('vcl_out.xml')
 
 		def vcl_get_w32_color(vclname):
 			c = vcl_theme_obj.get_color_w32(vclname)

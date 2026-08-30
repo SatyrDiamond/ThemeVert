@@ -55,6 +55,7 @@ class core:
 		self.currentplug_output = dv_plugins.create_selector('output')
 		self.cur_plugset_input = ''
 		self.cur_plugset_output = ''
+		self.debug = False
 
 	def input_load_plugins(self, pluginset):
 		if pluginset in pluginsets_input: 
@@ -135,20 +136,20 @@ class core:
 		selected_plugin = self.currentplug_input.selected_plugin
 		plug_obj = selected_plugin.plug_obj
 		plug_obj.parse(self.theme_obj, themeverter_intent)
-		self.theme_obj.to_xml('debug_in.xml')
+		if self.debug: self.theme_obj.to_xml('debug_in.xml')
 		colors_win32 = self.theme_obj.colors_win32
 		colors_gtk = self.theme_obj.colors_gtk
 		colors_win32.import_colors(self.theme_obj)
 		colors_gtk.import_colors(self.theme_obj)
 
-		self.theme_obj.complete_incomplete()
+		if self.debug: self.theme_obj.complete_incomplete()
 		
 		colors_win32.export_colors(self.theme_obj)
 		colors_gtk.export_colors(self.theme_obj)
-		self.theme_obj.to_xml('debug_mid.xml')
+		if self.debug: self.theme_obj.to_xml('debug_mid.xml')
 
 	def parse_output(self, themeverter_intent): 
 		plug_obj = self.currentplug_output.selected_plugin.plug_obj
 		plug_obj.parse(self.theme_obj, themeverter_intent)
 		#logger_core.info('File outputted: '+out_file)
-		self.theme_obj.to_xml('debug_out.xml')
+		if self.debug: self.theme_obj.to_xml('debug_out.xml')
