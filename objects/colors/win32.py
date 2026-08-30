@@ -196,8 +196,8 @@ class colors_win32():
 			# ------ titlebar -----
 			curstyle, curctrl = theme_obj.add_stylecontrol('titlebar')
 			curstyle.add_color_named('main:control_bg', 'win32__activetitle')
-			curstyle.add_color_named('inactive:control_bg', 'win32__inactivetitle')
 			curstyle.add_color_named('main:control_fg', 'win32__titletext')
+			curstyle.add_color_named('inactive:control_bg', 'win32__inactivetitle')
 			curstyle.add_color_named('inactive:control_fg', 'win32__inactivetitletext')
 
 			# ------ desktop -----
@@ -223,7 +223,12 @@ class colors_win32():
 
 			# ------ scrollbar -----
 			curstyle, curctrl = theme_obj.add_stylecontrol('scrollbar')
-			curstyle.add_color_named('main:bg', 'win32__scrollbar')
+			curstyle.add_color_named('main:control_bg', 'win32__scrollbar')
+
+			# ------ window -----
+			curstyle, curctrl = theme_obj.add_stylecontrol('window')
+			curstyle.add_color_named('main:border', 'win32__activeborder')
+			curstyle.add_color_named('inactive:border', 'win32__inactiveborder')
 
 	def export_colors(self, theme_obj):
 		if self.used == False and 'win32' not in theme_obj.supported_types:
@@ -257,6 +262,9 @@ class colors_win32():
 			self.set('activeborder', ctrl_main_bg.get_int() )
 			self.set('inactiveborder', ctrl_main_bg.get_int() )
 			self.set('windowframe', ctrl_main_bg.get_int() )
+
+			color = theme_obj.get_color(None, 'inactive:control_fg', True)
+			self.set('graytext', color.get_int() )
 
 			# ------ titlebar -----
 			color = theme_obj.get_color('titlebar', 'main:control_bg', True)
@@ -296,3 +304,9 @@ class colors_win32():
 			# ------ scrollbar -----
 			scrollbar = theme_obj.get_color('scrollbar', 'main:control_bg', True)
 			self.set('scrollbar', scrollbar.get_int() )
+
+			# ------ window -----
+			border = theme_obj.get_color('window', 'main:border', True)
+			self.set('activeborder', border.get_int() )
+			border = theme_obj.get_color('window', 'inactive:border', True)
+			self.set('inactiveborder', border.get_int() )

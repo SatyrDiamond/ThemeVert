@@ -255,7 +255,7 @@ class data_theme():
 
 		color_global = self.style_global.exists_color(colloc)
 
-		print('debug: get_color |', controlname, colloc, '|', color_global, end=' ' )
+		#print('debug: get_color |', controlname, colloc, '|', color_global, end=' ' )
 
 		outcolor = None
 		c = styleobj.get_color(colloc)
@@ -265,12 +265,12 @@ class data_theme():
 			for s in style.styles:
 				stylep = self.style_part[s]
 				color_ele = stylep.exists_color(colloc)
-				print(color_ele, end=' ' )
+				#print(color_ele, end=' ' )
 				if color_ele:
 					c = stylep.get_color(colloc)
 					break
 
-		print()
+		#print()
 
 		if c:
 			isname, val = c
@@ -298,6 +298,8 @@ class data_theme():
 
 		control_greytext_needed = False
 		edit_greytext_needed = False
+
+		globalstyle.simple_add_col('main:border', text_main_fg)
 
 		# ----------------- selected -----------------
 		#text
