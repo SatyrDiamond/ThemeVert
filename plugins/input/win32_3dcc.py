@@ -14,7 +14,7 @@ class input_plug(plugins.base):
 	
 	def get_prop(self):
 		prop = {}
-		prop['supported_types'] = ['gtk']
+		prop['supported_types'] = ['win32']
 		return prop
 	
 	def parse(self, theme_obj, themeverter_intent):

@@ -202,7 +202,7 @@ class colors_win32():
 
 			# ------ desktop -----
 			curstyle, curctrl = theme_obj.add_stylecontrol('desktop')
-			curstyle.add_color_named('main:control_bg', 'win32__Background')
+			curstyle.add_color_named('main:control_bg', 'win32__background')
 
 			# ------ tooltip -----
 			curstyle, curctrl = theme_obj.add_stylecontrol('tooltip')
@@ -287,7 +287,7 @@ class colors_win32():
 
 			# ------ tooltip -----
 			color_bg = theme_obj.get_color('tooltip', 'main:control_bg', True)
-			color_fg = theme_obj.get_color('tooltip', 'main:edit_fg', True)
+			color_fg = theme_obj.get_color('tooltip', 'main:control_fg', True)
 			self.set('infowindow', color_bg.get_int() )
 			self.set('infotext', color_fg.get_int() )
 

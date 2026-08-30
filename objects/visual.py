@@ -207,7 +207,7 @@ class visual_color:
 		return [self.r_f, self.g_f, self.b_f] if self.used else None
 
 	def get_hex(self): 
-		return ('%02x%02x%02x' % (self.r_i, self.g_i, self.b_i)) if self.used else None
+		return ('#%02x%02x%02x' % (self.r_i, self.g_i, self.b_i)) if self.used else None
 
 	def getbgr_int(self):
 		return [self.b_i, self.g_i, self.r_i] if self.used else None
@@ -216,11 +216,11 @@ class visual_color:
 		return [self.b_f, self.g_f, self.r_f] if self.used else None
 
 	def getbgr_hex(self): 
-		return ('%02x%02x%02x' % [self.b_i, self.g_i, self.r_i]) if self.used else None
+		return ('#%02x%02x%02x' % [self.b_i, self.g_i, self.r_i]) if self.used else None
 
 	def get_hex_fb(self, r, g, b): 
 		outcolor = [self.r_i, self.g_i, self.b_i] if self.used else [r, g, b]
-		return ('%02x%02x%02x' % (outcolor[0],outcolor[1],outcolor[2]))
+		return ('#%02x%02x%02x' % (outcolor[0],outcolor[1],outcolor[2]))
 
 	def internal_clamp(self):
 		self.r_f = xtramath.clamp(self.r_f, 0, 1)

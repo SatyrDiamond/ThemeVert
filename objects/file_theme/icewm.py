@@ -23,3 +23,10 @@ class icewm_theme():
 						elif val.lstrip('-').isdigit(): valtype = 'number'
 						else: valtype = 'type'
 						self.data[name] = [valtype, val]
+
+	def write(self, filename):
+		f = open(filename, 'w')
+		for k, v in self.data.items():
+			valtype, val = v
+			if valtype=='string': f.write(k+'="'+str(val)+'"'+'\n')
+			else: f.write(k+'='+str(val)+'\n')
