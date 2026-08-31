@@ -41,5 +41,7 @@ Short Name | Name | Ext |
 
 | Short Name | Name |
 | --- | :--- |
+| ```gtk_color_scheme``` | Gtk Colors .INI | ```.ini``` |
 | ```icewm``` | IceWM |
+| ```kde_color``` | KDE/Plasma Color Scheme | ```.colors``` |
 | ```win32_theme``` | Windows .theme |
