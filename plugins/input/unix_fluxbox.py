@@ -1,6 +1,5 @@
 
 import plugins
-from functions import color
 from objects import visual
 
 class input_plug(plugins.base):
@@ -22,36 +21,10 @@ class input_plug(plugins.base):
 		fluxboxtheme = fluxbox.fluxbox_theme()
 		fluxboxtheme.read(themeverter_intent.input_file)
 
-		def doubv(r):
-			if len(r)==1: return r+r
-			else: return r
-
-		def get_color(incolor):
-			if incolor.startswith('rgb:'):
-				r, g, b = incolor.strip('rgb:').split('/')
-				r = int(doubv(r), 16)
-				g = int(doubv(g), 16)
-				b = int(doubv(b), 16)
-				return [r,g,b]
-			elif incolor.startswith('#'):
-				if len(incolor)!=7: return None
-				else: return color.hex_to_int(incolor)
-			elif incolor=='white':
-				return [255,255,255]
-			elif incolor=='grey':
-				return [128,128,128]
-			elif incolor=='black':
-				return [0,0,0]
-			elif incolor.startswith('grey'):
-				greyc = (int(incolor.strip('grey'))/100)*255
-				return [greyc,greyc,greyc]
-			else:
-				print('unknown value', incolor)
-
 		def get_flux_color(name, control, colloc):
 			color = fluxboxtheme.get_data(name)
 			if color: 
-				color = get_color(color)
+				color = fluxbox.get_color(color)
 				theme_obj.add_color(control, colloc, color)
 
 		def get_flux_color_merge(name1, name2, control, colloc):
@@ -59,8 +32,8 @@ class input_plug(plugins.base):
 			color2 = fluxboxtheme.get_data(name2)
 
 			if color1 and color2: 
-				outcolor1 = visual.visual_color().from_int(get_color(color1))
-				outcolor2 = visual.visual_color().from_int(get_color(color2))
+				outcolor1 = visual.visual_color().from_int(fluxbox.get_color(color1))
+				outcolor2 = visual.visual_color().from_int(fluxbox.get_color(color2))
 				outcol = color.mix_color(outcolor1, outcolor2, 0.5)
 				theme_obj.add_color(control, colloc, outcol.get_int())
 
@@ -78,6 +51,10 @@ class input_plug(plugins.base):
 
 		get_flux_color('toolbar.button.color', None, 'main:control_bg')
 		get_flux_color('toolbar.button.picColor', None, 'main:control_fg')
+
+		# desktop
+		theme_obj.add_stylecontrol('desktop')
+		get_flux_color('background.color', 'desktop', 'main:control_bg')
 
 		# titlebar
 		theme_obj.add_stylecontrol('titlebar')
@@ -104,14 +81,6 @@ class input_plug(plugins.base):
 		get_flux_color('menu.frame.color', 'menu', 'main:control_bg')
 		get_flux_color('menu.frame.textColor', 'menu', 'main:control_fg')
 		get_flux_color('menu.frame.disableColor', 'menu', 'inactive:control_fg')
-		get_flux_color('menu.hilite.color', 'menu', 'main:control_bg_selected')
-		get_flux_color('menu.hilite.textColor', 'menu', 'main:control_fg_selected')
-		get_flux_color_merge('menu.frame.color', 'menu.frame.colorto', 'menu', 'main:control_bg_selected')
-
-		# menu
-		theme_obj.add_stylecontrol('menu')
-		get_flux_color('menu.frame.color', 'menu', 'main:control_bg')
-		get_flux_color('menu.frame.textColor', 'menu', 'main:control_fg')
 		get_flux_color('menu.hilite.color', 'menu', 'main:control_bg_selected')
 		get_flux_color('menu.hilite.textColor', 'menu', 'main:control_fg_selected')
 		get_flux_color_merge('menu.frame.color', 'menu.frame.colorto', 'menu', 'main:control_bg_selected')
