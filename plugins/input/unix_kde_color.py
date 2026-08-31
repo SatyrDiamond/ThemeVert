@@ -92,7 +92,7 @@ class input_plug(plugins.base):
 			add_kde_color(colorset, 'complementary', 'ForegroundPositive', 'complementary', 'main:control_fg_positive')
 			
 		if 'Colors:View' in config:
-			colorset = config['Colors:Tooltip']
+			colorset = config['Colors:View']
 			add_kde_color(colorset, 'view', 'BackgroundNormal', None, 'main:edit_bg')
 			add_kde_color(colorset, 'view', 'BackgroundAlternate', None, 'main:edit_bg_alt')
 			add_kde_color(colorset, 'view', 'ForegroundNormal', None, 'main:edit_fg')

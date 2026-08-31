@@ -1,6 +1,7 @@
 
 import plugins
 from objects import visual
+from functions import color
 
 class input_plug(plugins.base):
 	def is_themeconv_plugin(self):
@@ -22,10 +23,10 @@ class input_plug(plugins.base):
 		fluxboxtheme.read(themeverter_intent.input_file)
 
 		def get_flux_color(name, control, colloc):
-			color = fluxboxtheme.get_data(name)
-			if color: 
-				color = fluxbox.get_color(color)
-				theme_obj.add_color(control, colloc, color)
+			incolor = fluxboxtheme.get_data(name)
+			if incolor: 
+				incolor = fluxbox.get_color(incolor)
+				theme_obj.add_color(control, colloc, incolor)
 
 		def get_flux_color_merge(name1, name2, control, colloc):
 			color1 = fluxboxtheme.get_data(name1)

@@ -125,12 +125,26 @@ class input_plug(plugins.base):
 		add_color("ColorCPUStatusSystem", "rgb:FF/00/00")
 		add_color("ColorCPUStatusTemp", "rgb:60/60/C0")
 		add_color("ColorCPUStatusUser", "rgb:00/FF/00")
+		theme_obj.add_stylecontrol('graphstat_cpu')
+		theme_obj.add_color_named('graphstat_cpu', 'main:edit_bg', 'ColorCPUStatusIdle')
+		theme_obj.add_color_named('graphstat_cpu', 'main:edit_fg_interrupts', 'ColorCPUStatusInterrupts')
+		theme_obj.add_color_named('graphstat_cpu', 'main:edit_fg_iowait', 'ColorCPUStatusIoWait')
+		theme_obj.add_color_named('graphstat_cpu', 'main:edit_fg_nice', 'ColorCPUStatusNice')
+		theme_obj.add_color_named('graphstat_cpu', 'main:edit_fg_softirq', 'ColorCPUStatusSoftIrq')
+		theme_obj.add_color_named('graphstat_cpu', 'main:edit_fg_steal', 'ColorCPUStatusSteal')
+		theme_obj.add_color_named('graphstat_cpu', 'main:edit_fg_system', 'ColorCPUStatusSystem')
+		theme_obj.add_color_named('graphstat_cpu', 'main:edit_fg_temp', 'ColorCPUStatusTemp')
+		theme_obj.add_color_named('graphstat_cpu', 'main:edit_fg_user', 'ColorCPUStatusUser')
 
 		# Input
+		add_color("ColorInputText", "rgb:00/00/00")
 		add_color("ColorInput", "rgb:FF/FF/FF")
 		add_color("ColorInputSelection", "rgb:80/80/80")
 		add_color("ColorInputSelectionText", "rgb:00/00/00")
-		add_color("ColorInputText", "rgb:00/00/00")
+		theme_obj.add_color_named('input', 'main:edit_bg', 'ColorInput')
+		theme_obj.add_color_named('input', 'main:edit_fg', 'ColorInputText')
+		theme_obj.add_color_named('input', 'main:edit_bg_selected', 'ColorInputSelection')
+		theme_obj.add_color_named('input', 'main:edit_fg_selected', 'ColorInputSelectionText')
 
 		# MinimizedWindow
 		add_color("ColorActiveMinimizedWindow", "rgb:E0/E0/E0")
@@ -139,7 +153,11 @@ class input_plug(plugins.base):
 		add_color("ColorNormalMinimizedWindowText", "rgb:00/00/00")
 
 		# TaskBar
+		theme_obj.add_stylecontrol('taskbar')
 		add_color("ColorDefaultTaskBar", "rgb:C0/C0/C0")
+		theme_obj.add_color_named('taskbar', 'active:control_bg', 'ColorDefaultTaskBar')
+
+		theme_obj.add_stylecontrol('taskbar_button_app')
 		add_color("ColorActiveTaskBarApp", "rgb:E0/E0/E0")
 		add_color("ColorActiveTaskBarAppText", "rgb:00/00/00")
 		add_color("ColorInvisibleTaskBarApp", "rgb:80/80/80")
@@ -148,43 +166,79 @@ class input_plug(plugins.base):
 		add_color("ColorMinimizedTaskBarAppText", "rgb:00/00/00")
 		add_color("ColorNormalTaskBarApp", "rgb:C0/C0/C0")
 		add_color("ColorNormalTaskBarAppText", "rgb:00/00/00")
+		theme_obj.add_color_named('taskbar_button_app', 'active:control_bg', 'ColorActiveTaskBarApp')
+		theme_obj.add_color_named('taskbar_button_app', 'active:control_fg', 'ColorActiveTaskBarAppText')
+		theme_obj.add_color_named('taskbar_button_app', 'invisible:control_bg', 'ColorInvisibleTaskBarApp')
+		theme_obj.add_color_named('taskbar_button_app', 'invisible:control_fg', 'ColorInvisibleTaskBarAppText')
+		theme_obj.add_color_named('taskbar_button_app', 'minimized:control_bg', 'ColorMinimizedTaskBarApp')
+		theme_obj.add_color_named('taskbar_button_app', 'minimized:control_fg', 'ColorMinimizedTaskBarAppText')
+		theme_obj.add_color_named('taskbar_button_app', 'main:control_bg', 'ColorNormalTaskBarApp')
+		theme_obj.add_color_named('taskbar_button_app', 'main:control_fg', 'ColorNormalTaskBarAppText')
 
 		# Label
 		add_color("ColorLabel", "rgb:C0/C0/C0")
 		add_color("ColorLabelText", "rgb:00/00/00")
+		theme_obj.add_stylecontrol('label')
+		theme_obj.add_color_named('label', 'main:control_bg', 'ColorLabel')
+		theme_obj.add_color_named('label', 'main:control_fg', 'ColorLabelText')
 
 		# ListBox
 		add_color("ColorListBox", "rgb:C0/C0/C0")
 		add_color("ColorListBoxSelection", "rgb:80/80/80")
 		add_color("ColorListBoxSelectionText", "rgb:00/00/00")
 		add_color("ColorListBoxText", "rgb:00/00/00")
+		theme_obj.add_stylecontrol('listbox')
+		theme_obj.add_color_named('listbox', 'main:edit_bg', 'ColorListBox')
+		theme_obj.add_color_named('listbox', 'main:edit_fg', 'ColorListBoxText')
+		theme_obj.add_color_named('listbox', 'main:edit_bg_selected', 'ColorListBoxSelection')
+		theme_obj.add_color_named('listbox', 'main:edit_fg_selected', 'ColorListBoxSelectionText')
+
 		theme_obj.add_color_named(None, 'main:edit_bg', 'ColorListBox')
 		theme_obj.add_color_named(None, 'main:edit_fg', 'ColorListBoxText')
 		theme_obj.add_color_named(None, 'main:edit_bg_selected', 'ColorListBoxSelection')
 		theme_obj.add_color_named(None, 'main:edit_fg_selected', 'ColorListBoxSelectionText')
-
 		# MEMStatus
+		add_color("ColorMEMStatusFree", "rgb:00/00/00")
 		add_color("ColorMEMStatusBuffers", "rgb:60/60/C0")
 		add_color("ColorMEMStatusCached", "rgb:80/80/FF")
-		add_color("ColorMEMStatusFree", "rgb:00/00/00")
 		add_color("ColorMEMStatusUser", "rgb:40/40/80")
+		theme_obj.add_stylecontrol('graphstat_memory')
+		theme_obj.add_color_named('graphstat_memory', 'main:edit_bg', 'ColorMEMStatusFree')
+		theme_obj.add_color_named('graphstat_memory', 'main:edit_fg_buffers', 'ColorMEMStatusBuffers')
+		theme_obj.add_color_named('graphstat_memory', 'main:edit_fg_cached', 'ColorMEMStatusCached')
+		theme_obj.add_color_named('graphstat_memory', 'main:edit_fg_user', 'ColorMEMStatusUser')
 
 		# MoveSize
 		add_color("ColorMoveSizeStatus", "rgb:C0/C0/C0")
 		add_color("ColorMoveSizeStatusText", "rgb:00/00/00")
+		theme_obj.add_stylecontrol('move_size_status')
+		theme_obj.add_color_named('move_size_status', 'main:control_bg', 'ColorMoveSizeStatus')
+		theme_obj.add_color_named('move_size_status', 'main:control_fg', 'ColorMoveSizeStatusText')
 
 		# Net
 		add_color("ColorNetIdle", "rgb:00/00/00")
 		add_color("ColorNetReceive", "rgb:FF/00/FF")
 		add_color("ColorNetSend", "rgb:FF/FF/00")
+		theme_obj.add_stylecontrol('graphstat_network')
+		theme_obj.add_color_named('graphstat_network', 'main:edit_bg', 'ColorNetIdle')
+		theme_obj.add_color_named('graphstat_network', 'main:edit_fg_rx', 'ColorNetReceive')
+		theme_obj.add_color_named('graphstat_network', 'main:edit_fg_tx', 'ColorNetSend')
 		
 		# Clock
 		add_color("ColorClock", "rgb:00/00/00")
 		add_color("ColorClockText", "rgb:00/FF/00")
+		theme_obj.add_stylecontrol('clock')
+		theme_obj.add_color_named('clock', 'main:control_bg', 'ColorClock')
+		theme_obj.add_color_named('clock', 'main:control_fg', 'ColorClockText')
+		theme_obj.add_color_named('clock', 'main:edit_bg', 'ColorClock')
+		theme_obj.add_color_named('clock', 'main:edit_fg', 'ColorClockText')
 		
 		# QuickSwitch
 		add_color("ColorQuickSwitch", "rgb:C0/C0/C0")
 		add_color("ColorQuickSwitchText", "rgb:00/00/00")
+		theme_obj.add_stylecontrol('quick_switch')
+		theme_obj.add_color_named('quick_switch', 'main:control_bg', 'ColorQuickSwitch')
+		theme_obj.add_color_named('quick_switch', 'main:control_fg', 'ColorQuickSwitchText')
 
 		# ToolTip
 		add_color("ColorToolTip", "rgb:E0/E0/00")

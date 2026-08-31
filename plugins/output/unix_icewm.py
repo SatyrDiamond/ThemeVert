@@ -36,6 +36,14 @@ class output_plug(plugins.base):
 		themedata['DlgBorderSizeX'] = ['int', 2]
 		themedata['DlgBorderSizeY'] = ['int', 2]
 
+		def do_color(name, control, colloc):
+			outcol = theme_obj.get_color_rgb(control, colloc)
+			if outcol: themedata[name] = ['string', outcol.get_hex()]
+
+		def do_color_spec(name, control, colloc):
+			outcol = theme_obj.get_color_rgb_spec(control, colloc)
+			if outcol: themedata[name] = ['string', outcol.get_hex()]
+
 		ctrl_main_bg = theme_obj.get_color_rgb(None, 'main:control_bg')
 		ctrl_main_fg = theme_obj.get_color_rgb(None, 'main:control_fg')
 		text_main_bg = theme_obj.get_color_rgb(None, 'main:edit_bg')
@@ -51,111 +59,117 @@ class output_plug(plugins.base):
 		themedata['DlgBorderSizeY'] = ['int', 2]
 
 		#Border
-		o_color_bg = theme_obj.get_color_rgb('window', 'main:control_bg')
-		i_color_bg = theme_obj.get_color_rgb('window', 'inactive:control_bg')
-		themedata['ColorActiveBorder'] = ['string', o_color_bg.get_hex()]
-		themedata['ColorNormalBorder'] = ['string', i_color_bg.get_hex()]
+		do_color('ColorActiveBorder', 'window', 'main:control_bg')
+		do_color('ColorNormalBorder', 'window', 'inactive:control_bg')
 
 		#Button
-		o_color_bg = theme_obj.get_color_rgb('button', 'main:control_bg')
-		o_color_fg = theme_obj.get_color_rgb('button', 'main:control_fg')
-		pressed_color_bg = theme_obj.get_color_rgb('button', 'pressed:control_bg')
-		pressed_color_fg = theme_obj.get_color_rgb('button', 'pressed:control_fg')
-		themedata['ColorNormalButton'] = ['string', o_color_bg.get_hex()]
-		themedata['ColorNormalButtonText'] = ['string', o_color_fg.get_hex()]
-		themedata['ColorActiveButton'] = ['string', pressed_color_bg.get_hex()]
-		themedata['ColorActiveButtonText'] = ['string', pressed_color_fg.get_hex()]
+		do_color('ColorNormalButton', 'button', 'main:control_bg')
+		do_color('ColorNormalButtonText', 'button', 'main:control_fg')
+		do_color('ColorActiveButton', 'button', 'pressed:control_bg')
+		do_color('ColorActiveButtonText', 'button', 'pressed:control_fg')
 
 		#TitleButton
-		o_color_bg = theme_obj.get_color_rgb('titlebar_button', 'main:control_bg')
-		o_color_fg = theme_obj.get_color_rgb('titlebar_button', 'main:control_fg')
-		themedata['ColorNormalTitleButton'] = ['string', o_color_bg.get_hex()]
-		themedata['ColorNormalTitleButtonText'] = ['string', o_color_fg.get_hex()]
+		do_color('ColorNormalTitleButton', 'titlebar_button', 'main:control_bg')
+		do_color('ColorNormalTitleButtonText', 'titlebar_button', 'main:control_fg')
 
 		# ScrollBar
-		o_color_bg = theme_obj.get_color_rgb('scrollbar', 'main:control_bg')
-		themedata['ColorScrollBar'] = ['string', o_color_fg.get_hex()]
+		do_color('ColorScrollBar', 'scrollbar', 'main:control_bg')
 
-		o_color_bg = theme_obj.get_color_rgb('scrollbar_slider', 'main:control_bg')
-		themedata['ColorScrollBarSlider'] = ['string', o_color_fg.get_hex()]
+		do_color('ColorScrollBarSlider', 'scrollbar_slider', 'main:control_bg')
 
-		o_color_bg = theme_obj.get_color_rgb('scrollbar_button', 'main:control_bg')
-		o_color_fg = theme_obj.get_color_rgb('scrollbar_button', 'main:control_fg')
-		i_color_fg = theme_obj.get_color_rgb('scrollbar_button', 'inactive:control_fg')
-		themedata['ColorScrollBarButton'] = ['string', o_color_bg.get_hex()]
-		themedata['ColorScrollBarArrow'] = ['string', o_color_bg.get_hex()]
-		themedata['ColorScrollBarInactiveArrow'] = ['string', i_color_fg.get_hex()]
-		themedata['ColorScrollBarButtonArrow'] = ['string', o_color_fg.get_hex()]
+		do_color('ColorScrollBarButton', 'scrollbar_button', 'main:control_bg')
+		do_color('ColorScrollBarArrow', 'scrollbar_button', 'main:control_fg')
+		do_color('ColorScrollBarInactiveArrow', 'scrollbar_button', 'inactive:control_fg')
+		do_color('ColorScrollBarButtonArrow', 'scrollbar_button', 'main:control_fg')
 
 		# MenuItem
-		main_control_bg = theme_obj.get_color_rgb('menu', 'main:control_bg')
-		main_control_fg = theme_obj.get_color_rgb('menu', 'main:control_fg')
-		focused_control_bg = theme_obj.get_color_rgb('menu', 'focused:control_bg')
-		focused_control_fg = theme_obj.get_color_rgb('menu', 'focused:control_fg')
-		inactive_control_fg = theme_obj.get_color_rgb('menu', 'inactive:control_fg')
-
-		themedata['ColorNormalMenu'] = ['string', main_control_bg.get_hex()]
-		themedata['ColorNormalMenuItemText'] = ['string', main_control_fg.get_hex()]
-		themedata['ColorActiveMenuItem'] = ['string', focused_control_bg.get_hex()]
-		themedata['ColorActiveMenuItemText'] = ['string', focused_control_fg.get_hex()]
-		themedata['ColorDisabledMenuItemText'] = ['string', inactive_control_fg.get_hex()]
+		do_color('ColorNormalMenu', 'menu', 'main:control_bg')
+		do_color('ColorNormalMenuItemText', 'menu', 'main:control_fg')
+		do_color('ColorActiveMenuItem', 'menu', 'focused:control_bg')
+		do_color('ColorActiveMenuItemText', 'menu', 'focused:control_fg')
+		do_color('ColorDisabledMenuItemText', 'menu', 'inactive:control_fg')
 
 		# TitleBar
-		main_control_bg = theme_obj.get_color_rgb('titlebar', 'main:control_bg')
-		main_control_fg = theme_obj.get_color_rgb('titlebar', 'main:control_fg')
-		inactive_control_bg = theme_obj.get_color_rgb('titlebar', 'inactive:control_bg')
-		inactive_control_fg = theme_obj.get_color_rgb('titlebar', 'inactive:control_fg')
+		do_color('ColorActiveTitleBar', 'titlebar', 'main:control_bg')
+		do_color('ColorActiveTitleBarText', 'titlebar', 'main:control_fg')
+		do_color('ColorNormalTitleBar', 'titlebar', 'inactive:control_bg')
+		do_color('ColorNormalTitleBarText', 'titlebar', 'inactive:control_fg')
 
-		themedata['ColorActiveTitleBar'] = ['string', main_control_bg.get_hex()]
-		themedata['ColorActiveTitleBarText'] = ['string', main_control_fg.get_hex()]
-		themedata['ColorNormalTitleBar'] = ['string', inactive_control_bg.get_hex()]
-		themedata['ColorNormalTitleBarText'] = ['string', inactive_control_fg.get_hex()]
-		
 		# Apm
 
 		# CPUStatus
+		do_color("ColorCPUStatusIdle", 'graphstat_cpu', 'main:edit_bg')
+		do_color_spec("ColorCPUStatusInterrupts", 'graphstat_cpu', 'main:edit_fg_interrupts')
+		do_color_spec("ColorCPUStatusIoWait", 'graphstat_cpu', 'main:edit_fg_iowait')
+		do_color_spec("ColorCPUStatusNice", 'graphstat_cpu', 'main:edit_fg_nice')
+		do_color_spec("ColorCPUStatusSoftIrq", 'graphstat_cpu', 'main:edit_fg_softirq')
+		do_color_spec("ColorCPUStatusSteal", 'graphstat_cpu', 'main:edit_fg_steal')
+		do_color_spec("ColorCPUStatusSystem", 'graphstat_cpu', 'main:edit_fg_system')
+		do_color_spec("ColorCPUStatusTemp", 'graphstat_cpu', 'main:edit_fg_temp')
+		do_color_spec("ColorCPUStatusUser", 'graphstat_cpu', 'main:edit_fg_user')
 
 		# Input
-		themedata["ColorInput"] = ['string', text_main_bg.get_hex()]
-		themedata["ColorInputText"] = ['string', text_main_fg.get_hex()]
-		themedata["ColorInputSelection"] = ['string', text_sel_bg.get_hex()]
-		themedata["ColorInputSelectionText"] = ['string', text_sel_fg.get_hex()]
+		do_color("ColorInput", 'input', 'main:edit_bg')
+		do_color("ColorInputText", 'input', 'main:edit_fg')
+		do_color("ColorInputSelection", 'input', 'main:edit_bg_selected')
+		do_color("ColorInputSelectionText", 'input', 'main:edit_fg_selected')
 
 		# MinimizedWindow
-		themedata["ColorActiveMinimizedWindow"] = ['string', text_main_bg.get_hex()]
-		themedata["ColorActiveMinimizedWindowText"] = ['string', text_main_fg.get_hex()]
-		themedata["ColorNormalMinimizedWindow"] = ['string', ctrl_main_bg.get_hex()]
-		themedata["ColorNormalMinimizedWindowText"] = ['string', ctrl_main_fg.get_hex()]
+		do_color("ColorActiveMinimizedWindow", None, 'main:edit_bg')
+		do_color("ColorActiveMinimizedWindowText", None, 'main:edit_fg')
+		do_color("ColorNormalMinimizedWindow", None, 'main:control_bg')
+		do_color("ColorNormalMinimizedWindowText", None, 'main:control_fg')
 
 		# TaskBar
-		themedata["ColorDefaultTaskBar"] = ['string', ctrl_main_bg.get_hex()]
-		themedata["ColorActiveTaskBarApp"] = ['string', ctrl_main_bg.get_hex()]
-		themedata["ColorActiveTaskBarAppText"] = ['string', ctrl_main_fg.get_hex()]
-		themedata["ColorInvisibleTaskBarApp"] = ['string', ctrl_main_bg.get_hex()]
-		themedata["ColorInvisibleTaskBarAppText"] = ['string', ctrl_main_fg.get_hex()]
-		themedata["ColorMinimizedTaskBarApp"] = ['string', ctrl_main_bg.get_hex()]
-		themedata["ColorMinimizedTaskBarAppText"] = ['string', ctrl_main_fg.get_hex()]
-		themedata["ColorNormalTaskBarApp"] = ['string', ctrl_main_bg.get_hex()]
-		themedata["ColorNormalTaskBarAppText"] = ['string', ctrl_main_fg.get_hex()]
+		do_color("ColorDefaultTaskBar", 'taskbar', 'main:control_bg')
+
+		do_color("ColorActiveTaskBarApp", 'taskbar_button_app', 'active:control_bg')
+		do_color("ColorActiveTaskBarAppText", 'taskbar_button_app', 'active:control_fg')
+		do_color("ColorInvisibleTaskBarApp", 'taskbar_button_app', 'invisible:control_bg')
+		do_color("ColorInvisibleTaskBarAppText", 'taskbar_button_app', 'invisible:control_fg')
+		do_color("ColorMinimizedTaskBarApp", 'taskbar_button_app', 'minimized:control_bg')
+		do_color("ColorMinimizedTaskBarAppText", 'taskbar_button_app', 'minimized:control_fg')
+		do_color("ColorNormalTaskBarApp", 'taskbar_button_app', 'main:control_bg')
+		do_color("ColorNormalTaskBarAppText", 'taskbar_button_app', 'main:control_fg')
 
 		# Label
-		themedata['ColorLabel'] = ['string', ctrl_main_bg.get_hex()]
-		themedata['ColorLabelText'] = ['string', ctrl_main_fg.get_hex()]
+		do_color('ColorLabel', 'label', 'main:control_bg')
+		do_color('ColorLabelText', 'label', 'main:control_fg')
 
 		# ListBox
-		themedata['ColorListBox'] = ['string', text_main_bg.get_hex()]
-		themedata['ColorListBoxText'] = ['string', text_main_fg.get_hex()]
-		themedata['ColorListBoxSelection'] = ['string', text_sel_bg.get_hex()]
-		themedata['ColorListBoxSelectionText'] = ['string', text_sel_fg.get_hex()]
+		do_color('ColorListBox', 'listbox', 'main:edit_bg')
+		do_color('ColorListBoxText', 'listbox', 'main:edit_fg')
+		do_color('ColorListBoxSelection', 'listbox', 'main:edit_bg_selected')
+		do_color('ColorListBoxSelectionText', 'listbox', 'main:edit_fg_selected')
 
-		# TitleBar
-		col1 = theme_obj.get_color_rgb('tooltip', 'main:control_bg')
-		col2 = theme_obj.get_color_rgb('tooltip', 'main:control_fg')
-		themedata['ColorToolTip'] = ['string', col1.get_hex()]
-		themedata['ColorToolTipText'] = ['string', col2.get_hex()]
+		# MEMStatus
+		do_color('ColorMEMStatusFree', 'graphstat_memory', 'main:edit_bg')
+		do_color_spec('ColorMEMStatusBuffers', 'graphstat_memory', 'main:edit_fg_buffers')
+		do_color_spec('ColorMEMStatusCached', 'graphstat_memory', 'main:edit_fg_cached')
+		do_color_spec('ColorMEMStatusUser', 'graphstat_memory', 'main:edit_fg_user')
+
+		# MoveSize
+		do_color('ColorMoveSizeStatus', 'move_size_status', 'main:control_bg')
+		do_color('ColorMoveSizeStatusText', 'move_size_status', 'main:control_fg')
+		
+		# Net
+		do_color('ColorNetIdle', 'graphstat_network', 'main:edit_bg')
+		do_color_spec('ColorNetReceive', 'graphstat_network', 'main:edit_fg_rx')
+		do_color_spec('ColorNetSend', 'graphstat_network', 'main:edit_fg_tx')
+
+		# Clock
+		do_color('ColorClock', 'clock', 'main:control_bg')
+		do_color('ColorClockText', 'clock', 'main:control_fg')
+		
+		# QuickSwitch
+		do_color('ColorQuickSwitch', 'quick_switch', 'main:control_bg')
+		do_color('ColorQuickSwitchText', 'quick_switch', 'main:control_fg')
+
+		# ToolTip
+		do_color('ColorToolTip', 'tooltip', 'main:control_bg')
+		do_color('ColorToolTipText', 'tooltip', 'main:control_fg')
 		
 		# Desktop
-		desktop = theme_obj.get_color_rgb('desktop', 'main:control_bg')
-		themedata['DesktopBackgroundColor'] = ['string', desktop.get_hex()]
+		do_color('DesktopBackgroundColor', 'desktop', 'main:control_bg')
 
 		icewmtheme.write(themeverter_intent.output_file)
