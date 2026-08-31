@@ -11,7 +11,7 @@ class input_plug(plugins.base):
 		return 'icewm'
 	
 	def get_name(self):
-		return 'icewm'
+		return '[Unix] IceWM'
 	
 	def get_prop(self):
 		prop = {}

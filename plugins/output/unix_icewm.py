@@ -10,7 +10,7 @@ class output_plug(plugins.base):
 		return 'icewm'
 	
 	def get_name(self):
-		return 'IceWM'
+		return '[Unix] IceWM'
 	
 	def get_prop(self):
 		prop = {}

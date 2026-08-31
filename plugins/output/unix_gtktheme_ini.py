@@ -10,7 +10,7 @@ class output_plug(plugins.base):
 		return 'gtk_color_scheme'
 	
 	def get_name(self):
-		return 'Gtk Colors .INI'
+		return '[Unix] GTK Colors .INI'
 	
 	def get_prop(self):
 		prop = {}
