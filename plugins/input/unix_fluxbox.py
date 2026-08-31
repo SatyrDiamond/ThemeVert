@@ -10,7 +10,7 @@ class input_plug(plugins.base):
 		return 'fluxbox'
 	
 	def get_name(self):
-		return '[unix] FluxBox'
+		return '[Unix] FluxBox'
 	
 	def get_prop(self):
 		prop = {}

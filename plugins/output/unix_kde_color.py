@@ -9,7 +9,7 @@ class output_plug(plugins.base):
 		return 'kde_color'
 	
 	def get_name(self):
-		return 'KDE/Plasma Color Scheme'
+		return '[Unix] KDE/Plasma Color Scheme'
 	
 	def get_prop(self):
 		prop = {}

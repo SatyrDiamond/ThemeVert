@@ -10,7 +10,7 @@ class input_plug(plugins.base):
 		return 'blackbox'
 	
 	def get_name(self):
-		return '[unix] blackbox'
+		return '[Unix] blackbox'
 	
 	def get_prop(self):
 		prop = {}

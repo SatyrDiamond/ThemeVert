@@ -10,7 +10,7 @@ class output_plug(plugins.base):
 		return 'win32_theme'
 	
 	def get_name(self):
-		return 'Windows .theme'
+		return '[Win32] Windows .theme'
 	
 	def get_prop(self):
 		prop = {}
