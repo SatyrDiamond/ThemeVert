@@ -50,7 +50,7 @@ class input_plug(plugins.base):
 
 			if 'ForegroundInactive' in colorset:
 				theme_obj.add_global_color(txt_foregroundinactive, conv_color(colorset['ForegroundInactive']) )
-				tstyle.add_color_named('inactive:control_fg', txt_foregroundinactive)
+				tstyle.add_color_named('main:control_fg_inactive', txt_foregroundinactive)
 
 			if 'ForegroundLink' in colorset:
 				theme_obj.add_global_color(txt_foregroundlink, conv_color(colorset['ForegroundLink']) )
@@ -115,7 +115,7 @@ class input_plug(plugins.base):
 			theme_obj.add_global_color(txt_foregroundnormal, conv_color(colorset['ForegroundNormal']) )
 			theme_obj.add_global_color(txt_foregroundinactive, conv_color(colorset['ForegroundInactive']) )
 			tstyle.add_color_named('main:edit_fg', txt_foregroundnormal)
-			tstyle.add_color_named('inactive:edit_fg', txt_foregroundinactive)
+			tstyle.add_color_named('main:edit_fg_inactive', txt_foregroundinactive)
 
 			theme_obj.add_global_color(txt_foregroundlink, conv_color(colorset['ForegroundLink']) )
 			theme_obj.add_global_color(txt_foregroundvisited, conv_color(colorset['ForegroundVisited']) )
@@ -154,7 +154,7 @@ class input_plug(plugins.base):
 			theme_obj.add_global_color(txt_foregroundnormal, conv_color(colorset['ForegroundNormal']) )
 			theme_obj.add_global_color(txt_foregroundinactive, conv_color(colorset['ForegroundInactive']) )
 			tstyle.add_color_named('main:edit_fg_selected', txt_foregroundnormal)
-			tstyle.add_color_named('inactive:edit_fg_selected', txt_foregroundinactive)
+			tstyle.add_color_named('main:edit_fg_selected_inactive', txt_foregroundinactive)
 
 			if 'ForegroundLink' in colorset:
 				theme_obj.add_global_color(txt_foregroundlink, conv_color(colorset['ForegroundLink']) )
@@ -163,10 +163,6 @@ class input_plug(plugins.base):
 			if 'ForegroundVisited' in colorset:
 				theme_obj.add_global_color(txt_foregroundvisited, conv_color(colorset['ForegroundVisited']) )
 				tstyle.add_color_named('main:edit_fg_selected_url_visited', txt_foregroundvisited)
-
-			if 'ForegroundVisited' in colorset:
-				theme_obj.add_global_color(txt_foregroundvisited, conv_color(colorset['ForegroundVisited']) )
-				tstyle.add_color_named('main:control_fg_url_visited', txt_foregroundvisited)
 
 			if 'ForegroundActive' in colorset:
 				theme_obj.add_global_color(txt_foregroundactive, conv_color(colorset['ForegroundActive']) )
@@ -183,7 +179,7 @@ class input_plug(plugins.base):
 			if 'ForegroundPositive' in colorset:
 				theme_obj.add_global_color(txt_foregroundpositive, conv_color(colorset['ForegroundPositive']) )
 				tstyle.add_color_named('main:edit_fg_selected_positive', txt_foregroundpositive)
-				
+
 		if 'WM' in config:
 			colorset = config['WM']
 
