@@ -27,161 +27,104 @@ class input_plug(plugins.base):
 		config = configparser.ConfigParser()
 		config.read(themeverter_intent.input_file)
 
-		def do_colors(tstyle, colorset, name):
-			txt_backgroundnormal = 'kde_%s_BackgroundNormal' % name
-			txt_backgroundalternate = 'kde_%s_BackgroundAlternate' % name
-			txt_foregroundnormal = 'kde_%s_ForegroundNormal' % name
-			txt_foregroundinactive = 'kde_%s_ForegroundInactive' % name
-			txt_foregroundlink = 'kde_%s_ForegroundLink' % name
-			txt_foregroundvisited = 'kde_%s_ForegroundVisited' % name
-			txt_foregroundactive = 'kde_%s_ForegroundActive' % name
-			txt_foregroundnegative = 'kde_%s_ForegroundNegative' % name
-			txt_foregroundneutral = 'kde_%s_ForegroundNeutral' % name
-			txt_foregroundpositive = 'kde_%s_ForegroundPositive' % name
+		theme_obj.add_stylecontrol('button')
+		theme_obj.add_stylecontrol('tooltip')
+		theme_obj.add_stylecontrol('complementary')
+		theme_obj.add_stylecontrol('titlebar')
 
-			theme_obj.add_global_color(txt_backgroundnormal, conv_color(colorset['BackgroundNormal']) )
-			tstyle.add_color_named('main:control_bg', txt_backgroundnormal)
-			if 'BackgroundAlternate' in colorset:
-				theme_obj.add_global_color(txt_backgroundalternate, conv_color(colorset['BackgroundAlternate']) )
-				tstyle.add_color_named('main:control_bg_alt', txt_backgroundalternate)
+		def add_kde_color(kcolorset, colorcat, kcolorname, stylepart, colloc):
+			if kcolorname in kcolorset:
+				color_id = 'kde_%s_%s' % (colorcat, kcolorname)
+				color = conv_color(kcolorset[kcolorname])
+				theme_obj.add_global_color(color_id, color)
+				theme_obj.add_color_named(stylepart, colloc, color_id)
 
-			theme_obj.add_global_color(txt_foregroundnormal, conv_color(colorset['ForegroundNormal']) )
-			tstyle.add_color_named('main:control_fg', txt_foregroundnormal)
-
-			if 'ForegroundInactive' in colorset:
-				theme_obj.add_global_color(txt_foregroundinactive, conv_color(colorset['ForegroundInactive']) )
-				tstyle.add_color_named('main:control_fg_inactive', txt_foregroundinactive)
-
-			if 'ForegroundLink' in colorset:
-				theme_obj.add_global_color(txt_foregroundlink, conv_color(colorset['ForegroundLink']) )
-				tstyle.add_color_named('main:control_fg_url', txt_foregroundlink)
-
-			if 'ForegroundVisited' in colorset:
-				theme_obj.add_global_color(txt_foregroundvisited, conv_color(colorset['ForegroundVisited']) )
-				tstyle.add_color_named('main:control_fg_url_visited', txt_foregroundvisited)
-
-			if 'ForegroundActive' in colorset:
-				theme_obj.add_global_color(txt_foregroundactive, conv_color(colorset['ForegroundActive']) )
-				tstyle.add_color_named('main:control_fg_active', txt_foregroundactive)
-
-			if 'ForegroundNegative' in colorset:
-				theme_obj.add_global_color(txt_foregroundnegative, conv_color(colorset['ForegroundNegative']) )
-				tstyle.add_color_named('main:control_fg_negative', txt_foregroundnegative)
-
-			if 'ForegroundNeutral' in colorset:
-				theme_obj.add_global_color(txt_foregroundneutral, conv_color(colorset['ForegroundNeutral']) )
-				tstyle.add_color_named('main:control_fg_neutral', txt_foregroundneutral)
-
-			if 'ForegroundPositive' in colorset:
-				theme_obj.add_global_color(txt_foregroundpositive, conv_color(colorset['ForegroundPositive']) )
-				tstyle.add_color_named('main:control_fg_positive', txt_foregroundpositive)
-		
-		style_glob = theme_obj.style_global
 		if 'Colors:Window' in config:
-			do_colors(style_glob, config['Colors:Window'], 'win')
+			colorset = config['Colors:Window']
+			add_kde_color(colorset, 'win', 'BackgroundNormal', None, 'main:control_bg')
+			add_kde_color(colorset, 'win', 'BackgroundAlternate', None, 'main:control_bg_alt')
+			add_kde_color(colorset, 'win', 'ForegroundNormal', None, 'main:control_fg')
+			add_kde_color(colorset, 'win', 'ForegroundInactive', None, 'main:control_fg_inactive')
+			add_kde_color(colorset, 'win', 'ForegroundLink', None, 'main:control_fg_url')
+			add_kde_color(colorset, 'win', 'ForegroundVisited', None, 'main:control_fg_url_visited')
+			add_kde_color(colorset, 'win', 'ForegroundActive', None, 'main:control_fg_active')
+			add_kde_color(colorset, 'win', 'ForegroundNegative', None, 'main:control_fg_negative')
+			add_kde_color(colorset, 'win', 'ForegroundNeutral', None, 'main:control_fg_neutral')
+			add_kde_color(colorset, 'win', 'ForegroundPositive', None, 'main:control_fg_positive')
 
 		if 'Colors:Button' in config:
-			curstyle, curctrl = theme_obj.add_stylecontrol('button')
-			do_colors(curstyle, config['Colors:Button'], 'button')
+			colorset = config['Colors:Button']
+			add_kde_color(colorset, 'button', 'BackgroundNormal', 'button', 'main:control_bg')
+			add_kde_color(colorset, 'button', 'BackgroundAlternate', 'button', 'main:control_bg_alt')
+			add_kde_color(colorset, 'button', 'ForegroundNormal', 'button', 'main:control_fg')
+			add_kde_color(colorset, 'button', 'ForegroundInactive', 'button', 'main:control_fg_inactive')
+			add_kde_color(colorset, 'button', 'ForegroundLink', 'button', 'main:control_fg_url')
+			add_kde_color(colorset, 'button', 'ForegroundVisited', 'button', 'main:control_fg_url_visited')
+			add_kde_color(colorset, 'button', 'ForegroundActive', 'button', 'main:control_fg_active')
+			add_kde_color(colorset, 'button', 'ForegroundNegative', 'button', 'main:control_fg_negative')
+			add_kde_color(colorset, 'button', 'ForegroundNeutral', 'button', 'main:control_fg_neutral')
+			add_kde_color(colorset, 'button', 'ForegroundPositive', 'button', 'main:control_fg_positive')
 
 		if 'Colors:Tooltip' in config:
-			curstyle, curctrl = theme_obj.add_stylecontrol('tooltip')
-			do_colors(curstyle, config['Colors:Tooltip'], 'tooltip')
+			colorset = config['Colors:Tooltip']
+			add_kde_color(colorset, 'tooltip', 'BackgroundNormal', 'tooltip', 'main:control_bg')
+			add_kde_color(colorset, 'tooltip', 'BackgroundAlternate', 'tooltip', 'main:control_bg_alt')
+			add_kde_color(colorset, 'tooltip', 'ForegroundNormal', 'tooltip', 'main:control_fg')
+			add_kde_color(colorset, 'tooltip', 'ForegroundInactive', 'tooltip', 'main:control_fg_inactive')
+			add_kde_color(colorset, 'tooltip', 'ForegroundLink', 'tooltip', 'main:control_fg_url')
+			add_kde_color(colorset, 'tooltip', 'ForegroundVisited', 'tooltip', 'main:control_fg_url_visited')
+			add_kde_color(colorset, 'tooltip', 'ForegroundActive', 'tooltip', 'main:control_fg_active')
+			add_kde_color(colorset, 'tooltip', 'ForegroundNegative', 'tooltip', 'main:control_fg_negative')
+			add_kde_color(colorset, 'tooltip', 'ForegroundNeutral', 'tooltip', 'main:control_fg_neutral')
+			add_kde_color(colorset, 'tooltip', 'ForegroundPositive', 'tooltip', 'main:control_fg_positive')
 			
 		if 'Colors:Complementary' in config:
-			curstyle, curctrl = theme_obj.add_stylecontrol('complementary')
-			do_colors(curstyle, config['Colors:Complementary'], 'complementary')
+			colorset = config['Colors:Tooltip']
+			add_kde_color(colorset, 'complementary', 'BackgroundNormal', 'complementary', 'main:control_bg')
+			add_kde_color(colorset, 'complementary', 'BackgroundAlternate', 'complementary', 'main:control_bg_alt')
+			add_kde_color(colorset, 'complementary', 'ForegroundNormal', 'complementary', 'main:control_fg')
+			add_kde_color(colorset, 'complementary', 'ForegroundInactive', 'complementary', 'main:control_fg_inactive')
+			add_kde_color(colorset, 'complementary', 'ForegroundLink', 'complementary', 'main:control_fg_url')
+			add_kde_color(colorset, 'complementary', 'ForegroundVisited', 'complementary', 'main:control_fg_url_visited')
+			add_kde_color(colorset, 'complementary', 'ForegroundActive', 'complementary', 'main:control_fg_active')
+			add_kde_color(colorset, 'complementary', 'ForegroundNegative', 'complementary', 'main:control_fg_negative')
+			add_kde_color(colorset, 'complementary', 'ForegroundNeutral', 'complementary', 'main:control_fg_neutral')
+			add_kde_color(colorset, 'complementary', 'ForegroundPositive', 'complementary', 'main:control_fg_positive')
 			
 		if 'Colors:View' in config:
-			name = 'view'
-			colorset = config['Colors:View']
-			tstyle = style_glob
-			txt_backgroundnormal = 'kde_%s_BackgroundNormal' % name
-			txt_backgroundalternate = 'kde_%s_BackgroundAlternate' % name
-			txt_foregroundnormal = 'kde_%s_ForegroundNormal' % name
-			txt_foregroundinactive = 'kde_%s_ForegroundInactive' % name
-			txt_foregroundlink = 'kde_%s_ForegroundLink' % name
-			txt_foregroundvisited = 'kde_%s_ForegroundVisited' % name
-			txt_foregroundactive = 'kde_%s_ForegroundActive' % name
-			txt_foregroundnegative = 'kde_%s_ForegroundNegative' % name
-			txt_foregroundneutral = 'kde_%s_ForegroundNeutral' % name
-			txt_foregroundpositive = 'kde_%s_ForegroundPositive' % name
-
-			theme_obj.add_global_color(txt_backgroundnormal, conv_color(colorset['BackgroundNormal']) )
-			theme_obj.add_global_color(txt_backgroundalternate, conv_color(colorset['BackgroundAlternate']) )
-			tstyle.add_color_named('main:edit_bg', txt_backgroundnormal)
-			tstyle.add_color_named('main:edit_bg_alt', txt_backgroundalternate)
-
-			theme_obj.add_global_color(txt_foregroundnormal, conv_color(colorset['ForegroundNormal']) )
-			theme_obj.add_global_color(txt_foregroundinactive, conv_color(colorset['ForegroundInactive']) )
-			tstyle.add_color_named('main:edit_fg', txt_foregroundnormal)
-			tstyle.add_color_named('main:edit_fg_inactive', txt_foregroundinactive)
-
-			theme_obj.add_global_color(txt_foregroundlink, conv_color(colorset['ForegroundLink']) )
-			theme_obj.add_global_color(txt_foregroundvisited, conv_color(colorset['ForegroundVisited']) )
-			tstyle.add_color_named('main:edit_fg_url', txt_foregroundlink)
-			tstyle.add_color_named('main:edit_fg_url_visited', txt_foregroundvisited)
-
-			theme_obj.add_global_color(txt_foregroundactive, conv_color(colorset['ForegroundActive']) )
-			theme_obj.add_global_color(txt_foregroundnegative, conv_color(colorset['ForegroundNegative']) )
-			theme_obj.add_global_color(txt_foregroundneutral, conv_color(colorset['ForegroundNeutral']) )
-			theme_obj.add_global_color(txt_foregroundpositive, conv_color(colorset['ForegroundPositive']) )
-			tstyle.add_color_named('main:edit_fg_active', txt_foregroundactive)
-			tstyle.add_color_named('main:edit_fg_negative', txt_foregroundnegative)
-			tstyle.add_color_named('main:edit_fg_neutral', txt_foregroundneutral)
-			tstyle.add_color_named('main:edit_fg_positive', txt_foregroundpositive)
+			colorset = config['Colors:Tooltip']
+			add_kde_color(colorset, 'view', 'BackgroundNormal', None, 'main:edit_bg')
+			add_kde_color(colorset, 'view', 'BackgroundAlternate', None, 'main:edit_bg_alt')
+			add_kde_color(colorset, 'view', 'ForegroundNormal', None, 'main:edit_fg')
+			add_kde_color(colorset, 'view', 'ForegroundInactive', None, 'main:edit_fg_inactive')
+			add_kde_color(colorset, 'view', 'ForegroundLink', None, 'main:edit_fg_url')
+			add_kde_color(colorset, 'view', 'ForegroundVisited', None, 'main:edit_fg_url_visited')
+			add_kde_color(colorset, 'view', 'ForegroundActive', None, 'main:edit_fg_active')
+			add_kde_color(colorset, 'view', 'ForegroundNegative', None, 'main:edit_fg_negative')
+			add_kde_color(colorset, 'view', 'ForegroundNeutral', None, 'main:edit_fg_neutral')
+			add_kde_color(colorset, 'view', 'ForegroundPositive', None, 'main:edit_fg_positive')
 
 		if 'Colors:Selection' in config:
-			name = 'selection'
 			colorset = config['Colors:Selection']
-			tstyle = style_glob
-			txt_backgroundnormal = 'kde_%s_BackgroundNormal' % name
-			txt_backgroundalternate = 'kde_%s_BackgroundAlternate' % name
-			txt_foregroundnormal = 'kde_%s_ForegroundNormal' % name
-			txt_foregroundinactive = 'kde_%s_ForegroundInactive' % name
-			txt_foregroundlink = 'kde_%s_ForegroundLink' % name
-			txt_foregroundvisited = 'kde_%s_ForegroundVisited' % name
-			txt_foregroundactive = 'kde_%s_ForegroundActive' % name
-			txt_foregroundnegative = 'kde_%s_ForegroundNegative' % name
-			txt_foregroundneutral = 'kde_%s_ForegroundNeutral' % name
-			txt_foregroundpositive = 'kde_%s_ForegroundPositive' % name
-
-			theme_obj.add_global_color(txt_backgroundnormal, conv_color(colorset['BackgroundNormal']) )
-			theme_obj.add_global_color(txt_backgroundalternate, conv_color(colorset['BackgroundAlternate']) )
-			tstyle.add_color_named('main:edit_bg_selected', txt_backgroundnormal)
-			tstyle.add_color_named('main:edit_bg_selected_alt', txt_backgroundalternate)
-
-			theme_obj.add_global_color(txt_foregroundnormal, conv_color(colorset['ForegroundNormal']) )
-			theme_obj.add_global_color(txt_foregroundinactive, conv_color(colorset['ForegroundInactive']) )
-			tstyle.add_color_named('main:edit_fg_selected', txt_foregroundnormal)
-			tstyle.add_color_named('main:edit_fg_selected_inactive', txt_foregroundinactive)
-
-			if 'ForegroundLink' in colorset:
-				theme_obj.add_global_color(txt_foregroundlink, conv_color(colorset['ForegroundLink']) )
-				tstyle.add_color_named('main:edit_fg_selected_url', txt_foregroundlink)
-
-			if 'ForegroundVisited' in colorset:
-				theme_obj.add_global_color(txt_foregroundvisited, conv_color(colorset['ForegroundVisited']) )
-				tstyle.add_color_named('main:edit_fg_selected_url_visited', txt_foregroundvisited)
-
-			if 'ForegroundActive' in colorset:
-				theme_obj.add_global_color(txt_foregroundactive, conv_color(colorset['ForegroundActive']) )
-				tstyle.add_color_named('main:edit_fg_selected_active', txt_foregroundactive)
-
-			if 'ForegroundNegative' in colorset:
-				theme_obj.add_global_color(txt_foregroundnegative, conv_color(colorset['ForegroundNegative']) )
-				tstyle.add_color_named('main:edit_fg_selected_negative', txt_foregroundnegative)
-
-			if 'ForegroundNeutral' in colorset:
-				theme_obj.add_global_color(txt_foregroundneutral, conv_color(colorset['ForegroundNeutral']) )
-				tstyle.add_color_named('main:edit_fg_selected_neutral', txt_foregroundneutral)
-
-			if 'ForegroundPositive' in colorset:
-				theme_obj.add_global_color(txt_foregroundpositive, conv_color(colorset['ForegroundPositive']) )
-				tstyle.add_color_named('main:edit_fg_selected_positive', txt_foregroundpositive)
+			add_kde_color(colorset, 'selection', 'BackgroundNormal', None, 'main:edit_bg_selected')
+			add_kde_color(colorset, 'selection', 'BackgroundAlternate', None, 'main:edit_bg_selected_alt')
+			add_kde_color(colorset, 'selection', 'ForegroundNormal', None, 'main:edit_fg_selected')
+			add_kde_color(colorset, 'selection', 'ForegroundInactive', None, 'main:edit_fg_selected_inactive')
+			add_kde_color(colorset, 'selection', 'ForegroundLink', None, 'main:edit_fg_selected_url')
+			add_kde_color(colorset, 'selection', 'ForegroundVisited', None, 'main:edit_fg_selected_url_visited')
+			add_kde_color(colorset, 'selection', 'ForegroundActive', None, 'main:edit_fg_selected_active')
+			add_kde_color(colorset, 'selection', 'ForegroundNegative', None, 'main:edit_fg_selected_negative')
+			add_kde_color(colorset, 'selection', 'ForegroundNeutral', None, 'main:edit_fg_selected_neutral')
+			add_kde_color(colorset, 'selection', 'ForegroundPositive', None, 'main:edit_fg_selected_positive')
 
 		if 'WM' in config:
 			colorset = config['WM']
+			add_kde_color(colorset, 'wm', 'activeBackground', 'titlebar', 'main:control_bg')
+			add_kde_color(colorset, 'wm', 'activeBlend', 'titlebar', 'main:control_bg_second')
+			add_kde_color(colorset, 'wm', 'activeForeground', 'titlebar', 'main:control_fg')
+			add_kde_color(colorset, 'wm', 'inactiveBackground', 'titlebar', 'inactive:control_bg')
+			add_kde_color(colorset, 'wm', 'inactiveBlend', 'titlebar', 'inactive:control_fg')
+			add_kde_color(colorset, 'wm', 'inactiveForeground', 'titlebar', 'inactive:control_bg_second')
 
 			theme_obj.add_global_color('wm_activeBackground', conv_color(colorset['activeBackground']) )
 			theme_obj.add_global_color('wm_activeBlend', conv_color(colorset['activeBlend']) )
@@ -190,17 +133,10 @@ class input_plug(plugins.base):
 			theme_obj.add_global_color('wm_inactiveBlend', conv_color(colorset['inactiveBlend']) )
 			theme_obj.add_global_color('wm_inactiveForeground', conv_color(colorset['inactiveForeground']) )
 
-			curstyle, curctrl = theme_obj.add_stylecontrol('titlebar')
-			curstyle.add_color_named('main:control_bg', 'wm_activeBackground')
-			curstyle.add_color_named('main:control_bg_second', 'wm_activeBlend')
-			curstyle.add_color_named('main:control_fg', 'wm_activeForeground')
-			curstyle.add_prop('main', 'color_fx', 'gradent')
-			curstyle.add_prop('main', 'gradent_color', 'user_gradent')
-			curstyle.add_color_named('main:user_gradent', 'wm_activeBlend')
+			#curstyle.add_prop('main', 'color_fx', 'gradent')
+			#curstyle.add_prop('main', 'gradent_color', 'user_gradent')
+			#curstyle.add_color_named('main:user_gradent', 'wm_activeBlend')
 
-			curstyle.add_color_named('inactive:control_bg', 'wm_inactiveBackground')
-			curstyle.add_color_named('inactive:control_fg', 'wm_inactiveForeground')
-			curstyle.add_color_named('inactive:control_bg_second', 'wm_activeBlend')
-			curstyle.add_prop('inactive', 'color_fx', 'gradent')
-			curstyle.add_prop('inactive', 'gradent_color', 'user_gradent')
-			curstyle.add_color_named('inactive:user_gradent', 'wm_inactiveBlend')
+			#curstyle.add_prop('inactive', 'color_fx', 'gradent')
+			#curstyle.add_prop('inactive', 'gradent_color', 'user_gradent')
+			#curstyle.add_color_named('inactive:user_gradent', 'wm_inactiveBlend')

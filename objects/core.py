@@ -139,11 +139,12 @@ class core:
 		if self.debug: self.theme_obj.to_xml('debug_in.xml')
 		colors_win32 = self.theme_obj.colors_win32
 		colors_gtk = self.theme_obj.colors_gtk
+
 		colors_win32.import_colors(self.theme_obj)
 		colors_gtk.import_colors(self.theme_obj)
-
-		if self.debug: self.theme_obj.complete_incomplete()
 		
+		self.theme_obj.complete_incomplete()
+
 		colors_win32.export_colors(self.theme_obj)
 		colors_gtk.export_colors(self.theme_obj)
 		if self.debug: self.theme_obj.to_xml('debug_mid.xml')

@@ -9,6 +9,8 @@ def writestr(c):
 	return ' '.join([str(x) for x in c.get_int()])
 
 def mix_color(c1, c2, lvl): 
+	c1 = c1.copy()
+	c2 = c2.copy()
 	c1 *= lvl
 	c2 *= 1-lvl
 	return (c1+c2)

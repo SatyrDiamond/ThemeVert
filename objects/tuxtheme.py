@@ -5,8 +5,13 @@ from objects.colors import gtk as colors_gtk
 from objects import visual
 from objects import valobjs
 from functions import color as colorfunc
+import logging
 
 triplestr = valobjs.triplestr
+
+DEBUG = 0
+
+logger_theme = logging.getLogger('theme')
 
 # =============================================== DATA ===============================================
 
@@ -40,7 +45,7 @@ class data_color():
 	def get_simp(self):
 		if self.used:
 			if self.type=='name': return True, self.index_name
-			if self.manual=='manual': return False, self.color
+			if self.type=='manual': return False, self.color
 
 class data_font():
 	def __init__(self):
@@ -262,35 +267,86 @@ class data_theme():
 		ET.indent(outfile, space="\t", level=0)
 		outfile.write(out_file, xml_declaration = True)
 
-	def get_color(self, controlname, colloc, alwayscol):
-		styleobj = self.style_global
+	def _internal_get_stylepart(self, partname):
+		if partname in ['global', None]: return self.style_global
+		elif partname in self.style_part: return self.style_part[partname]
 
-		#color_global = self.style_global.exists_color(colloc)
+	def add_prop(self, controlname, state, name, value):
+		s = self._internal_get_stylepart(controlname)
+		if s: 
+			s.add_prop(state, name, value)
 
-		#print('debug: get_color |', controlname, colloc, '|', color_global, end=' ' )
+	def add_color(self, controlname, colloc, rgb):
+		s = self._internal_get_stylepart(controlname)
+		if s: 
+			s.add_color(colloc, rgb)
+			logger_theme.info('+ rgb color: %s to %s (%s)' % (colloc, controlname, rgb))
+		else:
+			logger_theme.warning('X rgb color %s to %s (%s), %s is missing' % (colloc, controlname, rgb, controlname))
 
-		outcolor = None
-		c = styleobj.get_color(colloc)
+	def add_color_named(self, controlname, colloc, colname):
+		s = self._internal_get_stylepart(controlname)
+		if s: 
+			s.add_color_named(colloc, colname)
+			logger_theme.info('+ named color: %s to %s (%s)' % (colloc, controlname, colname))
+		else:
+			logger_theme.warning('X named color %s to %s (%s), %s is missing' % (colloc, controlname, colname, controlname))
 
-		if controlname in self.controls:
-			style = self.controls[controlname]
-			for s in style.styles:
-				stylep = self.style_part[s]
-				color_ele = stylep.exists_color(colloc)
-				#print(color_ele, end=' ' )
-				if color_ele:
-					c = stylep.get_color(colloc)
-					break
+	def get_color_spec(self, controlname, colloc):
+		if controlname not in ['global', None]: 
+			if controlname in self.controls:
+				style = self.controls[controlname]
+				for s in style.styles:
+					stylep = self.style_part[s]
+					color_ele = stylep.exists_color(colloc)
+					#if DEBUG: print(color_ele, end=' ' )
+					if color_ele:
+						return stylep.get_color(colloc)
+		else:
+			return self.style_global.get_color(colloc)
 
-		#print()
+	def get_color(self, controlname, colloc):
+		c = None
+		c = self.style_global.get_color(colloc)
+		cc = self.get_color_spec(controlname, colloc)
+		if cc: return cc
+		else: return c
 
-		if c:
-			isname, val = c
-			if alwayscol:
-				if isname: val = self.colors[val]
+	def get_color_rgb(self, controlname, colloc):
+		outcol = self.get_color(controlname, colloc)
+		if outcol:
+			isname, val = outcol
+			if isname: 
+				val = self.colors[val]
 				return val.color.copy()
 			else:
-				return isname, val.copy() if not isname else val
+				return val.copy()
+
+	def get_color_rgb_spec(self, controlname, colloc):
+		outcol = self.get_color_spec(controlname, colloc)
+		if outcol:
+			isname, val = outcol
+			if isname: 
+				val = self.colors[val]
+				return val.color.copy()
+			else:
+				return val.copy()
+
+	def copy_color(self, i_controlname, i_colloc, o_controlname, o_colloc, overwrite):
+		incolor = self.get_color_spec(i_controlname, i_colloc)
+		if not overwrite:
+			if self.get_color(o_controlname, o_colloc): 
+				logger_theme.info('>X copy color: %s|%s to %s|%s (not overwriting)' % (i_controlname, i_colloc, o_controlname, o_colloc))
+				return 2
+		if incolor:
+			logger_theme.info('>> copy color: %s|%s to %s|%s' % (i_controlname, i_colloc, o_controlname, o_colloc))
+			isname, val = incolor
+			if isname: self.add_color_named(o_controlname, o_colloc, val)
+			else: self.add_color(o_controlname, o_colloc, val.get_int())
+			return 0
+		else:
+			logger_theme.info('X> copy color: %s|%s to %s|%s (org color not exist)' % (i_controlname, i_colloc, o_controlname, o_colloc))
+			return 1
 
 	def get_prop(self, controlname, state, name):
 		styleobj = self.style_global
@@ -302,69 +358,59 @@ class data_theme():
 				return stylep.get_prop(state, name)
 
 	def complete_incomplete(self):
-		globalstyle = self.style_global
+		logger_theme.info('complete_incomplete')
 
-		ctrl_main_bg = globalstyle.get_color('main:control_bg')
-		ctrl_main_fg = globalstyle.get_color('main:control_fg')
+		ctrl_main_bg = self.get_color(None, 'main:control_bg')
+		ctrl_main_fg = self.get_color(None, 'main:control_fg')
+		text_main_bg = self.get_color(None, 'main:edit_bg')
+		text_main_fg = self.get_color(None, 'main:edit_fg')
 
 		if (not ctrl_main_bg) or (not ctrl_main_fg):
 			print('control BG or FG missing')
 			exit()
 
-		text_main_bg = globalstyle.get_color('main:edit_bg')
-		text_main_fg = globalstyle.get_color('main:edit_fg')
 		if (not text_main_bg) or (not text_main_fg):
 			print('text BG or FG missing')
 			exit()
 
-		control_greytext_needed = False
-		edit_greytext_needed = False
-
-		globalstyle.simple_add_col('main:border', text_main_fg)
-
-		if not globalstyle.exists_color('main:control_bg_alt'):
-			globalstyle.simple_add_col('main:control_bg_alt', ctrl_main_bg)
+		self.copy_color(None, 'main:edit_fg', None, 'main:border', False)
+		self.copy_color(None, 'main:control_bg', None, 'main:control_bg_alt', False)
 
 		# ----------------- selected -----------------
 		#text
-		color1 = globalstyle.exists_color('main:edit_bg_selected')
-		color2 = globalstyle.exists_color('main:edit_fg_selected')
+		color1 = self.get_color(None, 'main:edit_bg_selected')
+		color2 = self.get_color(None, 'main:edit_fg_selected')
 		if (not color1) or (not color2):
-			globalstyle.simple_add_col('main:edit_fg_selected', text_main_bg)
-			globalstyle.simple_add_col('main:edit_bg_selected', text_main_fg)
+			self.copy_color(None, 'main:edit_bg', None, 'main:edit_fg_selected', False)
+			self.copy_color(None, 'main:edit_fg', None, 'main:edit_bg_selected', False)
 
 		#control
-		color1 = globalstyle.exists_color('main:control_text_selected_bg')
-		color2 = globalstyle.exists_color('main:control_text_selected')
+		self.copy_color(None, 'main:control_bg', None, 'main:control_font_bg', False)
+		self.copy_color(None, 'main:control_fg', None, 'main:control_font_fg', False)
+
+		color1 = self.get_color(None, 'main:control_font_selected_bg')
+		color2 = self.get_color(None, 'main:control_font_selected')
 		if (not color1) or (not color2):
-			globalstyle.simple_add_col('main:control_text_selected_bg', ctrl_main_fg)
-			globalstyle.simple_add_col('main:control_text_selected', ctrl_main_bg)
+			self.copy_color(None, 'main:control_font_bg', None, 'main:control_font_selected_bg', False)
+			self.copy_color(None, 'main:control_font_fg', None, 'main:control_font_selected_fg', False)
 
 		# ----------------- inactive -----------------
+
 		#control
-		ctxt = 'inactive:control_bg'
-		if not globalstyle.exists_color(ctxt): globalstyle.simple_add_col(ctxt, ctrl_main_bg)
-		if not globalstyle.exists_color('inactive:control_fg'):
-			globalstyle.add_color_named('inactive:control_fg', 'generated__control_greytext')
-			control_greytext_needed = True
+		self.copy_color(None, 'main:control_bg', None, 'inactive:control_bg', False)
+		if not self.get_color(None, 'inactive:control_fg'):
+			control_bg = self.get_color(None, 'main:control_bg')
+			control_fg = self.get_color(None, 'main:control_fg')
+			greycolor = colorfunc.mix_color(control_bg, control_fg, 0.5)
+			self.add_global_color('generated__control_greytext', greycolor.get_int() )
+			theme_obj.add_color_named(None, 'inactive:control_fg', 'generated__control_greytext')
 
 		#text
-		ctxt = 'inactive:edit_bg'
-		if not globalstyle.exists_color(ctxt): globalstyle.simple_add_col(ctxt, ctrl_main_bg)
-		if not globalstyle.exists_color('inactive:edit_fg'):
-			globalstyle.add_color_named('inactive:edit_fg', 'generated__control_greytext')
+		self.copy_color(None, 'main:edit_bg', None, 'inactive:edit_bg', False)
+		if not self.get_color(None, 'inactive:edit_fg'):
 			edit_greytext_needed = True
-
-		if control_greytext_needed:
-			greycolor = colorfunc.mix_color(
-				self.get_color(None, 'main:control_bg', True), 
-				self.get_color(None, 'main:control_fg', True)
-				, 0.5)
-			self.add_global_color('generated__control_greytext', greycolor.get_int() )
-
-		if edit_greytext_needed:
-			greycolor = colorfunc.mix_color(
-				self.get_color(None, 'main:edit_bg', True), 
-				self.get_color(None, 'main:edit_fg', True)
-				, 0.5)
+			edit_bg = self.get_color(None, 'main:edit_bg')
+			edit_fg = self.get_color(None, 'main:edit_fg')
+			greycolor = colorfunc.mix_color(edit_bg, edit_fg, 0.5)
 			self.add_global_color('generated__edit_greytext', greycolor.get_int() )
+			theme_obj.add_color_named(None, 'inactive:edit_fg', 'generated__edit_greytext')

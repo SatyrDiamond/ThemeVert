@@ -91,8 +91,6 @@ class wintheme():
 
 	def write(self, filename):
 		import configparser
-		f = open(filename, 'rb')
-
 		config = configparser.ConfigParser()
 		config['Control Panel\\Colors'] = self.colors
 

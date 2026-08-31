@@ -18,7 +18,7 @@ class output_plug(plugins.base):
 	def parse(self, theme_obj, themeverter_intent):
 		config = {}
 		def do_color(control, colloc, name, idict):
-			outcol = theme_obj.get_color(control, colloc, True)
+			outcol = theme_obj.get_color_rgb(control, colloc)
 			if outcol: idict[name] = outcol.get_hex()
 		general = {}
 		general['ColorScheme'] = "Converted Theme"

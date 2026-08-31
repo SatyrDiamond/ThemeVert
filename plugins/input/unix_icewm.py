@@ -44,45 +44,44 @@ class input_plug(plugins.base):
 		# Border
 		add_color("ColorNormalBorder", "rgb:C0/C0/C0")
 		add_color("ColorActiveBorder", "rgb:C0/C0/C0")
-		curstyle, curctrl = theme_obj.add_stylecontrol('window')
-		curstyle.add_color_named('main:border', 'ColorActiveBorder')
-		curstyle.add_color_named('inactive:border', 'ColorNormalBorder')
+		theme_obj.add_stylecontrol('window')
+		theme_obj.add_color_named('window', 'main:border', 'ColorActiveBorder')
+		theme_obj.add_color_named('window', 'inactive:border', 'ColorNormalBorder')
 
 		# Button
 		add_color("ColorActiveButton", "rgb:E0/E0/E0")
 		add_color("ColorActiveButtonText", "rgb:00/00/00")
 		add_color("ColorNormalButton", "rgb:C0/C0/C0")
 		add_color("ColorNormalButtonText", "rgb:00/00/00")
-		curstyle = theme_obj.style_global
-		curstyle.add_color_named('main:control_bg', 'ColorNormalButton')
-		curstyle.add_color_named('main:control_fg', 'ColorNormalButtonText')
-		curstyle.add_color_named('pressed:control_bg', 'ColorActiveButton')
-		curstyle.add_color_named('pressed:control_fg', 'ColorActiveButtonText')
+		theme_obj.add_color_named(None, 'main:control_bg', 'ColorNormalButton')
+		theme_obj.add_color_named(None, 'main:control_fg', 'ColorNormalButtonText')
+		theme_obj.add_color_named(None, 'pressed:control_bg', 'ColorActiveButton')
+		theme_obj.add_color_named(None, 'pressed:control_fg', 'ColorActiveButtonText')
 
 		# TitleButton
 		add_color("ColorNormalTitleButton", "rgb:C0/C0/C0")
 		add_color("ColorNormalTitleButtonText", "rgb:00/00/00")
-		curstyle, curctrl = theme_obj.add_stylecontrol('titlebar_button')
-		curstyle.add_color_named('main:control_bg', 'ColorNormalTitleButton')
-		curstyle.add_color_named('main:control_fg', 'ColorNormalTitleButtonText')
+		theme_obj.add_stylecontrol('titlebar_button')
+		theme_obj.add_color_named('titlebar_button', 'main:control_bg', 'ColorNormalTitleButton')
+		theme_obj.add_color_named('titlebar_button', 'main:control_fg', 'ColorNormalTitleButtonText')
 
 		# ScrollBar
 		add_color("ColorScrollBar", "rgb:A0/A0/A0")
-		curstyle, curctrl = theme_obj.add_stylecontrol('scrollbar')
-		curstyle.add_color_named('main:control_bg', 'ColorScrollBar')
+		theme_obj.add_stylecontrol('scrollbar')
+		theme_obj.add_color_named('scrollbar', 'main:control_bg', 'ColorScrollBar')
 
 		add_color("ColorScrollBarSlider", "rgb:C0/C0/C0")
-		curstyle, curctrl = theme_obj.add_stylecontrol('scrollbar_slider')
-		curstyle.add_color_named('main:control_bg', 'ColorScrollBarSlider')
+		theme_obj.add_stylecontrol('scrollbar_slider')
+		theme_obj.add_color_named('scrollbar_slider', 'main:control_bg', 'ColorScrollBarSlider')
 
 		add_color("ColorScrollBarButton", "rgb:C0/C0/C0")
 		add_color("ColorScrollBarArrow", "rgb:C0/C0/C0")
 		add_color("ColorScrollBarInactiveArrow", "rgb:80/80/80")
 		add_color("ColorScrollBarButtonArrow", "rgb:00/00/00")
-		curstyle, curctrl = theme_obj.add_stylecontrol('scrollbar_button')
-		curstyle.add_color_named('main:control_bg', 'ColorScrollBarButton')
-		curstyle.add_color_named('main:control_fg', 'ColorScrollBarButtonArrow')
-		curstyle.add_color_named('inactive:control_fg', 'ColorScrollBarInactiveArrow')
+		theme_obj.add_stylecontrol('scrollbar_button')
+		theme_obj.add_color_named('scrollbar_button', 'main:control_bg', 'ColorScrollBarButton')
+		theme_obj.add_color_named('scrollbar_button', 'main:control_fg', 'ColorScrollBarButtonArrow')
+		theme_obj.add_color_named('scrollbar_button', 'inactive:control_fg', 'ColorScrollBarInactiveArrow')
 
 		# MenuItem
 		add_color("ColorNormalMenu", "rgb:C0/C0/C0")
@@ -90,23 +89,23 @@ class input_plug(plugins.base):
 		add_color("ColorActiveMenuItem", "rgb:A0/A0/A0")
 		add_color("ColorActiveMenuItemText", "rgb:00/00/00")
 		add_color("ColorDisabledMenuItemText", "rgb:80/80/80")
-		curstyle, curctrl = theme_obj.add_stylecontrol('menu')
-		curstyle.add_color_named('main:control_bg', 'ColorNormalMenu')
-		curstyle.add_color_named('main:control_fg', 'ColorNormalMenuItemText')
-		curstyle.add_color_named('focused:control_bg', 'ColorActiveMenuItem')
-		curstyle.add_color_named('focused:control_fg', 'ColorActiveMenuItemText')
-		curstyle.add_color_named('inactive:control_fg', 'ColorDisabledMenuItemText')
+		theme_obj.add_stylecontrol('menu')
+		theme_obj.add_color_named('menu', 'main:control_bg', 'ColorNormalMenu')
+		theme_obj.add_color_named('menu', 'main:control_fg', 'ColorNormalMenuItemText')
+		theme_obj.add_color_named('menu', 'focused:control_bg', 'ColorActiveMenuItem')
+		theme_obj.add_color_named('menu', 'focused:control_fg', 'ColorActiveMenuItemText')
+		theme_obj.add_color_named('menu', 'inactive:control_fg', 'ColorDisabledMenuItemText')
 
 		# TitleBar
 		add_color("ColorActiveTitleBar", "rgb:00/00/A0")
 		add_color("ColorActiveTitleBarText", "rgb:FF/FF/FF")
 		add_color("ColorNormalTitleBar", "rgb:80/80/80")
 		add_color("ColorNormalTitleBarText", "rgb:00/00/00")
-		#curstyle, curctrl = theme_obj.add_stylecontrol('titlebar')
-		#curstyle.add_color_named('main:control_bg', 'ColorActiveTitleBar')
-		#curstyle.add_color_named('main:control_fg', 'ColorActiveTitleBarText')
-		#curstyle.add_color_named('inactive:control_bg', 'ColorNormalTitleBar')
-		#curstyle.add_color_named('inactive:control_fg', 'ColorNormalTitleBarText')
+		#theme_obj.add_stylecontrol('titlebar')
+		#theme_obj.add_color_named('main:control_bg', 'ColorActiveTitleBar')
+		#theme_obj.add_color_named('main:control_fg', 'ColorActiveTitleBarText')
+		#theme_obj.add_color_named('inactive:control_bg', 'ColorNormalTitleBar')
+		#theme_obj.add_color_named('inactive:control_fg', 'ColorNormalTitleBarText')
 
 		# Apm
 		add_color("ColorApm", "rgb:00/00/00")
@@ -159,11 +158,10 @@ class input_plug(plugins.base):
 		add_color("ColorListBoxSelection", "rgb:80/80/80")
 		add_color("ColorListBoxSelectionText", "rgb:00/00/00")
 		add_color("ColorListBoxText", "rgb:00/00/00")
-		curstyle = theme_obj.style_global
-		curstyle.add_color_named('main:edit_bg', 'ColorListBox')
-		curstyle.add_color_named('main:edit_fg', 'ColorListBoxText')
-		curstyle.add_color_named('main:edit_bg_selected', 'ColorListBoxSelection')
-		curstyle.add_color_named('main:edit_fg_selected', 'ColorListBoxSelectionText')
+		theme_obj.add_color_named(None, 'main:edit_bg', 'ColorListBox')
+		theme_obj.add_color_named(None, 'main:edit_fg', 'ColorListBoxText')
+		theme_obj.add_color_named(None, 'main:edit_bg_selected', 'ColorListBoxSelection')
+		theme_obj.add_color_named(None, 'main:edit_fg_selected', 'ColorListBoxSelectionText')
 
 		# MEMStatus
 		add_color("ColorMEMStatusBuffers", "rgb:60/60/C0")
@@ -191,12 +189,12 @@ class input_plug(plugins.base):
 		# ToolTip
 		add_color("ColorToolTip", "rgb:E0/E0/00")
 		add_color("ColorToolTipText", "rgb:00/00/00")
-		curstyle, curctrl = theme_obj.add_stylecontrol('tooltip')
-		curstyle.add_color_named('main:control_bg', 'ColorToolTip')
-		curstyle.add_color_named('main:control_fg', 'ColorToolTipText')
+		theme_obj.add_stylecontrol('tooltip')
+		theme_obj.add_color_named('tooltip', 'main:control_bg', 'ColorToolTip')
+		theme_obj.add_color_named('tooltip', 'main:control_fg', 'ColorToolTipText')
 
 		# Other
 		add_color("ColorDialog", "rgb:C0/C0/C0")
 		if add_color("DesktopBackgroundColor", None):
-			curstyle, curctrl = theme_obj.add_stylecontrol('desktop')
-			curstyle.add_color_named('main:control_bg', 'DesktopBackgroundColor')
+			theme_obj.add_stylecontrol('desktop')
+			theme_obj.add_color_named('desktop', 'main:control_bg', 'DesktopBackgroundColor')

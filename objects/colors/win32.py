@@ -180,94 +180,94 @@ class colors_win32():
 			theme_obj.add_global_color('win32__windowframe', self.windowframe.get_int() )
 			theme_obj.add_global_color('win32__windowtext', self.windowtext.get_int() )
 
-			globalstyle = theme_obj.style_global
-			globalstyle.add_color_named('main:control_bg', 'win32__buttonface')
-			globalstyle.add_color_named('main:control_bg_alt', 'win32__buttonalternateface')
-			globalstyle.add_color_named('main:control_fg', 'win32__windowtext')
-			globalstyle.add_color_named('main:edit_bg', 'win32__window')
-			globalstyle.add_color_named('main:edit_fg', 'win32__windowtext')
-			globalstyle.add_color_named('inactive:control_bg', 'win32__buttonface')
-			globalstyle.add_color_named('inactive:control_fg', 'win32__graytext')
-			globalstyle.add_color_named('inactive:edit_bg', 'win32__buttonface')
-			globalstyle.add_color_named('inactive:edit_fg', 'win32__graytext')
-			globalstyle.add_color_named('hot:edit_bg', 'win32__hottrackingcolor')
-			globalstyle.add_color_named('main:edit_bg_selected', 'win32__hilight')
-			globalstyle.add_color_named('main:edit_fg_selected', 'win32__hilighttext')
+			theme_obj.add_color_named(None, 'main:control_bg', 'win32__buttonface')
+			theme_obj.add_color_named(None, 'main:control_bg_alt', 'win32__buttonalternateface')
+			theme_obj.add_color_named(None, 'main:control_fg', 'win32__windowtext')
+			theme_obj.add_color_named(None, 'main:edit_bg', 'win32__window')
+			theme_obj.add_color_named(None, 'main:edit_fg', 'win32__windowtext')
+			theme_obj.add_color_named(None, 'inactive:control_bg', 'win32__buttonface')
+			theme_obj.add_color_named(None, 'inactive:control_fg', 'win32__graytext')
+			theme_obj.add_color_named(None, 'inactive:edit_bg', 'win32__buttonface')
+			theme_obj.add_color_named(None, 'inactive:edit_fg', 'win32__graytext')
+			theme_obj.add_color_named(None, 'hot:edit_bg', 'win32__hottrackingcolor')
+			theme_obj.add_color_named(None, 'main:edit_bg_selected', 'win32__hilight')
+			theme_obj.add_color_named(None, 'main:edit_fg_selected', 'win32__hilighttext')
 
 			# ------ titlebar -----
-			curstyle, curctrl = theme_obj.add_stylecontrol('titlebar')
-			curstyle.add_color_named('main:control_bg', 'win32__activetitle')
-			curstyle.add_color_named('main:control_fg', 'win32__titletext')
-			curstyle.add_color_named('main:control_bg_second', 'win32__gradientactivetitle')
-			curstyle.add_prop('main', 'color_fx', 'gradent')
-			curstyle.add_prop('main', 'gradent_color', 'user_gradent')
-			curstyle.add_color_named('main:user_gradent', 'win32__gradientactivetitle')
-
-			curstyle.add_color_named('inactive:control_bg', 'win32__inactivetitle')
-			curstyle.add_color_named('inactive:control_fg', 'win32__inactivetitletext')
-			curstyle.add_color_named('inactive:control_bg_second', 'win32__gradientinactivetitle')
-			curstyle.add_prop('main', 'color_fx', 'gradent')
-			curstyle.add_prop('main', 'gradent_color', 'user_gradent')
-			curstyle.add_color_named('main:user_gradent', 'win32__gradientinactivetitle')
+			theme_obj.add_stylecontrol('titlebar')
+			theme_obj.add_color_named('titlebar', 'main:control_bg', 'win32__activetitle')
+			theme_obj.add_color_named('titlebar', 'main:control_fg', 'win32__titletext')
+			theme_obj.add_color_named('titlebar', 'main:control_bg_second', 'win32__gradientactivetitle')
+			theme_obj.add_color_named('titlebar', 'main:user_gradent', 'win32__gradientactivetitle')
+			theme_obj.add_color_named('titlebar', 'inactive:control_bg', 'win32__inactivetitle')
+			theme_obj.add_color_named('titlebar', 'inactive:control_fg', 'win32__inactivetitletext')
+			theme_obj.add_color_named('titlebar', 'inactive:control_bg_second', 'win32__gradientinactivetitle')
+			theme_obj.add_color_named('titlebar', 'main:user_gradent', 'win32__gradientinactivetitle')
+			theme_obj.add_prop('titlebar', 'main', 'color_fx', 'gradent')
+			theme_obj.add_prop('titlebar', 'main', 'gradent_color', 'user_gradent')
+			theme_obj.add_prop('titlebar', 'main', 'color_fx', 'gradent')
+			theme_obj.add_prop('titlebar', 'main', 'gradent_color', 'user_gradent')
 
 			# ------ desktop -----
-			curstyle, curctrl = theme_obj.add_stylecontrol('desktop')
-			curstyle.add_color_named('main:control_bg', 'win32__background')
+			theme_obj.add_stylecontrol('desktop')
+			theme_obj.add_color_named('desktop', 'main:control_bg', 'win32__background')
 
 			# ------ tooltip -----
-			curstyle, curctrl = theme_obj.add_stylecontrol('tooltip')
-			curstyle.add_color_named('main:control_bg', 'win32__infowindow')
-			curstyle.add_color_named('main:control_fg', 'win32__infotext')
+			theme_obj.add_stylecontrol('tooltip')
+			theme_obj.add_color_named('tooltip', 'main:control_bg', 'win32__infowindow')
+			theme_obj.add_color_named('tooltip', 'main:control_fg', 'win32__infotext')
 
 			# ------ menubar -----
-			curstyle, curctrl = theme_obj.add_stylecontrol('menubar')
-			curstyle.add_color_named('main:control_bg', 'win32__menubar')
-			curstyle.add_color_named('main:control_fg', 'win32__menutext')
+			theme_obj.add_stylecontrol('menubar')
+			theme_obj.add_color_named('menubar', 'main:control_bg', 'win32__menubar')
+			theme_obj.add_color_named('menubar', 'main:control_fg', 'win32__menutext')
 
 			# ------ menu -----
-			curstyle, curctrl = theme_obj.add_stylecontrol('menu')
-			curstyle.add_color_named('main:control_bg', 'win32__menu')
-			curstyle.add_color_named('main:control_fg', 'win32__menutext')
-			curstyle.add_color_named('focused:control_bg', 'win32__hilight')
-			curstyle.add_color_named('focused:control_fg', 'win32__hilighttext')
+			theme_obj.add_stylecontrol('menu')
+			theme_obj.add_color_named('menu', 'main:control_bg', 'win32__menu')
+			theme_obj.add_color_named('menu', 'main:control_fg', 'win32__menutext')
+			theme_obj.add_color_named('menu', 'focused:control_bg', 'win32__hilight')
+			theme_obj.add_color_named('menu', 'focused:control_fg', 'win32__hilighttext')
 
 			# ------ scrollbar -----
-			curstyle, curctrl = theme_obj.add_stylecontrol('scrollbar')
-			curstyle.add_color_named('main:control_bg', 'win32__scrollbar')
+			theme_obj.add_stylecontrol('scrollbar')
+			theme_obj.add_color_named('scrollbar', 'main:control_bg', 'win32__scrollbar')
 
 			# ------ window -----
-			curstyle, curctrl = theme_obj.add_stylecontrol('window')
-			curstyle.add_color_named('main:border', 'win32__activeborder')
-			curstyle.add_color_named('inactive:border', 'win32__inactiveborder')
+			theme_obj.add_stylecontrol('window')
+			theme_obj.add_color_named('window', 'main:border', 'win32__activeborder')
+			theme_obj.add_color_named('window', 'inactive:border', 'win32__inactiveborder')
 
 	def export_colors(self, theme_obj):
 		if self.used == False and 'win32' not in theme_obj.supported_types:
 			theme_obj.supported_types.append('win32')
 
 			globalstyle = theme_obj.style_global
-			ctrl_main_bg = theme_obj.get_color(None, 'main:control_bg', True)
-			ctrl_main_fg = theme_obj.get_color(None, 'main:control_fg', True)
-			text_main_bg = theme_obj.get_color(None, 'main:edit_bg', True)
-			text_main_fg = theme_obj.get_color(None, 'main:edit_fg', True)
-			text_sel_bg = theme_obj.get_color(None, 'main:edit_bg_selected', True)
-			text_sel_fg = theme_obj.get_color(None, 'main:edit_fg_selected', True)
+			ctrl_main_bg = theme_obj.get_color_rgb(None, 'main:control_bg')
+			ctrl_main_fg = theme_obj.get_color_rgb(None, 'main:control_fg')
+			text_main_bg = theme_obj.get_color_rgb(None, 'main:edit_bg')
+			text_main_fg = theme_obj.get_color_rgb(None, 'main:edit_fg')
+			text_sel_bg = theme_obj.get_color_rgb(None, 'main:edit_bg_selected')
+			text_sel_fg = theme_obj.get_color_rgb(None, 'main:edit_fg_selected')
 
 			maxv = 1-(max(ctrl_main_bg.get_int())/255)
 
 			mulctrl = 1.3+((maxv**2)/1.5)
 
-			threed_dark = ctrl_main_bg.copy()*(1/mulctrl)
+			threed_shadow = ctrl_main_bg.copy()*(1/mulctrl)
 			threed_light = ctrl_main_bg.copy()*(mulctrl/1)
 
-			self.set('buttonface', ctrl_main_bg.get_int() )
-			self.set('buttondkshadow', threed_dark.get_int() )
-			self.set('buttonshadow', threed_dark.get_int() )
-			self.set('buttonhilight', threed_light.get_int() )
-			self.set('buttonlight', threed_light.get_int() )
+			threed_mid_shadow = colorfunc.mix_color(threed_shadow, ctrl_main_bg, 0.5)
+			threed_mid_light = colorfunc.mix_color(threed_light, ctrl_main_bg, 0.5)
 
-			altface = theme_obj.get_color(None, 'main:control_bg_alt', True)
-			if altface: self.set('buttonalternateface', altface.get_int())
-			else: self.set('buttonalternateface', ctrl_main_bg.get_int())
+			self.set('buttonface', ctrl_main_bg.get_int() )
+			self.set('buttondkshadow', threed_shadow.get_int() )
+			self.set('buttonshadow', threed_mid_shadow.get_int() )
+			self.set('buttonhilight', threed_light.get_int() )
+			self.set('buttonlight', threed_mid_light.get_int() )
+
+			altface = theme_obj.get_color_rgb(None, 'main:control_bg_alt')
+			self.set('buttonalternateface', altface.get_int())
 
 			self.set('buttontext', ctrl_main_fg.get_int() )
 
@@ -281,60 +281,66 @@ class colors_win32():
 			self.set('inactiveborder', ctrl_main_bg.get_int() )
 			self.set('windowframe', ctrl_main_bg.get_int() )
 
-			color = theme_obj.get_color(None, 'inactive:control_fg', True)
+			color = theme_obj.get_color_rgb(None, 'inactive:control_fg')
 			self.set('graytext', color.get_int() )
 
 			# ------ titlebar -----
-			color = theme_obj.get_color('titlebar', 'main:control_bg', True)
+			color = theme_obj.get_color_rgb('titlebar', 'main:control_bg')
 			self.set('activetitle', color.get_int() )
 			self.set('gradientactivetitle', color.get_int() )
 			cfx_type = theme_obj.get_prop('titlebar', 'main', 'color_fx')
 			if cfx_type=='gradent':
 				gradent_color = theme_obj.get_prop('titlebar', 'main', 'gradent_color')
-				gcolor = theme_obj.get_color('titlebar', 'main:'+gradent_color, True)
+				gcolor = theme_obj.get_color_rgb('titlebar', 'main:'+gradent_color)
+				if gcolor: self.set('gradientactivetitle', gcolor.get_int() )
+			else:
+				gcolor = theme_obj.get_color_rgb('titlebar', 'main:control_bg_second')
 				if gcolor: self.set('gradientactivetitle', gcolor.get_int() )
 
-			color = theme_obj.get_color('titlebar', 'inactive:control_bg', True)
+			color = theme_obj.get_color_rgb('titlebar', 'inactive:control_bg')
 			self.set('inactivetitle', color.get_int() )
 			self.set('gradientinactivetitle', color.get_int() )
 			cfx_type = theme_obj.get_prop('titlebar', 'inactive', 'color_fx')
 			if cfx_type=='gradent':
 				gradent_color = theme_obj.get_prop('titlebar', 'inactive', 'gradent_color')
-				gcolor = theme_obj.get_color('titlebar', 'inactive:'+gradent_color, True)
+				gcolor = theme_obj.get_color_rgb('titlebar', 'inactive:'+gradent_color)
 				if gcolor: self.set('gradientinactivetitle', gcolor.get_int() )
-			
-			color = theme_obj.get_color('titlebar', 'main:control_fg', True)
+			else:
+				gcolor = theme_obj.get_color_rgb('titlebar', 'inactive:control_bg_second')
+				if gcolor: self.set('gradientinactivetitle', gcolor.get_int() )
+
+			color = theme_obj.get_color_rgb('titlebar', 'main:control_fg')
 			self.set('titletext', color.get_int() )
 
-			color = theme_obj.get_color('titlebar', 'inactive:control_fg', True)
+			color = theme_obj.get_color_rgb('titlebar', 'inactive:control_fg')
 			self.set('inactivetitletext', color.get_int() )
 
 			# ------ desktop -----
-			color_bg = theme_obj.get_color('desktop', 'main:control_bg', True)
+			color_bg = theme_obj.get_color_rgb('desktop', 'main:control_bg')
 			self.set('background', color_bg.get_int() )
 
 			# ------ tooltip -----
-			color_bg = theme_obj.get_color('tooltip', 'main:control_bg', True)
-			color_fg = theme_obj.get_color('tooltip', 'main:control_fg', True)
+			color_bg = theme_obj.get_color_rgb('tooltip', 'main:control_bg')
+			color_fg = theme_obj.get_color_rgb('tooltip', 'main:control_fg')
 			self.set('infowindow', color_bg.get_int() )
 			self.set('infotext', color_fg.get_int() )
 
 			# ------ menubar -----
-			color_bg = theme_obj.get_color('menubar', 'main:control_bg', True)
+			color_bg = theme_obj.get_color_rgb('menubar', 'main:control_bg')
 			self.set('menubar', color_bg.get_int() )
 
 			# ------ menu -----
-			color_bg = theme_obj.get_color('menu', 'main:control_bg', True)
-			color_fg = theme_obj.get_color('menu', 'main:control_fg', True)
+			color_bg = theme_obj.get_color_rgb('menu', 'main:control_bg')
+			color_fg = theme_obj.get_color_rgb('menu', 'main:control_fg')
 			self.set('menu', color_bg.get_int() )
 			self.set('menutext', color_fg.get_int() )
 
 			# ------ scrollbar -----
-			scrollbar = theme_obj.get_color('scrollbar', 'main:control_bg', True)
+			scrollbar = theme_obj.get_color_rgb('scrollbar', 'main:control_bg')
 			self.set('scrollbar', scrollbar.get_int() )
 
 			# ------ window -----
-			border = theme_obj.get_color('window', 'main:border', True)
+			border = theme_obj.get_color_rgb('window', 'main:border')
 			#self.set('activeborder', border.get_int() )
-			border = theme_obj.get_color('window', 'inactive:border', True)
+			border = theme_obj.get_color_rgb('window', 'inactive:border')
 			#self.set('inactiveborder', border.get_int() )
