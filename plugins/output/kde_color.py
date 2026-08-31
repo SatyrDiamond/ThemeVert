@@ -104,19 +104,14 @@ class output_plug(plugins.base):
 		do_color(None, 'main:edit_fg_selected_positive', 'ForegroundPositive', colors)
 		config['Colors:Selection'] = colors
 
-
 		colors = {}
-		do_color(None, 'main:control_bg', 'activeBackground', colors)
-		do_color(None, 'main:control_bg_second', 'activeBlend', colors)
-		do_color(None, 'main:control_fg', 'activeForeground', colors)
-		do_color(None, 'inactive:control_bg', 'inactiveBackground', colors)
-		do_color(None, 'inactive:control_bg_second', 'inactiveBlend', colors)
-		do_color(None, 'inactive:control_fg', 'inactiveForeground', colors)
+		do_color('titlebar', 'main:control_bg', 'activeBackground', colors)
+		do_color('titlebar', 'main:control_bg_second', 'activeBlend', colors)
+		do_color('titlebar', 'main:control_fg', 'activeForeground', colors)
+		do_color('titlebar', 'inactive:control_bg', 'inactiveBackground', colors)
+		do_color('titlebar', 'inactive:control_bg_second', 'inactiveBlend', colors)
+		do_color('titlebar', 'inactive:control_fg', 'inactiveForeground', colors)
 		config['WM'] = colors
-
-
-
-
 
 		f = open(themeverter_intent.output_file, 'w')
 		for c in config:
