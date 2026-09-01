@@ -55,8 +55,10 @@ class input_plug(plugins.base):
 		add_color("ColorNormalButtonText", "rgb:00/00/00")
 		theme_obj.add_color_named(None, 'main:control_bg', 'ColorNormalButton')
 		theme_obj.add_color_named(None, 'main:control_fg', 'ColorNormalButtonText')
+		theme_obj.add_color_named(None, 'main:control_font_fg', 'ColorNormalButtonText')
 		theme_obj.add_color_named(None, 'pressed:control_bg', 'ColorActiveButton')
 		theme_obj.add_color_named(None, 'pressed:control_fg', 'ColorActiveButtonText')
+		theme_obj.add_color_named(None, 'pressed:control_font_fg', 'ColorActiveButtonText')
 
 		# TitleButton
 		add_color("ColorNormalTitleButton", "rgb:C0/C0/C0")
@@ -64,6 +66,7 @@ class input_plug(plugins.base):
 		theme_obj.add_stylecontrol('titlebar_button')
 		theme_obj.add_color_named('titlebar_button', 'main:control_bg', 'ColorNormalTitleButton')
 		theme_obj.add_color_named('titlebar_button', 'main:control_fg', 'ColorNormalTitleButtonText')
+		theme_obj.add_color_named('titlebar_button', 'main:control_font_fg', 'ColorNormalTitleButtonText')
 
 		# ScrollBar
 		add_color("ColorScrollBar", "rgb:A0/A0/A0")
@@ -92,9 +95,12 @@ class input_plug(plugins.base):
 		theme_obj.add_stylecontrol('menu')
 		theme_obj.add_color_named('menu', 'main:control_bg', 'ColorNormalMenu')
 		theme_obj.add_color_named('menu', 'main:control_fg', 'ColorNormalMenuItemText')
+		theme_obj.add_color_named('menu', 'main:control_font_fg', 'ColorNormalMenuItemText')
 		theme_obj.add_color_named('menu', 'focused:control_bg', 'ColorActiveMenuItem')
 		theme_obj.add_color_named('menu', 'focused:control_fg', 'ColorActiveMenuItemText')
+		theme_obj.add_color_named('menu', 'focused:control_font_fg', 'ColorActiveMenuItemText')
 		theme_obj.add_color_named('menu', 'inactive:control_fg', 'ColorDisabledMenuItemText')
+		theme_obj.add_color_named('menu', 'inactive:control_font_fg', 'ColorDisabledMenuItemText')
 
 		# TitleBar
 		add_color("ColorActiveTitleBar", "rgb:00/00/A0")
@@ -167,20 +173,24 @@ class input_plug(plugins.base):
 		add_color("ColorNormalTaskBarApp", "rgb:C0/C0/C0")
 		add_color("ColorNormalTaskBarAppText", "rgb:00/00/00")
 		theme_obj.add_color_named('taskbar_button_app', 'active:control_bg', 'ColorActiveTaskBarApp')
-		theme_obj.add_color_named('taskbar_button_app', 'active:control_fg', 'ColorActiveTaskBarAppText')
 		theme_obj.add_color_named('taskbar_button_app', 'invisible:control_bg', 'ColorInvisibleTaskBarApp')
-		theme_obj.add_color_named('taskbar_button_app', 'invisible:control_fg', 'ColorInvisibleTaskBarAppText')
 		theme_obj.add_color_named('taskbar_button_app', 'minimized:control_bg', 'ColorMinimizedTaskBarApp')
-		theme_obj.add_color_named('taskbar_button_app', 'minimized:control_fg', 'ColorMinimizedTaskBarAppText')
 		theme_obj.add_color_named('taskbar_button_app', 'main:control_bg', 'ColorNormalTaskBarApp')
+		theme_obj.add_color_named('taskbar_button_app', 'active:control_fg', 'ColorActiveTaskBarAppText')
+		theme_obj.add_color_named('taskbar_button_app', 'invisible:control_fg', 'ColorInvisibleTaskBarAppText')
+		theme_obj.add_color_named('taskbar_button_app', 'minimized:control_fg', 'ColorMinimizedTaskBarAppText')
 		theme_obj.add_color_named('taskbar_button_app', 'main:control_fg', 'ColorNormalTaskBarAppText')
+		theme_obj.add_color_named('taskbar_button_app', 'active:control_font_fg', 'ColorActiveTaskBarAppText')
+		theme_obj.add_color_named('taskbar_button_app', 'invisible:control_font_fg', 'ColorInvisibleTaskBarAppText')
+		theme_obj.add_color_named('taskbar_button_app', 'minimized:control_font_fg', 'ColorMinimizedTaskBarAppText')
+		theme_obj.add_color_named('taskbar_button_app', 'main:control_font_fg', 'ColorNormalTaskBarAppText')
 
 		# Label
 		add_color("ColorLabel", "rgb:C0/C0/C0")
 		add_color("ColorLabelText", "rgb:00/00/00")
 		theme_obj.add_stylecontrol('label')
 		theme_obj.add_color_named('label', 'main:control_bg', 'ColorLabel')
-		theme_obj.add_color_named('label', 'main:control_fg', 'ColorLabelText')
+		theme_obj.add_color_named('label', 'main:control_font_fg', 'ColorLabelText')
 
 		# ListBox
 		add_color("ColorListBox", "rgb:C0/C0/C0")
@@ -214,7 +224,7 @@ class input_plug(plugins.base):
 		add_color("ColorMoveSizeStatusText", "rgb:00/00/00")
 		theme_obj.add_stylecontrol('move_size_status')
 		theme_obj.add_color_named('move_size_status', 'main:control_bg', 'ColorMoveSizeStatus')
-		theme_obj.add_color_named('move_size_status', 'main:control_fg', 'ColorMoveSizeStatusText')
+		theme_obj.add_color_named('move_size_status', 'main:control_font_fg', 'ColorMoveSizeStatusText')
 
 		# Net
 		add_color("ColorNetIdle", "rgb:00/00/00")
@@ -239,14 +249,14 @@ class input_plug(plugins.base):
 		add_color("ColorQuickSwitchText", "rgb:00/00/00")
 		theme_obj.add_stylecontrol('quick_switch')
 		theme_obj.add_color_named('quick_switch', 'main:control_bg', 'ColorQuickSwitch')
-		theme_obj.add_color_named('quick_switch', 'main:control_fg', 'ColorQuickSwitchText')
+		theme_obj.add_color_named('quick_switch', 'main:control_font_fg', 'ColorQuickSwitchText')
 
 		# ToolTip
 		add_color("ColorToolTip", "rgb:E0/E0/00")
 		add_color("ColorToolTipText", "rgb:00/00/00")
 		theme_obj.add_stylecontrol('tooltip')
 		theme_obj.add_color_named('tooltip', 'main:control_bg', 'ColorToolTip')
-		theme_obj.add_color_named('tooltip', 'main:control_fg', 'ColorToolTipText')
+		theme_obj.add_color_named('tooltip', 'main:control_font_fg', 'ColorToolTipText')
 
 		# Other
 		add_color("ColorDialog", "rgb:C0/C0/C0")

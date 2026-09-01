@@ -64,13 +64,13 @@ class output_plug(plugins.base):
 
 		#Button
 		do_color('ColorNormalButton', 'button', 'main:control_bg')
-		do_color('ColorNormalButtonText', 'button', 'main:control_fg')
+		do_color('ColorNormalButtonText', 'button', 'main:control_font_fg')
 		do_color('ColorActiveButton', 'button', 'pressed:control_bg')
-		do_color('ColorActiveButtonText', 'button', 'pressed:control_fg')
+		do_color('ColorActiveButtonText', 'button', 'pressed:control_font_fg')
 
 		#TitleButton
 		do_color('ColorNormalTitleButton', 'titlebar_button', 'main:control_bg')
-		do_color('ColorNormalTitleButtonText', 'titlebar_button', 'main:control_fg')
+		do_color('ColorNormalTitleButtonText', 'titlebar_button', 'main:control_font_fg')
 
 		# ScrollBar
 		do_color('ColorScrollBar', 'scrollbar', 'main:control_bg')
@@ -84,16 +84,16 @@ class output_plug(plugins.base):
 
 		# MenuItem
 		do_color('ColorNormalMenu', 'menu', 'main:control_bg')
-		do_color('ColorNormalMenuItemText', 'menu', 'main:control_fg')
+		do_color('ColorNormalMenuItemText', 'menu', 'main:control_font_fg')
 		do_color('ColorActiveMenuItem', 'menu', 'focused:control_bg')
-		do_color('ColorActiveMenuItemText', 'menu', 'focused:control_fg')
-		do_color('ColorDisabledMenuItemText', 'menu', 'inactive:control_fg')
+		do_color('ColorActiveMenuItemText', 'menu', 'focused:control_font_fg')
+		do_color('ColorDisabledMenuItemText', 'menu', 'inactive:control_font_fg')
 
 		# TitleBar
 		do_color('ColorActiveTitleBar', 'titlebar', 'main:control_bg')
-		do_color('ColorActiveTitleBarText', 'titlebar', 'main:control_fg')
+		do_color('ColorActiveTitleBarText', 'titlebar', 'main:control_font_fg')
 		do_color('ColorNormalTitleBar', 'titlebar', 'inactive:control_bg')
-		do_color('ColorNormalTitleBarText', 'titlebar', 'inactive:control_fg')
+		do_color('ColorNormalTitleBarText', 'titlebar', 'inactive:control_font_fg')
 
 		# Apm
 
@@ -124,17 +124,17 @@ class output_plug(plugins.base):
 		do_color("ColorDefaultTaskBar", 'taskbar', 'main:control_bg')
 
 		do_color("ColorActiveTaskBarApp", 'taskbar_button_app', 'active:control_bg')
-		do_color("ColorActiveTaskBarAppText", 'taskbar_button_app', 'active:control_fg')
+		do_color("ColorActiveTaskBarAppText", 'taskbar_button_app', 'active:control_font_fg')
 		do_color("ColorInvisibleTaskBarApp", 'taskbar_button_app', 'invisible:control_bg')
-		do_color("ColorInvisibleTaskBarAppText", 'taskbar_button_app', 'invisible:control_fg')
+		do_color("ColorInvisibleTaskBarAppText", 'taskbar_button_app', 'invisible:control_font_fg')
 		do_color("ColorMinimizedTaskBarApp", 'taskbar_button_app', 'minimized:control_bg')
-		do_color("ColorMinimizedTaskBarAppText", 'taskbar_button_app', 'minimized:control_fg')
+		do_color("ColorMinimizedTaskBarAppText", 'taskbar_button_app', 'minimized:control_font_fg')
 		do_color("ColorNormalTaskBarApp", 'taskbar_button_app', 'main:control_bg')
-		do_color("ColorNormalTaskBarAppText", 'taskbar_button_app', 'main:control_fg')
+		do_color("ColorNormalTaskBarAppText", 'taskbar_button_app', 'main:control_font_fg')
 
 		# Label
 		do_color('ColorLabel', 'label', 'main:control_bg')
-		do_color('ColorLabelText', 'label', 'main:control_fg')
+		do_color('ColorLabelText', 'label', 'main:control_font_fg')
 
 		# ListBox
 		do_color('ColorListBox', 'listbox', 'main:edit_bg')
@@ -150,7 +150,7 @@ class output_plug(plugins.base):
 
 		# MoveSize
 		do_color('ColorMoveSizeStatus', 'move_size_status', 'main:control_bg')
-		do_color('ColorMoveSizeStatusText', 'move_size_status', 'main:control_fg')
+		do_color('ColorMoveSizeStatusText', 'move_size_status', 'main:control_font_fg')
 		
 		# Net
 		do_color('ColorNetIdle', 'graphstat_network', 'main:edit_bg')
@@ -163,11 +163,11 @@ class output_plug(plugins.base):
 		
 		# QuickSwitch
 		do_color('ColorQuickSwitch', 'quick_switch', 'main:control_bg')
-		do_color('ColorQuickSwitchText', 'quick_switch', 'main:control_fg')
+		do_color('ColorQuickSwitchText', 'quick_switch', 'main:control_font_fg')
 
 		# ToolTip
 		do_color('ColorToolTip', 'tooltip', 'main:control_bg')
-		do_color('ColorToolTipText', 'tooltip', 'main:control_fg')
+		do_color('ColorToolTipText', 'tooltip', 'main:control_font_fg')
 		
 		# Desktop
 		do_color('DesktopBackgroundColor', 'desktop', 'main:control_bg')

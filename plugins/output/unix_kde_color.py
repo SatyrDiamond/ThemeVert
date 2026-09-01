@@ -107,15 +107,15 @@ class output_plug(plugins.base):
 		colors = {}
 		do_color('titlebar', 'main:control_bg', 'activeBackground', colors)
 		do_color('titlebar', 'main:control_bg', 'activeBlend', colors)
-		do_color('titlebar', 'main:control_fg', 'activeForeground', colors)
+		do_color('titlebar', 'main:control_font_fg', 'activeForeground', colors)
 		do_color('titlebar', 'inactive:control_bg', 'inactiveBackground', colors)
 		do_color('titlebar', 'inactive:control_bg', 'inactiveBlend', colors)
-		do_color('titlebar', 'inactive:control_fg', 'inactiveForeground', colors)
+		do_color('titlebar', 'inactive:control_font_fg', 'inactiveForeground', colors)
 
 		def do_gradent(state, name):
-			color_fx = theme_obj.get_prop('titlebar', state, 'color_fx:control_bg')
+			color_fx = theme_obj.get_prop_color('titlebar', state, 'control_bg', 'color_fx')
 			if color_fx=='gradent':
-				gradent_colors = theme_obj.get_prop('titlebar', state, 'gradent_colors:control_bg')
+				gradent_colors = theme_obj.get_prop_color('titlebar', state, 'control_bg', 'gradent_colors')
 				gradent_colors = gradent_colors.split(',')
 				do_color('titlebar', state+':'+gradent_colors[0], name, colors)
 				do_color('titlebar', state+':'+gradent_colors[-1], name, colors)

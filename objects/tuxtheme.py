@@ -72,6 +72,8 @@ class basstyle_state():
 		self.prop = {}
 		self.colors = {}
 		self.fonts = {}
+		self.prop_color = {}
+
 	def __bool__(self): return True in [bool(c) for c in self.colors]
 
 	def create_color(self, name):
@@ -140,10 +142,6 @@ class basstyle_main():
 		cstate = self.add_state(state)
 		cstate.add_color_named(name, colname)
 
-	def add_prop(self, state, name, value):
-		cstate = self.add_state(state)
-		cstate.prop[name] = value
-
 	def get_prop(self, state, name):
 		if state=='main':
 			c = self.mainstate
@@ -152,11 +150,28 @@ class basstyle_main():
 			c = self.states[state]
 			if name in c.prop: return c.prop[name] 
 
-	def add_font(self, colloc):
-		calloc_val = triplestr.from_str(colloc)
-		state = calloc_val.category
-		name = calloc_val.type
+	def add_prop(self, state, name, value):
+		cstate = self.add_state(state)
+		cstate.prop[name] = value
 
+	def add_prop_color(self, state, color, name, value):
+		cstate = self.add_state(state)
+		if color not in cstate.prop_color: cstate.prop_color[color] = {}
+		cstate.prop_color[color][name] = value
+
+	def get_prop_color(self, state, color, name):
+		if state=='main':
+			c = self.mainstate
+			if color in c.prop_color:  
+				if name in c.prop_color[color]: 
+					return c.prop_color[color][name] 
+		elif state in self.states: 
+			c = self.states[state]
+			if color in c.prop_color:  
+				if name in c.prop_color[color]: 
+					return c.prop_color[color][name] 
+
+	def add_font(self, state, name):
 		cstate = self.add_state(state)
 		return cstate.create_font(name)
 
@@ -271,10 +286,20 @@ class data_theme():
 		if partname in ['global', None]: return self.style_global
 		elif partname in self.style_part: return self.style_part[partname]
 
+	def add_font(self, controlname, state, name):
+		s = self._internal_get_stylepart(controlname)
+		if s: 
+			return s.add_font(state, name)
+
 	def add_prop(self, controlname, state, name, value):
 		s = self._internal_get_stylepart(controlname)
 		if s: 
 			s.add_prop(state, name, value)
+
+	def add_prop_color(self, controlname, state, color, name, value):
+		s = self._internal_get_stylepart(controlname)
+		if s: 
+			s.add_prop_color(state, color, name, value)
 
 	def add_color(self, controlname, colloc, rgb):
 		s = self._internal_get_stylepart(controlname)
@@ -357,6 +382,15 @@ class data_theme():
 				stylep = self.style_part[s]
 				return stylep.get_prop(state, name)
 
+	def get_prop_color(self, controlname, state, color, name):
+		styleobj = self.style_global
+
+		if controlname in self.controls:
+			style = self.controls[controlname]
+			for s in style.styles:
+				stylep = self.style_part[s]
+				return stylep.get_prop_color(state, color, name)
+
 	def complete_incomplete(self):
 		logger_theme.info('complete_incomplete')
 
@@ -387,6 +421,8 @@ class data_theme():
 		#control
 		self.copy_color(None, 'main:control_bg', None, 'main:control_font_bg', False)
 		self.copy_color(None, 'main:control_fg', None, 'main:control_font_fg', False)
+		self.copy_color(None, 'main:edit_bg', None, 'main:edit_font_bg', False)
+		self.copy_color(None, 'main:edit_fg', None, 'main:edit_font_fg', False)
 
 		color1 = self.get_color(None, 'main:control_font_selected_bg')
 		color2 = self.get_color(None, 'main:control_font_selected')

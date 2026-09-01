@@ -38,11 +38,11 @@ class output_plug(plugins.base):
 		def do_color_dual(isspec, name, control, colloc):
 			state, colname = colloc.split(':')
 			
-			color_fx = theme_obj.get_prop(control, state, 'color_fx:'+colname)
-			themedata[name] = 'raised'
+			color_fx = theme_obj.get_prop_color(control, state, colname, 'color_fx')
+			themedata[name] = 'raised border'
 
 			if color_fx=='gradent':
-				gradent_colors = theme_obj.get_prop(control, state, 'gradent_colors:'+colname)
+				gradent_colors = theme_obj.get_prop_color(control, state, colname, 'gradent_colors')
 				themedata[name] += ' gradient'
 				gradent_colors = gradent_colors.split(',')
 				do_color(name+'.color', control, state+':'+gradent_colors[0])
@@ -54,29 +54,35 @@ class output_plug(plugins.base):
 				else: return do_color(name+'.color', control, colloc)
 			return False
 
+		def do_data(name, control, state, prop, fallback):
+			outdata = theme_obj.get_prop(control, state,prop)
+			themedata[name] = str(outdata) if outdata else fallback
+
 		# window
-		do_color_dual(False, 'window.button.unfocus', 'titlebar_button', 'main:control_bg')
-		do_color_dual(False, 'window.button.focus', 'titlebar_button', 'main:control_bg')
-		do_color_dual(False, 'window.button.pressed', 'titlebar_button', 'pressed:control_bg')
-		do_color('window.button.unfocus.picColor', 'titlebar_button', 'main:control_fg')
-		do_color('window.button.focus.picColor', 'titlebar_button', 'main:control_fg')
-		do_color('window.button.pressed.picColor', 'titlebar_button', 'pressed:control_fg')
+		do_color_dual(False, 'window.button.unfocus', 'window_button', 'inactive:control_bg')
+		do_color_dual(False, 'window.button.focus', 'window_button', 'main:control_bg')
+		do_color_dual(False, 'window.button.pressed', 'window_button', 'pressed:control_bg')
+		do_color('window.button.unfocus.picColor', 'window_button', 'inactive:control_fg')
+		do_color('window.button.focus.picColor', 'window_button', 'main:control_fg')
+		do_color('window.button.pressed.picColor', 'window_button', 'pressed:control_fg')
+
 		do_color_dual(False, 'window.grip.focus', 'titlebar', 'main:control_bg')
-		do_color_dual(False, 'window.grip.unfocus', 'titlebar', 'main:control_bg')
+		do_color_dual(False, 'window.grip.unfocus', 'titlebar', 'inactive:control_bg')
 		do_color_dual(False, 'window.handle.focus', 'titlebar', 'main:control_bg')
-		do_color_dual(False, 'window.handle.unfocus', 'titlebar', 'main:control_bg')
+		do_color_dual(False, 'window.handle.unfocus', 'titlebar', 'inactive:control_bg')
 		do_color_dual(False, 'window.label.focus', 'titlebar', 'main:control_bg')
-		do_color('window.label.focus.textColor', 'titlebar', 'main:control_fg')
+		do_color('window.label.focus.textColor', 'titlebar', 'main:control_font_fg')
 		do_color_dual(False, 'window.label.unfocus', 'titlebar', 'inactive:control_bg')
-		do_color('window.label.unfocus.textColor', 'titlebar', 'inactive:control_fg')
+		do_color('window.label.unfocus.textColor', 'titlebar', 'inactive:control_font_fg')
 		do_color_dual(False, 'window.title.focus', 'titlebar', 'main:control_bg')
-		do_color_dual(False, 'window.title.unfocus', 'titlebar', 'main:control_bg')
+		do_color_dual(False, 'window.title.unfocus', 'titlebar', 'inactive:control_bg')
+
 		do_color('window.frame.focusColor', None, 'main:control_bg')
-		do_color('window.frame.unfocusColor', None, 'main:control_bg')
+		do_color('window.frame.unfocusColor', None, 'inactive:control_bg')
 		themedata['window.title.height'] = '24'
 		themedata['window.font'] = 'lucidasans-12'
 		themedata['window.justify'] = 'left'
-		do_color('window.borderColor', None, 'main:control_fg')
+		do_color('window.borderColor', None, 'main:control_bg')
 		themedata['window.borderWidth'] = '1'
 
 		# menu
@@ -91,12 +97,12 @@ class output_plug(plugins.base):
 		do_color_dual(False, 'menu.frame', 'menu', 'main:control_bg')
 		do_color('menu.frame.disableColor', 'menu', 'inactive:control_fg')
 		themedata['menu.frame.font'] = 'lucidasans-12'
-		themedata['menu.frame.justify'] = 'center'
+		do_data('menu.frame.justify', 'menu_header', 'main', 'text_alignment', 'left')
 		do_color('menu.frame.textColor', 'menu', 'main:control_fg')
 
 		# menu.hilite
-		colc1 = do_color_dual(False, 'menu.hilite', 'menu', 'main:control_bg_selected')
-		colc2 = do_color('menu.hilite.textcolor', 'menu', 'main:control_fg_selected')
+		colc1 = do_color_dual(False, 'menu.hilite', 'menu', 'focused:control_bg')
+		colc2 = do_color('menu.hilite.textcolor', 'menu', 'focused:control_font_fg')
 		if (not colc1) or (not colc2):
 			do_color_dual(False, 'menu.hilite', None, 'main:edit_bg_selected')
 			do_color('menu.hilite.textcolor', None, 'main:edit_fg_selected')
@@ -108,13 +114,13 @@ class output_plug(plugins.base):
 			do_color('menu.title.textColor', 'titlebar', 'main:control_fg')
 
 		themedata['menu.title.font'] = 'lucidasans-12'
-		themedata['menu.title.justify'] = 'center'
+		do_data('menu.title.justify', 'menu_header', 'main', 'text_alignment', 'center')
 		themedata['menu.titleHeight'] = '30'
 
 		# toolbar
 		do_color_dual(False, 'toolbar', 'taskbar', 'main:control_bg')
 		themedata['toolbar.height'] = '24'
-		themedata['toolbar.justify'] = 'left'
+		do_data('toolbar.justify', 'taskbar', 'main', 'text_alignment', 'left')
 		themedata['toolbar.font'] = 'lucidasans-12'
 
 		# toolbar.clock
@@ -133,13 +139,13 @@ class output_plug(plugins.base):
 		do_color_dual(False, 'toolbar.windowLabel', 'taskbar_button_app', 'main:control_bg')
 		do_color('toolbar.windowLabel.textColor', 'taskbar_button_app', 'main:control_fg')
 
-
 		# others
-		do_color('borderColor', None, 'main:control_fg')
+		if not do_color('borderColor', 'window', 'main:border'):
+			do_color('borderColor', None, 'main:control_bg')
 		do_color('background', 'desktop', 'main:control_bg')
 		themedata['bevelWidth'] = '2'
-		themedata['borderWidth'] = '1'
-		themedata['handleWidth'] = '2'
+		do_data('borderWidth', 'window', 'main', 'border_width', '1')
+		do_data('handleWidth', 'window', 'main', 'handle_height', '2')
 
 		themedata = fluxboxtheme.data_wildcard
 

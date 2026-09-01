@@ -121,31 +121,38 @@ class colors_gtk():
 				theme_obj.add_color_named(None, 'main:edit_bg', 'gtk__base_color')
 			if globalcolor_add('text_color', self.text_color): 
 				theme_obj.add_color_named(None, 'main:edit_fg', 'gtk__text_color')
+				theme_obj.add_color_named(None, 'main:edit_font_fg', 'gtk__text_color')
 
 			if globalcolor_add('bg_color', self.bg_color): 
 				theme_obj.add_color_named(None, 'main:control_bg', 'gtk__bg_color')
 			if globalcolor_add('fg_color', self.fg_color): 
 				theme_obj.add_color_named(None, 'main:control_fg', 'gtk__fg_color')
+				theme_obj.add_color_named(None, 'main:control_font_fg', 'gtk__fg_color')
 
 			if globalcolor_add('selected_bg_color', self.selected_bg_color): 
 				theme_obj.add_color_named(None, 'selected:control_bg', 'gtk__selected_bg_color')
 			if globalcolor_add('selected_fg_color', self.selected_fg_color): 
 				theme_obj.add_color_named(None, 'selected:control_fg', 'gtk__selected_fg_color')
+				theme_obj.add_color_named(None, 'selected:control_font_fg', 'gtk__selected_fg_color')
 
 			if globalcolor_add('selected_base_color', self.selected_base_color): 
 				theme_obj.add_color_named(None, 'main:edit_bg_selected', 'gtk__selected_base_color')
 			if globalcolor_add('selected_text_color', self.selected_text_color): 
 				theme_obj.add_color_named(None, 'main:edit_fg_selected', 'gtk__selected_text_color')
+				theme_obj.add_color_named(None, 'main:edit_font_fg_selected', 'gtk__selected_text_color')
 
 			if globalcolor_add('inactive_fg_color', self.inactive_fg_color): 
 				theme_obj.add_color_named(None, 'inactive:control_fg', 'gtk__inactive_fg_color')
 			if globalcolor_add('inactive_text_color', self.inactive_text_color): 
 				theme_obj.add_color_named(None, 'inactive:edit_fg', 'gtk__inactive_text_color')
+				theme_obj.add_color_named(None, 'inactive:edit_font_fg', 'gtk__inactive_text_color')
 
 			if globalcolor_add('url_color', self.url_color): 
 				theme_obj.add_color_named(None, 'main:edit_fg_url', 'gtk__url_color')
+				theme_obj.add_color_named(None, 'main:edit_font_fg_url', 'gtk__url_color')
 			if globalcolor_add('visited_url_color', self.visited_url_color): 
-				theme_obj.add_color_named(None, 'visited:edit_fg_url_visited', 'gtk__visited_url_color')
+				theme_obj.add_color_named(None, 'main:edit_fg_url_visited', 'gtk__visited_url_color')
+				theme_obj.add_color_named(None, 'main:edit_font_fg_url_visited', 'gtk__visited_url_color')
 
 			if globalcolor_add('tooltip_color', self.tooltip_color): 
 				theme_obj.add_color_named('tooltip', 'main:control_bg', 'gtk__tooltip_color')
@@ -154,26 +161,31 @@ class colors_gtk():
 				theme_obj.add_color_named('infobar_error', 'main:control_bg', 'gtk__error_bg_color')
 			if globalcolor_add('error_fg_color', self.error_fg_color): 
 				theme_obj.add_color_named('infobar_error', 'main:control_fg', 'gtk__error_fg_color')
+				theme_obj.add_color_named('infobar_error', 'main:control_font_fg', 'gtk__error_fg_color')
 
 			if globalcolor_add('warning_bg_color', self.warning_bg_color): 
 				theme_obj.add_color_named('infobar_warning', 'main:control_bg', 'gtk__warning_bg_color')
 			if globalcolor_add('warning_fg_color', self.warning_fg_color): 
 				theme_obj.add_color_named('infobar_warning', 'main:control_fg', 'gtk__warning_fg_color')
+				theme_obj.add_color_named('infobar_warning', 'main:control_font_fg', 'gtk__warning_fg_color')
 
 			if globalcolor_add('info_bg_color', self.info_bg_color): 
 				theme_obj.add_color_named('infobar_info', 'main:control_bg', 'gtk__info_bg_color')
 			if globalcolor_add('info_fg_color', self.info_fg_color): 
 				theme_obj.add_color_named('infobar_info', 'main:control_fg', 'gtk__info_fg_color')
+				theme_obj.add_color_named('infobar_info', 'main:control_font_fg', 'gtk__info_fg_color')
 
 			if globalcolor_add('question_bg_color', self.question_bg_color): 
-				theme_obj.add_color_named('infobar_question', 'main:control_bg', 'gtk__info_bg_color')
+				theme_obj.add_color_named('infobar_question', 'main:control_bg', 'gtk__question_fg_color')
 			if globalcolor_add('question_fg_color', self.question_fg_color): 
-				theme_obj.add_color_named('infobar_question', 'main:control_fg', 'gtk__info_fg_color')
+				theme_obj.add_color_named('infobar_question', 'main:control_fg', 'gtk__question_fg_color')
+				theme_obj.add_color_named('infobar_question', 'main:control_font_fg', 'gtk__question_fg_color')
 
 			if globalcolor_add('other_bg_color', self.other_bg_color): 
 				theme_obj.add_color_named('infobar_other', 'main:control_bg', 'gtk__other_bg_color')
 			if globalcolor_add('other_fg_color', self.other_fg_color): 
 				theme_obj.add_color_named('infobar_other', 'main:control_fg', 'gtk__other_fg_color')
+				theme_obj.add_color_named('infobar_other', 'main:control_font_fg', 'gtk__other_fg_color')
 			
 			globalcolor_add('error_color', self.error_color)
 

@@ -53,6 +53,15 @@ class input_plug(plugins.base):
 			add_kde_color(colorset, 'win', 'ForegroundNeutral', None, 'main:control_fg_neutral')
 			add_kde_color(colorset, 'win', 'ForegroundPositive', None, 'main:control_fg_positive')
 
+			add_kde_color(colorset, 'win', 'ForegroundNormal', None, 'main:control_font_fg')
+			add_kde_color(colorset, 'win', 'ForegroundInactive', None, 'main:control_font_fg_inactive')
+			add_kde_color(colorset, 'win', 'ForegroundLink', None, 'main:control_font_fg_url')
+			add_kde_color(colorset, 'win', 'ForegroundVisited', None, 'main:control_font_fg_url_visited')
+			add_kde_color(colorset, 'win', 'ForegroundActive', None, 'main:control_font_fg_active')
+			add_kde_color(colorset, 'win', 'ForegroundNegative', None, 'main:control_font_fg_negative')
+			add_kde_color(colorset, 'win', 'ForegroundNeutral', None, 'main:control_font_fg_neutral')
+			add_kde_color(colorset, 'win', 'ForegroundPositive', None, 'main:control_font_fg_positive')
+
 		if 'Colors:Button' in config:
 			colorset = config['Colors:Button']
 			add_kde_color(colorset, 'button', 'BackgroundNormal', 'button', 'main:control_bg')
@@ -65,6 +74,15 @@ class input_plug(plugins.base):
 			add_kde_color(colorset, 'button', 'ForegroundNegative', 'button', 'main:control_fg_negative')
 			add_kde_color(colorset, 'button', 'ForegroundNeutral', 'button', 'main:control_fg_neutral')
 			add_kde_color(colorset, 'button', 'ForegroundPositive', 'button', 'main:control_fg_positive')
+
+			add_kde_color(colorset, 'button', 'ForegroundNormal', 'button', 'main:control_font_fg')
+			add_kde_color(colorset, 'button', 'ForegroundInactive', 'button', 'main:control_font_fg_inactive')
+			add_kde_color(colorset, 'button', 'ForegroundLink', 'button', 'main:control_font_fg_url')
+			add_kde_color(colorset, 'button', 'ForegroundVisited', 'button', 'main:control_font_fg_url_visited')
+			add_kde_color(colorset, 'button', 'ForegroundActive', 'button', 'main:control_font_fg_active')
+			add_kde_color(colorset, 'button', 'ForegroundNegative', 'button', 'main:control_font_fg_negative')
+			add_kde_color(colorset, 'button', 'ForegroundNeutral', 'button', 'main:control_font_fg_neutral')
+			add_kde_color(colorset, 'button', 'ForegroundPositive', 'button', 'main:control_font_fg_positive')
 
 		if 'Colors:Tooltip' in config:
 			colorset = config['Colors:Tooltip']
@@ -79,6 +97,15 @@ class input_plug(plugins.base):
 			add_kde_color(colorset, 'tooltip', 'ForegroundNeutral', 'tooltip', 'main:control_fg_neutral')
 			add_kde_color(colorset, 'tooltip', 'ForegroundPositive', 'tooltip', 'main:control_fg_positive')
 			
+			add_kde_color(colorset, 'tooltip', 'ForegroundNormal', 'tooltip', 'main:control_font_fg')
+			add_kde_color(colorset, 'tooltip', 'ForegroundInactive', 'tooltip', 'main:control_font_fg_inactive')
+			add_kde_color(colorset, 'tooltip', 'ForegroundLink', 'tooltip', 'main:control_font_fg_url')
+			add_kde_color(colorset, 'tooltip', 'ForegroundVisited', 'tooltip', 'main:control_font_fg_url_visited')
+			add_kde_color(colorset, 'tooltip', 'ForegroundActive', 'tooltip', 'main:control_font_fg_active')
+			add_kde_color(colorset, 'tooltip', 'ForegroundNegative', 'tooltip', 'main:control_font_fg_negative')
+			add_kde_color(colorset, 'tooltip', 'ForegroundNeutral', 'tooltip', 'main:control_font_fg_neutral')
+			add_kde_color(colorset, 'tooltip', 'ForegroundPositive', 'tooltip', 'main:control_font_fg_positive')
+
 		if 'Colors:Complementary' in config:
 			colorset = config['Colors:Tooltip']
 			add_kde_color(colorset, 'complementary', 'BackgroundNormal', 'complementary', 'main:control_bg')
@@ -92,6 +119,15 @@ class input_plug(plugins.base):
 			add_kde_color(colorset, 'complementary', 'ForegroundNeutral', 'complementary', 'main:control_fg_neutral')
 			add_kde_color(colorset, 'complementary', 'ForegroundPositive', 'complementary', 'main:control_fg_positive')
 			
+			add_kde_color(colorset, 'complementary', 'ForegroundNormal', 'complementary', 'main:control_font_fg')
+			add_kde_color(colorset, 'complementary', 'ForegroundInactive', 'complementary', 'main:control_font_fg_inactive')
+			add_kde_color(colorset, 'complementary', 'ForegroundLink', 'complementary', 'main:control_font_fg_url')
+			add_kde_color(colorset, 'complementary', 'ForegroundVisited', 'complementary', 'main:control_font_fg_url_visited')
+			add_kde_color(colorset, 'complementary', 'ForegroundActive', 'complementary', 'main:control_font_fg_active')
+			add_kde_color(colorset, 'complementary', 'ForegroundNegative', 'complementary', 'main:control_font_fg_negative')
+			add_kde_color(colorset, 'complementary', 'ForegroundNeutral', 'complementary', 'main:control_font_fg_neutral')
+			add_kde_color(colorset, 'complementary', 'ForegroundPositive', 'complementary', 'main:control_font_fg_positive')
+
 		if 'Colors:View' in config:
 			colorset = config['Colors:View']
 			add_kde_color(colorset, 'view', 'BackgroundNormal', None, 'main:edit_bg')
@@ -104,6 +140,15 @@ class input_plug(plugins.base):
 			add_kde_color(colorset, 'view', 'ForegroundNegative', None, 'main:edit_fg_negative')
 			add_kde_color(colorset, 'view', 'ForegroundNeutral', None, 'main:edit_fg_neutral')
 			add_kde_color(colorset, 'view', 'ForegroundPositive', None, 'main:edit_fg_positive')
+
+			add_kde_color(colorset, 'view', 'ForegroundNormal', None, 'main:edit_font_fg')
+			add_kde_color(colorset, 'view', 'ForegroundInactive', None, 'main:edit_font_fg_inactive')
+			add_kde_color(colorset, 'view', 'ForegroundLink', None, 'main:edit_font_fg_url')
+			add_kde_color(colorset, 'view', 'ForegroundVisited', None, 'main:edit_font_fg_url_visited')
+			add_kde_color(colorset, 'view', 'ForegroundActive', None, 'main:edit_font_fg_active')
+			add_kde_color(colorset, 'view', 'ForegroundNegative', None, 'main:edit_font_fg_negative')
+			add_kde_color(colorset, 'view', 'ForegroundNeutral', None, 'main:edit_font_fg_neutral')
+			add_kde_color(colorset, 'view', 'ForegroundPositive', None, 'main:edit_font_fg_positive')
 
 		if 'Colors:Selection' in config:
 			colorset = config['Colors:Selection']
@@ -125,16 +170,16 @@ class input_plug(plugins.base):
 
 			# BG
 			bg_id = add_kde_color(colorset, 'wm', 'activeBackground', 'titlebar', 'main:control_bg')
-			add_kde_color(colorset, 'wm', 'activeForeground', 'titlebar', 'main:control_fg')
+			add_kde_color(colorset, 'wm', 'activeForeground', 'titlebar', 'main:control_font_fg')
 			if add_kde_color(colorset, 'wm', 'activeBlend', 'titlebar', 'main:gradent2'):
-				theme_obj.add_prop('titlebar', 'main', 'color_fx:control_bg', 'gradent')
-				theme_obj.add_prop('titlebar', 'main', 'gradent_colors:control_bg', 'gradent1,gradent2')
+				theme_obj.add_prop_color('titlebar', 'main', 'control_bg', 'color_fx', 'gradent')
+				theme_obj.add_prop_color('titlebar', 'main', 'control_bg', 'gradent_colors', 'gradent1,gradent2')
 				theme_obj.add_color_named('titlebar', 'main:gradent1', bg_id)
 
 			# FG
 			fg_id = add_kde_color(colorset, 'wm', 'inactiveBackground', 'titlebar', 'inactive:control_bg')
-			add_kde_color(colorset, 'wm', 'inactiveForeground', 'titlebar', 'inactive:control_fg')
+			add_kde_color(colorset, 'wm', 'inactiveForeground', 'titlebar', 'inactive:control_font_fg')
 			if add_kde_color(colorset, 'wm', 'inactiveBlend', 'titlebar', 'inactive:gradent2'):
-				theme_obj.add_prop('titlebar', 'inactive', 'color_fx:control_bg', 'gradent')
-				theme_obj.add_prop('titlebar', 'inactive', 'gradent_colors:control_bg', 'gradent1,gradent2')
+				theme_obj.add_prop_color('titlebar', 'inactive', 'control_bg', 'color_fx', 'gradent')
+				theme_obj.add_prop_color('titlebar', 'inactive', 'control_bg', 'gradent_colors', 'gradent1,gradent2')
 				theme_obj.add_color_named('titlebar', 'inactive:gradent1', fg_id)
