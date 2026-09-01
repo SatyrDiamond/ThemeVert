@@ -197,16 +197,20 @@ class colors_win32():
 			theme_obj.add_stylecontrol('titlebar')
 			theme_obj.add_color_named('titlebar', 'main:control_bg', 'win32__activetitle')
 			theme_obj.add_color_named('titlebar', 'main:control_fg', 'win32__titletext')
-			theme_obj.add_color_named('titlebar', 'main:control_bg_second', 'win32__gradientactivetitle')
-			theme_obj.add_color_named('titlebar', 'main:user_gradent', 'win32__gradientactivetitle')
 			theme_obj.add_color_named('titlebar', 'inactive:control_bg', 'win32__inactivetitle')
 			theme_obj.add_color_named('titlebar', 'inactive:control_fg', 'win32__inactivetitletext')
-			theme_obj.add_color_named('titlebar', 'inactive:control_bg_second', 'win32__gradientinactivetitle')
-			theme_obj.add_color_named('titlebar', 'main:user_gradent', 'win32__gradientinactivetitle')
-			theme_obj.add_prop('titlebar', 'main', 'color_fx', 'gradent')
-			theme_obj.add_prop('titlebar', 'main', 'gradent_color', 'user_gradent')
-			theme_obj.add_prop('titlebar', 'main', 'color_fx', 'gradent')
-			theme_obj.add_prop('titlebar', 'main', 'gradent_color', 'user_gradent')
+
+			theme_obj.add_prop('titlebar', 'main', 'color_fx:control_bg', 'gradent')
+			theme_obj.add_prop('titlebar', 'main', 'gradent_colors:control_bg', 'gradent1,gradent2')
+			theme_obj.add_color_named('titlebar', 'main:gradent1', 'win32__activetitle')
+			theme_obj.add_color_named('titlebar', 'main:gradent2', 'win32__gradientactivetitle')
+
+			theme_obj.add_prop('titlebar', 'inactive', 'color_fx:control_bg', 'gradent')
+			theme_obj.add_prop('titlebar', 'inactive', 'gradent_colors:control_bg', 'gradent1,gradent2')
+			theme_obj.add_color_named('titlebar', 'inactive:gradent1', 'win32__inactivetitle')
+			theme_obj.add_color_named('titlebar', 'inactive:gradent2', 'win32__gradientinactivetitle')
+
+			theme_obj.add_prop('titlebar', 'main', 'color_fx_only_classic_de', '1')
 
 			# ------ desktop -----
 			theme_obj.add_stylecontrol('desktop')
@@ -288,26 +292,25 @@ class colors_win32():
 			color = theme_obj.get_color_rgb('titlebar', 'main:control_bg')
 			self.set('activetitle', color.get_int() )
 			self.set('gradientactivetitle', color.get_int() )
-			cfx_type = theme_obj.get_prop('titlebar', 'main', 'color_fx')
-			if cfx_type=='gradent':
-				gradent_color = theme_obj.get_prop('titlebar', 'main', 'gradent_color')
-				gcolor = theme_obj.get_color_rgb('titlebar', 'main:'+gradent_color)
-				if gcolor: self.set('gradientactivetitle', gcolor.get_int() )
-			else:
-				gcolor = theme_obj.get_color_rgb('titlebar', 'main:control_bg_second')
-				if gcolor: self.set('gradientactivetitle', gcolor.get_int() )
 
 			color = theme_obj.get_color_rgb('titlebar', 'inactive:control_bg')
 			self.set('inactivetitle', color.get_int() )
 			self.set('gradientinactivetitle', color.get_int() )
-			cfx_type = theme_obj.get_prop('titlebar', 'inactive', 'color_fx')
-			if cfx_type=='gradent':
-				gradent_color = theme_obj.get_prop('titlebar', 'inactive', 'gradent_color')
-				gcolor = theme_obj.get_color_rgb('titlebar', 'inactive:'+gradent_color)
-				if gcolor: self.set('gradientinactivetitle', gcolor.get_int() )
-			else:
-				gcolor = theme_obj.get_color_rgb('titlebar', 'inactive:control_bg_second')
-				if gcolor: self.set('gradientinactivetitle', gcolor.get_int() )
+
+			def do_gradent(control, state, winc1, winc2):
+				color_fx = theme_obj.get_prop(control, state, 'color_fx:control_bg')
+				if color_fx=='gradent':
+					gradent_colors = theme_obj.get_prop(control, state, 'gradent_colors:control_bg')
+					gradent_colors = gradent_colors.split(',')
+					color1 = theme_obj.get_color_rgb('titlebar', state+':'+gradent_colors[0])
+					color2 = theme_obj.get_color_rgb('titlebar', state+':'+gradent_colors[-1])
+					self.set(winc1, color1.get_int() )
+					self.set(winc2, color2.get_int() )
+
+			do_gradent('titlebar', 'main', 'activetitle', 'gradientactivetitle')
+			do_gradent('titlebar', 'main', 'inactivetitle', 'gradientinactivetitle')
+
+			# ------ titlebar text -----
 
 			color = theme_obj.get_color_rgb('titlebar', 'main:control_fg')
 			self.set('titletext', color.get_int() )

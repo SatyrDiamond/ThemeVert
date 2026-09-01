@@ -38,6 +38,7 @@ class input_plug(plugins.base):
 				color = conv_color(kcolorset[kcolorname])
 				theme_obj.add_global_color(color_id, color)
 				theme_obj.add_color_named(stylepart, colloc, color_id)
+				return color_id
 
 		if 'Colors:Window' in config:
 			colorset = config['Colors:Window']
@@ -119,24 +120,21 @@ class input_plug(plugins.base):
 
 		if 'WM' in config:
 			colorset = config['WM']
-			add_kde_color(colorset, 'wm', 'activeBackground', 'titlebar', 'main:control_bg')
-			add_kde_color(colorset, 'wm', 'activeBlend', 'titlebar', 'main:control_bg_second')
+
+			theme_obj.add_prop('titlebar', 'main', 'color_fx_only_classic_de', '1')
+
+			# BG
+			bg_id = add_kde_color(colorset, 'wm', 'activeBackground', 'titlebar', 'main:control_bg')
 			add_kde_color(colorset, 'wm', 'activeForeground', 'titlebar', 'main:control_fg')
-			add_kde_color(colorset, 'wm', 'inactiveBackground', 'titlebar', 'inactive:control_bg')
-			add_kde_color(colorset, 'wm', 'inactiveBlend', 'titlebar', 'inactive:control_fg')
-			add_kde_color(colorset, 'wm', 'inactiveForeground', 'titlebar', 'inactive:control_bg_second')
+			if add_kde_color(colorset, 'wm', 'activeBlend', 'titlebar', 'main:gradent2'):
+				theme_obj.add_prop('titlebar', 'main', 'color_fx:control_bg', 'gradent')
+				theme_obj.add_prop('titlebar', 'main', 'gradent_colors:control_bg', 'gradent1,gradent2')
+				theme_obj.add_color_named('titlebar', 'main:gradent1', bg_id)
 
-			theme_obj.add_global_color('wm_activeBackground', conv_color(colorset['activeBackground']) )
-			theme_obj.add_global_color('wm_activeBlend', conv_color(colorset['activeBlend']) )
-			theme_obj.add_global_color('wm_activeForeground', conv_color(colorset['activeForeground']) )
-			theme_obj.add_global_color('wm_inactiveBackground', conv_color(colorset['inactiveBackground']) )
-			theme_obj.add_global_color('wm_inactiveBlend', conv_color(colorset['inactiveBlend']) )
-			theme_obj.add_global_color('wm_inactiveForeground', conv_color(colorset['inactiveForeground']) )
-
-			#curstyle.add_prop('main', 'color_fx', 'gradent')
-			#curstyle.add_prop('main', 'gradent_color', 'user_gradent')
-			#curstyle.add_color_named('main:user_gradent', 'wm_activeBlend')
-
-			#curstyle.add_prop('inactive', 'color_fx', 'gradent')
-			#curstyle.add_prop('inactive', 'gradent_color', 'user_gradent')
-			#curstyle.add_color_named('inactive:user_gradent', 'wm_inactiveBlend')
+			# FG
+			fg_id = add_kde_color(colorset, 'wm', 'inactiveBackground', 'titlebar', 'inactive:control_bg')
+			add_kde_color(colorset, 'wm', 'inactiveForeground', 'titlebar', 'inactive:control_fg')
+			if add_kde_color(colorset, 'wm', 'inactiveBlend', 'titlebar', 'inactive:gradent2'):
+				theme_obj.add_prop('titlebar', 'inactive', 'color_fx:control_bg', 'gradent')
+				theme_obj.add_prop('titlebar', 'inactive', 'gradent_colors:control_bg', 'gradent1,gradent2')
+				theme_obj.add_color_named('titlebar', 'inactive:gradent1', fg_id)

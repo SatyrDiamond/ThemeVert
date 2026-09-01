@@ -66,3 +66,8 @@ class fluxbox_theme():
 					s = len(k)
 					if s>outs: out = self.data_wildcard[k]
 			return out
+
+	def write(self, filename):
+		f = open(filename, 'w')
+		for k, v in list(self.data.items())+list(self.data_wildcard.items()):
+			f.write(k+': '+str(v)+'\n')

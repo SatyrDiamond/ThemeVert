@@ -197,6 +197,7 @@ class input_plug(plugins.base):
 		theme_obj.add_color_named(None, 'main:edit_fg', 'ColorListBoxText')
 		theme_obj.add_color_named(None, 'main:edit_bg_selected', 'ColorListBoxSelection')
 		theme_obj.add_color_named(None, 'main:edit_fg_selected', 'ColorListBoxSelectionText')
+		
 		# MEMStatus
 		add_color("ColorMEMStatusFree", "rgb:00/00/00")
 		add_color("ColorMEMStatusBuffers", "rgb:60/60/C0")
