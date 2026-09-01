@@ -242,6 +242,11 @@ class colors_win32():
 			theme_obj.add_color_named('window', 'main:border', 'win32__activeborder')
 			theme_obj.add_color_named('window', 'inactive:border', 'win32__inactiveborder')
 
+			# ------ window -----
+			theme_obj.add_stylecontrol('titlebar_button')
+			theme_obj.add_color_named('titlebar_button', 'main:control_bg', 'win32__buttonface')
+			theme_obj.add_color_named('titlebar_button', 'main:control_fg', 'win32__buttontext')
+
 	def export_colors(self, theme_obj):
 		if self.used == False and 'win32' not in theme_obj.supported_types:
 			theme_obj.supported_types.append('win32')
@@ -308,7 +313,7 @@ class colors_win32():
 					self.set(winc2, color2.get_int() )
 
 			do_gradent('titlebar', 'main', 'activetitle', 'gradientactivetitle')
-			do_gradent('titlebar', 'main', 'inactivetitle', 'gradientinactivetitle')
+			do_gradent('titlebar', 'inactive', 'inactivetitle', 'gradientinactivetitle')
 
 			# ------ titlebar text -----
 

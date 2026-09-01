@@ -43,6 +43,7 @@ Short Name | Type | Name | Ext |
 
 | Short Name | Type | Name |
 | --- | :--- | :--- |
+| ```fluxbox``` | Unix |  FluxBox | ```.cfg``` |
 | ```gtk_color_scheme``` | Unix | GTK Colors .INI | ```.ini``` |
 | ```icewm``` | Unix | IceWM |
 | ```kde_color``` | Unix | KDE/Plasma Color Scheme | ```.colors``` |
