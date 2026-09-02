@@ -21,8 +21,6 @@ class output_plug(plugins.base):
 		manyboxtheme = manybox.manybox_theme()
 		manyboxtheme.set_fluxbox()
 
-		print('not yet')
-
 		def do_color(name, control, colloc):
 			outcol = theme_obj.get_color_rgb(control, colloc)
 			if outcol: 
