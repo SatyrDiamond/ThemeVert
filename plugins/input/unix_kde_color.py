@@ -156,12 +156,25 @@ class input_plug(plugins.base):
 			add_kde_color(colorset, 'selection', 'BackgroundAlternate', None, 'main:edit_bg_selected_alt')
 			add_kde_color(colorset, 'selection', 'ForegroundNormal', None, 'main:edit_fg_selected')
 			add_kde_color(colorset, 'selection', 'ForegroundInactive', None, 'main:edit_fg_selected_inactive')
+			add_kde_color(colorset, 'selection', 'ForegroundNormal', None, 'main:edit_fg_selected')
+			add_kde_color(colorset, 'selection', 'ForegroundInactive', None, 'main:edit_fg_selected_inactive')
 			add_kde_color(colorset, 'selection', 'ForegroundLink', None, 'main:edit_fg_selected_url')
 			add_kde_color(colorset, 'selection', 'ForegroundVisited', None, 'main:edit_fg_selected_url_visited')
 			add_kde_color(colorset, 'selection', 'ForegroundActive', None, 'main:edit_fg_selected_active')
 			add_kde_color(colorset, 'selection', 'ForegroundNegative', None, 'main:edit_fg_selected_negative')
 			add_kde_color(colorset, 'selection', 'ForegroundNeutral', None, 'main:edit_fg_selected_neutral')
 			add_kde_color(colorset, 'selection', 'ForegroundPositive', None, 'main:edit_fg_selected_positive')
+
+			add_kde_color(colorset, 'selection', 'ForegroundNormal', None, 'main:edit_font_fg_selected')
+			add_kde_color(colorset, 'selection', 'ForegroundInactive', None, 'main:edit_font_fg_selected_inactive')
+			add_kde_color(colorset, 'selection', 'ForegroundNormal', None, 'main:edit_font_fg_selected')
+			add_kde_color(colorset, 'selection', 'ForegroundInactive', None, 'main:edit_font_fg_selected_inactive')
+			add_kde_color(colorset, 'selection', 'ForegroundLink', None, 'main:edit_font_fg_selected_url')
+			add_kde_color(colorset, 'selection', 'ForegroundVisited', None, 'main:edit_font_fg_selected_url_visited')
+			add_kde_color(colorset, 'selection', 'ForegroundActive', None, 'main:edit_font_fg_selected_active')
+			add_kde_color(colorset, 'selection', 'ForegroundNegative', None, 'main:edit_font_fg_selected_negative')
+			add_kde_color(colorset, 'selection', 'ForegroundNeutral', None, 'main:edit_font_fg_selected_neutral')
+			add_kde_color(colorset, 'selection', 'ForegroundPositive', None, 'main:edit_font_fg_selected_positive')
 
 		if 'WM' in config:
 			colorset = config['WM']

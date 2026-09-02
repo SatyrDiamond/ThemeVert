@@ -17,21 +17,21 @@ class output_plug(plugins.base):
 		return prop
 	
 	def parse(self, theme_obj, themeverter_intent):
-		from objects.file_theme import fluxbox
-		fluxboxtheme = fluxbox.fluxbox_theme()
-		themedata = fluxboxtheme.data
+		from objects.file_theme import manybox
+		manyboxtheme = manybox.manybox_theme()
+		manyboxtheme.set_blackbox()
 
 		def do_color(name, control, colloc):
 			outcol = theme_obj.get_color_rgb(control, colloc)
 			if outcol: 
-				themedata[name] = outcol.get_hex()
+				manyboxtheme.add_data(name, outcol.get_hex())
 				return True
 			return False
 
 		def do_color_spec(name, control, colloc):
 			outcol = theme_obj.get_color_rgb_spec(control, colloc)
 			if outcol: 
-				themedata[name] = outcol.get_hex()
+				manyboxtheme.add_data(name, outcol.get_hex())
 				return True
 			return False
 
@@ -39,24 +39,26 @@ class output_plug(plugins.base):
 			state, colname = colloc.split(':')
 			
 			color_fx = theme_obj.get_prop_color(control, state, colname, 'color_fx')
-			themedata[name] = 'raised border' if not props else props
+			outprops = 'raised border' if not props else props
 
 			if color_fx=='gradent':
 				gradent_colors = theme_obj.get_prop_color(control, state, colname, 'gradent_colors')
-				themedata[name] += ' gradient'
+				outprops += ' gradient'
 				gradent_colors = gradent_colors.split(',')
 				do_color(name+'.color1', control, state+':'+gradent_colors[0])
 				do_color(name+'.color2', control, state+':'+gradent_colors[-1])
+				manyboxtheme.add_data(name+'.appearance', outprops)
 				return True
 			else:
-				themedata[name] += ' solid'
+				outprops += ' solid'
 				if isspec: return do_color_spec(name+'.backgroundColor', control, colloc)
 				else: return do_color(name+'.backgroundColor', control, colloc)
+				manyboxtheme.add_data(name+'.appearance', outprops)
 			return False
 
 		def do_data(name, control, state, prop, fallback):
 			outdata = theme_obj.get_prop(control, state,prop)
-			themedata[name] = str(outdata) if outdata else fallback
+			manyboxtheme.add_data(name, str(outdata) if outdata else fallback)
 
 		# -------- menu.title
 		do_color_dual(False, 'menu.title', 'menu_header', 'main:control_bg', None)
@@ -64,7 +66,7 @@ class output_plug(plugins.base):
 		do_color('menu.title.textColor', 'menu_header', 'main:control_font_fg')
 		do_data('menu.title.alignment', 'menu_header', 'main', 'text_alignment', 'center')
 		do_data('menu.title.marginwidth', 'menu_header', 'main', 'margin_width', '2')
-		themedata['menu.title.font'] = 'Bitstream Vera Sans-12:style=Bold'
+		manyboxtheme.add_data('menu.title.font', 'Bitstream Vera Sans-12:style=Bold')
 
 		# -------- menu.frame
 		do_color_dual(False, 'menu.frame', 'menu', 'main:control_bg', None)
@@ -91,7 +93,7 @@ class output_plug(plugins.base):
 		do_color_dual(False, 'toolbar', 'taskbar', 'main:control_bg', None)
 		do_data('toolbar.alignment', 'taskbar', 'main', 'text_alignment', 'left')
 		do_data('toolbar.marginwidth', 'taskbar', 'main', 'margin_width', '2')
-		themedata['toolbar.font'] = 'Bitstream Vera Sans-9:style=Bold'
+		manyboxtheme.add_data('toolbar.font', 'Bitstream Vera Sans-9:style=Bold')
 
 		# -------- toolbar.label
 		do_color_dual(False, 'toolbar.label', 'taskbar_label', 'main:control_bg', None)
@@ -156,11 +158,11 @@ class output_plug(plugins.base):
 		do_color_dual(False, 'window.grip.unfocus', 'window_grip', 'inactive:control_bg', None)
 
 		# -------- window.frame
-		do_data('window.frame.borderWidth', 'window', 'main', 'border_width', '1')
+		do_data('window.frame.borderwidth', 'window', 'main', 'border_width', '1')
 		# focus
-		do_color('window.frame.focus.borderColor', 'window', 'main:border')
+		do_color('window.frame.focus.bordercolor', 'window', 'main:border')
 		# unfocus
-		do_color('window.frame.unfocus.borderColor', 'window', 'inactive:border')
+		do_color('window.frame.unfocus.bordercolor', 'window', 'inactive:border')
 
 		# -------- window
 		do_data('window.alignment', 'window', 'main', 'text_alignment', 'left')
@@ -175,6 +177,6 @@ class output_plug(plugins.base):
 		# -------- desktop
 		outcol = theme_obj.get_color_rgb('desktop', 'main:control_bg')
 		if outcol:
-			themedata['rootCommand'] = 'bsetroot -solid '+('rgb:%02x/%02x/%02x' % tuple(outcol.get_int()))
+			manyboxtheme.add_data('rootCommand', 'bsetroot -solid '+('rgb:%02x/%02x/%02x' % tuple(outcol.get_int())))
 
-		fluxboxtheme.write(themeverter_intent.output_file)
+		manyboxtheme.write(themeverter_intent.output_file)
