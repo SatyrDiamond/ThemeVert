@@ -123,8 +123,8 @@ class input_plug(plugins.base):
 		theme_obj.add_stylecontrol('window_back')
 		theme_obj.add_stylecontrol('titlebar')
 
-		do_data('window.label.text.justify', 'window', 'main', 'text_alignment', 'left')
-		
+		add_data('window.label.text.justify', 'window', 'main', 'text_alignment', 'string')
+
 		# -------- window.active.border
 		get_box_color('window.active.border.color', 'window', 'main:border')
 		get_box_color('window.inactive.border.color', 'window', 'inactive:border')
