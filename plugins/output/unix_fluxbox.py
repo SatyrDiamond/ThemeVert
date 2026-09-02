@@ -55,6 +55,8 @@ class output_plug(plugins.base):
 				if gradent_type=='rectangle': outprops += ' rectangle'
 				if gradent_type=='pyramid': outprops += ' pyramid'
 
+				if gradent_type=='splitvertical': outprops += ' vertical'
+				
 				gradent_colors = gradent_colors.split(',')
 				do_color(name+'.color', control, state+':'+gradent_colors[0])
 				do_color(name+'.colorto', control, state+':'+gradent_colors[-1])

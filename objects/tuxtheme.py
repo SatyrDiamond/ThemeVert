@@ -407,7 +407,7 @@ class data_theme():
 			print('text BG or FG missing')
 			exit()
 
-		self.copy_color(None, 'main:edit_fg', None, 'main:border', False)
+		self.copy_color(None, 'main:control_fg', None, 'main:border', False)
 		self.copy_color(None, 'main:control_bg', None, 'main:control_bg_alt', False)
 
 		# ----------------- selected -----------------

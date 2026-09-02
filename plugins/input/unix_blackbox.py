@@ -87,8 +87,8 @@ class input_plug(plugins.base):
 		get_bb_color('menu.title.foregroundColor', 'menu_header', 'main:control_fg')
 		get_bb_color('menu.title.textColor', 'menu_header', 'main:control_fg')
 		get_bb_color('menu.title.textColor', 'menu_header', 'main:control_font_fg')
-		#add_data('menu.title.alignment', 'menu_header', 'main', 'text_alignment', 'string')
-		#add_data('menu.title.marginwidth', 'menu_header', 'main', 'margin_width', 'int')
+		add_data('menu.title.alignment', 'menu_header', 'main', 'text_alignment', 'string')
+		add_data('menu.title.marginwidth', 'menu_header', 'main', 'margin_width', 'int')
 		# skipped menu.title.font
 
 		# -------- menu.frame
@@ -98,8 +98,8 @@ class input_plug(plugins.base):
 		get_bb_color('menu.frame.textColor', 'menu', 'main:control_font_fg')
 		get_bb_color('menu.frame.disabledColor', 'menu', 'inactive:control_fg')
 		get_bb_color('menu.frame.disabledColor', 'menu', 'inactive:control_font_fg')
-		#add_data('menu.frame.alignment', 'menu', 'main', 'text_alignment', 'string')
-		#add_data('menu.frame.marginwidth', 'menu', 'main', 'margin_width', 'int')
+		add_data('menu.frame.alignment', 'menu', 'main', 'text_alignment', 'string')
+		add_data('menu.frame.marginwidth', 'menu', 'main', 'margin_width', 'int')
 
 		# -------- menu.active
 		get_bb_color_dual('menu.active', 'menu', 'focused:control_bg')
@@ -109,19 +109,19 @@ class input_plug(plugins.base):
 		# -------- slit
 		theme_obj.add_stylecontrol('slit')
 		get_bb_color_dual('slit', 'slit', 'main:control_bg')
-		#add_data('slit.marginwidth', 'slit', 'main', 'margin_width', 'int')
+		add_data('slit.marginwidth', 'slit', 'main', 'margin_width', 'int')
 
 		# -------- toolbar
 		theme_obj.add_stylecontrol('taskbar')
 		get_bb_color_dual('toolbar', 'taskbar', 'main:control_bg')
-		#add_data('toolbar.alignment', 'taskbar', 'main', 'text_alignment', 'string')
-		#add_data('toolbar.marginwidth', 'taskbar', 'main', 'margin_width', 'int')
+		add_data('toolbar.alignment', 'taskbar', 'main', 'text_alignment', 'string')
+		add_data('toolbar.marginwidth', 'taskbar', 'main', 'margin_width', 'int')
 
 		# -------- toolbar.label
 		theme_obj.add_stylecontrol('taskbar_label')
 		get_bb_color_dual('toolbar.label', 'taskbar_label', 'main:control_bg')
 		get_bb_color('toolbar.label.textColor', 'taskbar_label', 'main:control_fg')
-		#add_data('toolbar.label.marginwidth', 'taskbar_label', 'main', 'margin_width', 'int')
+		add_data('toolbar.label.marginwidth', 'taskbar_label', 'main', 'margin_width', 'int')
 
 		# -------- toolbar.windowLabel
 		theme_obj.add_stylecontrol('taskbar_button_app')
@@ -138,7 +138,7 @@ class input_plug(plugins.base):
 		get_bb_color_dual('toolbar.button', 'taskbar_button', 'main:control_bg')
 		get_bb_color_dual('toolbar.button.pressed', 'taskbar_button', 'pressed:control_bg')
 		get_bb_color('toolbar.button.foregroundColor', 'taskbar_button', 'main:control_fg')
-		#add_data('toolbar.button.marginwidth', 'taskbar_button', 'main', 'margin_width', 'int')
+		add_data('toolbar.button.marginwidth', 'taskbar_button', 'main', 'margin_width', 'int')
 
 		# -------- window.title
 		theme_obj.add_stylecontrol('window_back')
@@ -147,7 +147,7 @@ class input_plug(plugins.base):
 		# unfocus
 		get_bb_color_dual('window.title.unfocus', 'window_back', 'inactive:control_bg')
 
-		#add_data('window.title.marginwidth', 'window_back', 'main', 'margin_width', 'int')
+		add_data('window.title.marginwidth', 'window_back', 'main', 'margin_width', 'int')
 
 		# -------- window.label
 		theme_obj.add_stylecontrol('titlebar')
@@ -162,7 +162,7 @@ class input_plug(plugins.base):
 		get_bb_color('window.label.unfocus.textColor', 'titlebar', 'inactive:control_fg')
 		get_bb_color('window.label.unfocus.textColor', 'titlebar', 'inactive:control_font_fg')
 
-		#add_data('window.label.marginwidth', 'titlebar', 'main', 'margin_width', 'int')
+		add_data('window.label.marginwidth', 'titlebar', 'main', 'margin_width', 'int')
 
 		# -------- window.button
 		theme_obj.add_stylecontrol('window_button')
@@ -182,7 +182,7 @@ class input_plug(plugins.base):
 			
 		get_bb_color('window.button.pressed.foregroundColor', 'window_button', 'pressed:control_fg')
 
-		#add_data('window.button.marginwidth', 'window_button', 'main', 'margin_width', 'int')
+		add_data('window.button.marginwidth', 'window_button', 'main', 'margin_width', 'int')
 
 		# -------- window.handle
 		theme_obj.add_stylecontrol('window_handle')
@@ -200,15 +200,15 @@ class input_plug(plugins.base):
 
 		# -------- window.frame
 		theme_obj.add_stylecontrol('window')
-		#add_data('window.frame.borderWidth', 'window', 'main', 'border_width', 'int')
+		add_data('window.frame.borderWidth', 'window', 'main', 'border_width', 'int')
 		# focus
 		get_bb_color('window.frame.focus.borderColor', 'window', 'main:border')
 		# unfocus
 		get_bb_color('window.frame.unfocus.borderColor', 'window', 'inactive:border')
 
 		# -------- window
-		#add_data('window.alignment', 'window', 'main', 'text_alignment', 'string')
-		#add_data('window.handleHeight', 'window', 'main', 'handle_height', 'int')
+		add_data('window.alignment', 'window', 'main', 'text_alignment', 'string')
+		add_data('window.handleHeight', 'window', 'main', 'handle_height', 'int')
 
 		# -------- desktop
 		theme_obj.add_stylecontrol('desktop')

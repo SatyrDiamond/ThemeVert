@@ -187,6 +187,10 @@ openbox_defaults = {
 	}
 }
 
+openbox_casereplace = [
+	['colorto', 'colorTo'],
+]
+
 # ====================================== FLUXBOX ======================================
 
 fluxbox_valtypes = {
@@ -561,6 +565,7 @@ class manybox_theme():
 		self.def_valtypes = openbox_valtypes
 		self.def_defaults = openbox_defaults
 		self.def_valtypes_splt = dict([[k,splitgrp(v)] for k,v in self.def_valtypes.items()])
+		self.def_casereplace = openbox_casereplace
 
 	def set_fluxbox(self):
 		self.def_valtypes = fluxbox_valtypes
@@ -641,12 +646,14 @@ class manybox_theme():
 				if x[0]=='!': continue
 				elif x[0]=='#': continue
 				else:
-					name, val = x.split(':', 1)
-					name = name.lower().strip().rstrip()
-					val = val.strip().rstrip()
+					splval = x.split(':', 1)
+					if len(splval)==2:
+						name, val = splval
+						name = name.lower().strip().rstrip()
+						val = val.strip().rstrip()
 
-					if '*' not in name: predata[name] = val
-					else: predata_wild[name] = val
+						if '*' not in name: predata[name] = val
+						else: predata_wild[name] = val
 
 		valid_all = self.iter_valid('_root')
 		for k, v in predata_wild.items():

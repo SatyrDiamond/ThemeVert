@@ -11,7 +11,7 @@ class input_plug(plugins.base):
 		return 'openbox'
 	
 	def get_name(self):
-		return '[Unix] openbox'
+		return '[Unix] OpenBox'
 	
 	def get_prop(self):
 		prop = {}
@@ -32,12 +32,23 @@ class input_plug(plugins.base):
 					colordata = incolor['_root'].lower().split(' ') if incolor else []
 					color1 = manybox.get_color(incolor['color'])
 
-					if 'border.color' in incolor:
+					if 'parentrelative' in colordata: return False
+					if 'border.color' in incolor and bordercolloc:
 						border = manybox.get_color(incolor['color'])
 						theme_obj.add_color(control, bordercolloc, border)
 						
 					if color1 and ('colorto' in incolor) and ('gradient' in colordata) and control: 
 						color2 = manybox.get_color(incolor['colorto'])
+
+						gradtype = None
+						if 'horizontal' in colordata: gradtype = 'horizontal'
+						if 'vertical' in colordata: gradtype = 'vertical'
+						if 'diagonal' in colordata: gradtype = 'diagonal'
+						if 'crossdiagonal' in colordata: gradtype = 'crossdiagonal'
+						if 'pipecross' in colordata: gradtype = 'pipecross'
+						if 'mirrorhorizontal' in colordata: gradtype = 'mirrorhorizontal'
+						if 'splitvertical' in colordata: gradtype = 'splitvertical'
+						if 'pyramid' in colordata: gradtype = 'pyramid'
 
 						outcolor1 = visual.visual_color().from_int(color1)
 						outcolor2 = visual.visual_color().from_int(color2)
@@ -47,6 +58,7 @@ class input_plug(plugins.base):
 						state, name = colloc.split(':')
 
 						theme_obj.add_prop_color(control, state, name, 'color_fx', 'gradent')
+						if gradtype: theme_obj.add_prop_color(control, state, name, 'gradent_type', gradtype)
 						theme_obj.add_prop_color(control, state, name, 'gradent_colors', 'gradent1,gradent2')
 						theme_obj.add_color(control, state+':gradent1', color1)
 						theme_obj.add_color(control, state+':gradent2', color2)
@@ -111,6 +123,8 @@ class input_plug(plugins.base):
 		theme_obj.add_stylecontrol('window_back')
 		theme_obj.add_stylecontrol('titlebar')
 
+		do_data('window.label.text.justify', 'window', 'main', 'text_alignment', 'left')
+		
 		# -------- window.active.border
 		get_box_color('window.active.border.color', 'window', 'main:border')
 		get_box_color('window.inactive.border.color', 'window', 'inactive:border')
