@@ -142,7 +142,7 @@ class output_plug(plugins.base):
 		if not do_color_dual(True, 'menu.title', 'menu_header', 'main:control_bg', None):
 			do_color_dual(False, 'menu.title', 'titlebar', 'main:control_bg', None)
 		if not do_color_spec('menu.title.textColor', 'menu_header', 'main:control_fg'):
-			do_color('menu.title.textColor', 'titlebar', 'main:control_fg')
+			do_color('menu.title.textColor', 'titlebar', 'main:control_font_fg')
 
 		manyboxtheme.add_data('menu.title.font', 'lucidasans-12')
 		do_data('menu.title.justify', 'menu_header', 'main', 'text_alignment', 'center')
@@ -171,8 +171,11 @@ class output_plug(plugins.base):
 		do_color('toolbar.label.textColor', 'taskbar_label', 'main:control_fg')
 
 		# -------- toolbar.windowLabel
-		do_color_dual(False, 'toolbar.windowLabel', 'taskbar_button_app', 'main:control_bg', None)
-		do_color('toolbar.windowLabel.textColor', 'taskbar_button_app', 'main:control_fg')
+		colorv1 = do_color_dual(True, 'toolbar.windowLabel', 'taskbar_button_app', 'main:control_bg', None)
+		colorv2 = do_color_spec('toolbar.windowLabel.textColor', 'taskbar_button_app', 'main:control_fg')
+		if not (colorv1 and colorv2):
+			colorv1 = do_color_dual(False, 'toolbar.windowLabel', 'titlebar', 'main:control_bg', None)
+			colorv2 = do_color('toolbar.windowLabel.textColor', 'titlebar', 'main:control_font_fg')
 
 		# -------- others
 		if not do_color('borderColor', 'window', 'main:border'):

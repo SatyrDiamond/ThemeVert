@@ -183,6 +183,7 @@ class input_plug(plugins.base):
 
 			# BG
 			bg_id = add_kde_color(colorset, 'wm', 'activeBackground', 'titlebar', 'main:control_bg')
+			add_kde_color(colorset, 'wm', 'activeForeground', 'titlebar', 'main:control_fg')
 			add_kde_color(colorset, 'wm', 'activeForeground', 'titlebar', 'main:control_font_fg')
 			if add_kde_color(colorset, 'wm', 'activeBlend', 'titlebar', 'main:gradent2'):
 				theme_obj.add_prop_color('titlebar', 'main', 'control_bg', 'color_fx', 'gradent')
@@ -191,6 +192,7 @@ class input_plug(plugins.base):
 
 			# FG
 			fg_id = add_kde_color(colorset, 'wm', 'inactiveBackground', 'titlebar', 'inactive:control_bg')
+			add_kde_color(colorset, 'wm', 'inactiveForeground', 'titlebar', 'inactive:control_fg')
 			add_kde_color(colorset, 'wm', 'inactiveForeground', 'titlebar', 'inactive:control_font_fg')
 			if add_kde_color(colorset, 'wm', 'inactiveBlend', 'titlebar', 'inactive:gradent2'):
 				theme_obj.add_prop_color('titlebar', 'inactive', 'control_bg', 'color_fx', 'gradent')

@@ -48,13 +48,14 @@ class output_plug(plugins.base):
 				do_color(name+'.color1', control, state+':'+gradent_colors[0])
 				do_color(name+'.color2', control, state+':'+gradent_colors[-1])
 				manyboxtheme.add_data(name+'.appearance', outprops)
-				return True
+				outval = True
 			else:
 				outprops += ' solid'
-				if isspec: return do_color_spec(name+'.backgroundColor', control, colloc)
-				else: return do_color(name+'.backgroundColor', control, colloc)
+				if isspec: outval = do_color_spec(name+'.backgroundcolor', control, colloc)
+				else: outval = do_color(name+'.backgroundcolor', control, colloc)
 				manyboxtheme.add_data(name+'.appearance', outprops)
-			return False
+
+			return outval
 
 		def do_data(name, control, state, prop, fallback):
 			outdata = theme_obj.get_prop(control, state,prop)
@@ -97,16 +98,20 @@ class output_plug(plugins.base):
 
 		# -------- toolbar.label
 		do_color_dual(False, 'toolbar.label', 'taskbar_label', 'main:control_bg', None)
-		do_color('toolbar.label.textColor', 'taskbar_label', 'main:control_fg')
+		do_color('toolbar.label.textColor', 'taskbar_label', 'main:control_font_fg')
 		do_data('toolbar.label.marginwidth', 'taskbar_label', 'main', 'margin_width', '2')
 
 		# -------- toolbar.windowLabel
-		do_color_dual(False, 'toolbar.windowLabel', 'taskbar_button_app', 'main:control_bg', None)
-		do_color('toolbar.windowLabel.textColor', 'taskbar_button_app', 'main:control_fg')
+
+		colorv1 = do_color_dual(True, 'toolbar.windowLabel', 'taskbar_button_app', 'main:control_bg', None)
+		colorv2 = do_color_spec('toolbar.windowLabel.textColor', 'taskbar_button_app', 'main:control_font_fg')
+		if not (colorv1 and colorv2):
+			colorv1 = do_color_dual(False, 'toolbar.windowLabel', 'titlebar', 'main:control_bg', None)
+			colorv2 = do_color('toolbar.windowLabel.textColor', 'titlebar', 'main:control_font_fg')
 
 		# -------- toolbar.clock
 		do_color_dual(False, 'toolbar.clock', 'clock', 'main:control_bg', None)
-		do_color('toolbar.clock.textColor', 'clock', 'main:control_fg')
+		do_color('toolbar.clock.textColor', 'clock', 'main:control_font_fg')
 
 		# -------- toolbar.button
 		do_color_dual(False, 'toolbar.button', 'taskbar_button', 'main:control_bg', None)
@@ -125,10 +130,10 @@ class output_plug(plugins.base):
 		# -------- window.label
 		# focus
 		do_color_dual(False, 'window.label.focus', 'titlebar', 'main:control_bg', None)
-		do_color('window.label.focus.textColor', 'titlebar', 'main:control_fg')
+		do_color('window.label.focus.textColor', 'titlebar', 'main:control_font_fg')
 		# unfocus
 		do_color_dual(False, 'window.label.unfocus', 'titlebar', 'inactive:control_bg', None)
-		do_color('window.label.unfocus.textColor', 'titlebar', 'inactive:control_fg')
+		do_color('window.label.unfocus.textColor', 'titlebar', 'inactive:control_font_fg')
 
 		do_data('window.label.marginwidth', 'titlebar', 'main', 'margin_width', '2')
 
@@ -168,11 +173,8 @@ class output_plug(plugins.base):
 		do_data('window.alignment', 'window', 'main', 'text_alignment', 'left')
 		do_data('window.handleHeight', 'window', 'main', 'border_width', '8')
 
-
-
-
-
-
+		do_color('window.frame.focus.bordercolor', None, 'main:border')
+		do_color('bordercolor', None, 'main:border')
 
 		# -------- desktop
 		outcol = theme_obj.get_color_rgb('desktop', 'main:control_bg')

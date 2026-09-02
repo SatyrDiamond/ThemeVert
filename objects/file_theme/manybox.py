@@ -414,6 +414,11 @@ blackbox_valtypes = {
 		"toolbar.windowlabel.backgroundcolor": "single_color",
 		"toolbar.windowlabel.color1": "single_color",
 		"toolbar.windowlabel.color2": "single_color",
+		"window.button.pressed.appearance": "string",
+		"window.button.pressed.backgroundcolor": "single_color",
+		"window.button.pressed.color1": "single_color",
+		"window.button.pressed.color2": "single_color",
+		"window.button.pressed.foregroundcolor": "single_color",
 		"window.button.focus.appearance": "string",
 		"window.button.focus.backgroundcolor": "single_color",
 		"window.button.focus.color1": "single_color",
@@ -472,9 +477,11 @@ blackbox_valtypes = {
 		"toolbar.button.color1": "single_color",
 		"toolbar.button.color2": "single_color",
 		"toolbar.button.appearance": "string",
+		"toolbar.button.backgroundcolor": "single_color",
 		"toolbar.button.pressed.color1": "single_color",
 		"toolbar.button.pressed.color2": "single_color",
 		"toolbar.button.pressed.appearance": "string",
+		"toolbar.button.pressed.backgroundcolor": "single_color",
 		"toolbar.button.foregroundcolor": "single_color",
 		"toolbar.button.marginwidth": "number",
 		"window.title.marginwidth": "number",
@@ -485,7 +492,8 @@ blackbox_valtypes = {
 		"window.frame.borderwidth": "number",
 		"window.frame.focus.bordercolor": "single_color",
 		"window.frame.unfocus.bordercolor": "single_color",
-		"window.alignment": "align"
+		"window.alignment": "align",
+		"bordercolor": "number",
 	}
 }
 
@@ -496,6 +504,14 @@ blackbox_defaults = {
 blackbox_casereplace = [
 	['windowlabel', 'windowLabel'],
 	['bordercolor', 'borderColor'],
+	['backgroundcolor', 'backgroundColor'],
+	['foregroundcolor', 'foregroundColor'],
+	['disabledcolor', 'disabledColor'],
+	['textcolor', 'textColor'],
+	['bordercolor', 'borderColor'],
+	['borderwidth', 'borderWidth'],
+	['marginwidth', 'marginWidth'],
+	['handleheight', 'handleHeight'],
 ]
 
 # ====================================== MAIN ======================================
