@@ -305,17 +305,17 @@ class data_theme():
 		s = self._internal_get_stylepart(controlname)
 		if s: 
 			s.add_color(colloc, rgb)
-			logger_theme.info('+ rgb color: %s to %s (%s)' % (colloc, controlname, rgb))
+			if DEBUG: logger_theme.info('+ rgb color: %s to %s (%s)' % (colloc, controlname, rgb))
 		else:
-			logger_theme.warning('X rgb color %s to %s (%s), %s is missing' % (colloc, controlname, rgb, controlname))
+			if DEBUG: logger_theme.warning('X rgb color %s to %s (%s), %s is missing' % (colloc, controlname, rgb, controlname))
 
 	def add_color_named(self, controlname, colloc, colname):
 		s = self._internal_get_stylepart(controlname)
 		if s: 
 			s.add_color_named(colloc, colname)
-			logger_theme.info('+ named color: %s to %s (%s)' % (colloc, controlname, colname))
+			if DEBUG: logger_theme.info('+ named color: %s to %s (%s)' % (colloc, controlname, colname))
 		else:
-			logger_theme.warning('X named color %s to %s (%s), %s is missing' % (colloc, controlname, colname, controlname))
+			if DEBUG: logger_theme.warning('X named color %s to %s (%s), %s is missing' % (colloc, controlname, colname, controlname))
 
 	def get_color_spec(self, controlname, colloc):
 		if controlname not in ['global', None]: 
@@ -361,16 +361,16 @@ class data_theme():
 		incolor = self.get_color_spec(i_controlname, i_colloc)
 		if not overwrite:
 			if self.get_color(o_controlname, o_colloc): 
-				logger_theme.info('>X copy color: %s|%s to %s|%s (not overwriting)' % (i_controlname, i_colloc, o_controlname, o_colloc))
+				if DEBUG: logger_theme.info('>X copy color: %s|%s to %s|%s (not overwriting)' % (i_controlname, i_colloc, o_controlname, o_colloc))
 				return 2
 		if incolor:
-			logger_theme.info('>> copy color: %s|%s to %s|%s' % (i_controlname, i_colloc, o_controlname, o_colloc))
+			if DEBUG: logger_theme.info('>> copy color: %s|%s to %s|%s' % (i_controlname, i_colloc, o_controlname, o_colloc))
 			isname, val = incolor
 			if isname: self.add_color_named(o_controlname, o_colloc, val)
 			else: self.add_color(o_controlname, o_colloc, val.get_int())
 			return 0
 		else:
-			logger_theme.info('X> copy color: %s|%s to %s|%s (org color not exist)' % (i_controlname, i_colloc, o_controlname, o_colloc))
+			if DEBUG: logger_theme.info('X> copy color: %s|%s to %s|%s (org color not exist)' % (i_controlname, i_colloc, o_controlname, o_colloc))
 			return 1
 
 	def get_prop(self, controlname, state, name):
@@ -392,7 +392,7 @@ class data_theme():
 				return stylep.get_prop_color(state, color, name)
 
 	def complete_incomplete(self):
-		logger_theme.info('complete_incomplete')
+		if DEBUG: logger_theme.info('complete_incomplete')
 
 		ctrl_main_bg = self.get_color(None, 'main:control_bg')
 		ctrl_main_fg = self.get_color(None, 'main:control_fg')

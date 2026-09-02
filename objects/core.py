@@ -3,6 +3,9 @@ from plugins import base as dv_plugins
 from objects import tuxtheme
 import os
 
+import logging
+logger_core = logging.getLogger('core')
+
 pluginsets_input = {
 'main': ['', 'Main'],
 'apps': ['apps', 'Apps']
@@ -55,7 +58,7 @@ class core:
 		self.currentplug_output = dv_plugins.create_selector('output')
 		self.cur_plugset_input = ''
 		self.cur_plugset_output = ''
-		self.debug = False
+		self.debug = 1
 
 	def input_load_plugins(self, pluginset):
 		if pluginset in pluginsets_input: 
@@ -152,5 +155,5 @@ class core:
 	def parse_output(self, themeverter_intent): 
 		plug_obj = self.currentplug_output.selected_plugin.plug_obj
 		plug_obj.parse(self.theme_obj, themeverter_intent)
-		#logger_core.info('File outputted: '+out_file)
+		logger_core.info('File outputted')
 		if self.debug: self.theme_obj.to_xml('debug_out.xml')
